@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroForge Academy — AI/DS Interview & Presentation Ready</title>
+  <meta name="description" content="Master Data Science & AI from zero to interview-ready. Learn CNN, RNN, Transformers, NLP with real projects. Be ready to build, explain, and defend every concept." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════ ANIMATED BG ═══════════════════════ -->
+  <canvas id="neural-canvas"></canvas>
+
+  <!-- ═══════════════════════ SIDEBAR NAV ═══════════════════════ -->
+  <nav id="sidebar">
+    <div class="nav-brand">
+      <span class="brand-icon">⚡</span>
+      <span class="brand-text">NeuroForge</span>
+    </div>
+    <div class="nav-xp">
+      <div class="xp-label">Job Readiness</div>
+      <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar"></div></div>
+      <div class="xp-value" id="xp-value">0 XP</div>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#" data-section="home" class="nav-item active" id="nav-home">
+        <span class="nav-icon">🏠</span><span>Dashboard</span>
+      </a></li>
+      <li><a href="#" data-section="roadmap" class="nav-item" id="nav-roadmap">
+        <span class="nav-icon">🗺️</span><span>Learning Roadmap</span>
+      </a></li>
+      <li class="nav-group-label">Core Modules</li>
+      <li><a href="#" data-section="nlp" class="nav-item" id="nav-nlp">
+        <span class="nav-icon">📝</span><span>NLP & Text AI</span>
+        <span class="badge" id="badge-nlp"></span>
+      </a></li>
+      <li><a href="#" data-section="classical" class="nav-item" id="nav-classical">
+        <span class="nav-icon">📐</span><span>Classical ML</span>
+        <span class="badge" id="badge-classical"></span>
+      </a></li>
+      <li><a href="#" data-section="rnn" class="nav-item" id="nav-rnn">
+        <span class="nav-icon">🔄</span><span>RNN / LSTM</span>
+        <span class="badge" id="badge-rnn"></span>
+      </a></li>
+      <li><a href="#" data-section="transformer" class="nav-item" id="nav-transformer">
+        <span class="nav-icon">🤖</span><span>Transformers</span>
+        <span class="badge" id="badge-transformer"></span>
+      </a></li>
+      <li><a href="#" data-section="cnn" class="nav-item" id="nav-cnn">
+        <span class="nav-icon">👁️</span><span>CNN</span>
+        <span class="badge" id="badge-cnn"></span>
+      </a></li>
+      <li class="nav-group-label">Capstone Projects</li>
+      <li><a href="#" data-section="imdb" class="nav-item" id="nav-imdb">
+        <span class="nav-icon">🎬</span><span>IMDB Recommender</span>
+      </a></li>
+      <li><a href="#" data-section="crypto" class="nav-item" id="nav-crypto">
+        <span class="nav-icon">📈</span><span>Crypto Forecaster</span>
+      </a></li>
+      <li class="nav-group-label">Interview Prep</li>
+      <li><a href="#" data-section="viva" class="nav-item" id="nav-viva">
+        <span class="nav-icon">🎤</span><span>Viva Mode</span>
+      </a></li>
+      <li><a href="#" data-section="present" class="nav-item" id="nav-present">
+        <span class="nav-icon">📊</span><span>Presentation Kit</span>
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
+  <main id="main-content">
+
+    <!-- ══════ HOME ══════ -->
+    <section id="section-home" class="section active">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-eyebrow">🎯 Interview + Presentation Ready</div>
+          <h1 class="hero-title">Learn it. <span class="gradient-text">Build it.</span><br/>Defend it.</h1>
+          <p class="hero-sub">The only AI/DS learning platform designed around one brutal truth: <strong>you must explain every line of code confidently in an interview or live evaluation.</strong></p>
+          <div class="hero-cta-row">
+            <button class="btn-primary" onclick="navigateTo('roadmap')">Start Learning Path</button>
+            <button class="btn-ghost" onclick="navigateTo('viva')">🎤 Practice Viva</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-n">5</span><span class="stat-l">Core Modules</span></div>
+            <div class="stat"><span class="stat-n">60+</span><span class="stat-l">Interview Q&amp;As</span></div>
+            <div class="stat"><span class="stat-n">2</span><span class="stat-l">Live Projects</span></div>
+            <div class="stat"><span class="stat-n">8</span><span class="stat-l">Secret Techniques</span></div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="techniques-card glass-card">
+            <h3>🧠 The 8 Secret Learning Techniques</h3>
+            <div class="technique-list">
+              <div class="technique-item"><span class="t-num">01</span><div><strong>Active Recall</strong><p>Retrieval beats re-reading by 2–3× (Roediger &amp; Karpicke, 2006)</p></div></div>
+              <div class="technique-item"><span class="t-num">02</span><div><strong>Interleaving</strong><p>Mix CNN/RNN/Transformer tabs — forces discrimination</p></div></div>
+              <div class="technique-item"><span class="t-num">03</span><div><strong>Desirable Difficulty</strong><p>Fill-in-gap code before seeing the answer</p></div></div>
+              <div class="technique-item"><span class="t-num">04</span><div><strong>Dual Coding</strong><p>Every concept = animated diagram + code</p></div></div>
+              <div class="technique-item"><span class="t-num">05</span><div><strong>Feynman Technique</strong><p>"Explain to a 5-year-old" box per module</p></div></div>
+              <div class="technique-item"><span class="t-num">06</span><div><strong>Spaced Repetition</strong><p>Ebbinghaus curve — optimal review intervals</p></div></div>
+              <div class="technique-item"><span class="t-num">07</span><div><strong>Elaborative Interrogation</strong><p>"Why does this work?" for every formula</p></div></div>
+              <div class="technique-item"><span class="t-num">08</span><div><strong>Worked Example Effect</strong><p>Full solutions first, then solve alone (Sweller, 1988)</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-cards-grid">
+        <div class="module-card glass-card" onclick="navigateTo('nlp')">
+          <div class="mc-icon">📝</div>
+          <h3>NLP & Text AI</h3>
+          <p>TF-IDF, tokenization, stopwords, cosine similarity</p>
+          <div class="mc-project">→ IMDB Recommender</div>
+        </div>
+        <div class="module-card glass-card" onclick="navigateTo('classical')">
+          <div class="mc-icon">📐</div>
+          <h3>Classical ML</h3>
+          <p>KNN, cosine distance, hybrid scoring, model evaluation</p>
+          <div class="mc-project">→ IMDB Recommender</div>
+        </div>
+        <div class="module-card glass-card" onclick="navigateTo('rnn')">
+          <div class="mc-icon">🔄</div>
+          <h3>RNN / LSTM</h3>
+          <p>Vanishing gradients, gates, BPTT, time-series forecasting</p>
+          <div class="mc-project">→ Crypto Forecaster</div>
+        </div>
+        <div class="module-card glass-card" onclick="navigateTo('transformer')">
+          <div class="mc-icon">🤖</div>
+          <h3>Transformers</h3>
+          <p>Self-attention, Q/K/V, positional encoding, BERT, GPT</p>
+          <div class="mc-project">→ Sentiment Analysis</div>
+        </div>
+        <div class="module-card glass-card" onclick="navigateTo('cnn')">
+          <div class="mc-icon">👁️</div>
+          <h3>CNN</h3>
+          <p>Convolution, pooling, receptive field, feature maps</p>
+          <div class="mc-project">→ Image Classification</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ ROADMAP ══════ -->
+    <section id="section-roadmap" class="section">
+      <div class="section-header">
+        <h2>🗺️ Your Learning Roadmap</h2>
+        <p>A carefully sequenced path — each module unlocks interview confidence for the next</p>
+      </div>
+      <div class="roadmap-timeline" id="roadmap-timeline"></div>
+    </section>
+
+    <!-- ══════ NLP MODULE ══════ -->
+    <section id="section-nlp" class="section">
+      <div id="module-nlp-content"></div>
+    </section>
+
+    <!-- ══════ CLASSICAL ML MODULE ══════ -->
+    <section id="section-classical" class="section">
+      <div id="module-classical-content"></div>
+    </section>
+
+    <!-- ══════ RNN MODULE ══════ -->
+    <section id="section-rnn" class="section">
+      <div id="module-rnn-content"></div>
+    </section>
+
+    <!-- ══════ TRANSFORMER MODULE ══════ -->
+    <section id="section-transformer" class="section">
+      <div id="module-transformer-content"></div>
+    </section>
+
+    <!-- ══════ CNN MODULE ══════ -->
+    <section id="section-cnn" class="section">
+      <div id="module-cnn-content"></div>
+    </section>
+
+    <!-- ══════ IMDB PROJECT ══════ -->
+    <section id="section-imdb" class="section">
+      <div id="imdb-content"></div>
+    </section>
+
+    <!-- ══════ CRYPTO PROJECT ══════ -->
+    <section id="section-crypto" class="section">
+      <div id="crypto-content"></div>
+    </section>
+
+    <!-- ══════ VIVA MODE ══════ -->
+    <section id="section-viva" class="section">
+      <div id="viva-content"></div>
+    </section>
+
+    <!-- ══════ PRESENTATION KIT ══════ -->
+    <section id="section-present" class="section">
+      <div id="present-content"></div>
+    </section>
+
+  </main>
+
+  <script src="js/animations.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
