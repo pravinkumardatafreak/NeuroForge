@@ -353,19 +353,20 @@ window.renderIMDBProject = function () {
 
   el.innerHTML = `
     <div class="section-header">
-      <h2>🎬 IMDB Movie Recommender — Full Pipeline</h2>
-      <p>Walk through every step end-to-end. Understand it so well you can re-build it from scratch in an interview.</p>
+      <h2>🎬 IMDb Movie Recommender — Full Pipeline</h2>
+      <p>Walk through every step end-to-end. Ground truth project: <a href="https://github.com/pravinkumardatafreak/IMDb-Movie-Recommender" target="_blank" style="color:var(--cyan);text-decoration:underline">github.com/pravinkumardatafreak/IMDb-Movie-Recommender</a></p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
       <div class="glass-card" style="padding:1rem">
-        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Tech Stack</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Tech Stack & SOTA Upgrades</div>
         <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
-          ${['Pandas','NLTK','Scikit-learn','TF-IDF','KNN','Cosine Similarity','Streamlit','Selenium'].map(t=>`<span class="tag cyan">${t}</span>`).join('')}
+          ${['Pandas','NLTK','Scikit-learn','TF-IDF','KNN','SBERT (all-MiniLM-L6-v2)','LIME Keywords','Streamlit','Selenium'].map(t=>`<span class="tag cyan">${t}</span>`).join('')}
         </div>
       </div>
       <div class="glass-card" style="padding:1rem">
-        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Core Concept</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Core Concept & Dual Search</div>
         <div style="font-family:var(--font-mono);font-size:0.8rem;color:var(--cyan)">Score = 0.7 × similarity + 0.3 × (rating/5)</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.3rem">Dual Search: By Movie Title OR Custom Storyline Plot Description</div>
       </div>
     </div>
     <div class="pipeline-steps" id="imdb-pipeline">
@@ -427,7 +428,7 @@ window.renderCryptoProject = function () {
   el.innerHTML = `
     <div class="section-header">
       <h2>📈 CryptoCast — Multi-Horizon BTC Forecasting (5 Models)</h2>
-      <p>Real capstone project: 1D-CNN · RNN · LSTM · Transformer · PatchTST trained on ~5,000 daily records (Aug 2010–Mar 2024). Target = Log Return. Horizons = 1D, 3D, 7D. Built in PyTorch.</p>
+      <p>Real capstone project: <a href="https://github.com/pravinkumardatafreak/cryptocast" target="_blank" style="color:var(--cyan);text-decoration:underline">github.com/pravinkumardatafreak/cryptocast</a> · 1D-CNN · RNN · LSTM · Transformer · PatchTST trained on ~5,000 daily records (Aug 2010–Mar 2024). Target = Log Return. Horizons = 1D, 3D, 7D. Built in PyTorch.</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
       <div class="glass-card" style="padding:1rem">
