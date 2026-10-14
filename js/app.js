@@ -29,6 +29,7 @@ window.navigateTo = function (sectionId) {
   if (navItem) navItem.classList.add('active');
 
   // Lazy render sections
+  if (sectionId === 'zoho-mock') { if (typeof renderZohoMockSection === 'function') renderZohoMockSection(); }
   if (sectionId === 'roadmap') renderRoadmap();
   if (sectionId === 'nlp') renderModule('nlp');
   if (sectionId === 'classical') renderModule('classical');
@@ -857,4 +858,9 @@ function renderPresentationKit() {
 
 /* ─── Init ─── */
 initXP();
-navigateTo('home');
+const hashSec = window.location.hash.replace('#', '');
+if (hashSec && document.getElementById('section-' + hashSec)) {
+  navigateTo(hashSec);
+} else {
+  navigateTo('home');
+}

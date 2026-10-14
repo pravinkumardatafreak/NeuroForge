@@ -1,19 +1,47 @@
-# ⚡ NeuroForge Academy — AI/DS Evaluation & Learning SaaS Engine
+# ⚡ NeuroForge Academy — Pravin's AI/DS Interview & Presentation Cockpit
 
-An interactive, cognitive-science-driven **Data Science & AI Learning Platform & Live Evaluation Readiness Suite**.
+An interactive, cognitive-science-driven **Data Science & AI Learning Platform & Live Evaluation Readiness Suite**, personalized for **Pravin Kumar R** and featuring a dedicated **Zoho IT Solutions Data Scientist Mock War Room**.
 
-Built specifically to bridge the gap between building raw Data Science models and **explaining, presenting, and defending every design decision live** in technical interviews and GUVI HCL Capstone evaluations.
+Built specifically to bridge the gap between building raw Data Science models and **explaining, presenting, and defending every design decision live** with first-principles mathematical rigor in technical interviews.
 
 ---
 
-## 🌟 Strategic Value & Product Vision
+## 🏢 🎯 New Flagship: Zoho IT Solutions Mock War Room (Live Session Ready)
 
-Most Data Science portfolios consist of static `.ipynb` Jupyter notebooks that showcase model code but fail to demonstrate **technical communication, architectural justification, or product thinking**.
+Built specifically for Pravin's upcoming Data Scientist interview track at **ZOHO IT SOLUTION**:
 
-**NeuroForge Academy** elevates Data Science work into an interactive, SaaS-ready learning product that:
-1. **Teaches Core AI/DS Concepts** through cognitive science principles (Active Recall, Interleaving, Dual Coding, Elaborative Interrogation).
-2. **Features Real Project Walkthroughs** for **IMDb Content-Based Recommender** (TF-IDF, SBERT, Cosine KNN, LIME Explainability) and **CryptoCast Multi-Horizon Forecaster** (PyTorch 1D-CNN, RNN, LSTM, Transformer, PatchTST).
-3. **Serves as a 30-Minute Live Evaluation Preparation Engine** with 7-step (NLP) and 13-step (Deep Learning) presentation decks aligned 100% with GUVI HCL evaluation rubrics.
+* **Candidate Profile & Match**: 
+  * **Candidate**: Pravin Kumar R
+  * **Foundation**: B.E. Civil Engineering (First Class Honors) + Master's Data Science (HCL GUVI / IIT Madras Research Park Incubated)
+  * **Verified Experience**: Data Science Intern — Internship Studio (14,102 telemetry records, 89.2% error reduction)
+  * **Rational Match Score**: **98.3 / 100** (Tier 1 Highly Qualified Standard)
+* **⚡ 45-Minute Live Mock Simulator**:
+  * Real-time synchronized 45-minute countdown timer with interactive controls.
+  * Phase progress tracking: Self-Intro (3m) &rarr; Python & Logic (10m) &rarr; SQL & Data (10m) &rarr; ML Mechanics (12m) &rarr; Project Defense (10m).
+  * Live prompt randomizer, model defense answer reveals, trap warnings, and speech synthesis prompt playback.
+* **🎯 4-Round Zoho Strategy & Rubric**:
+  * Round 1: Problem Solving & Core Python Fundamentals (Hash maps, two-pointer, time/space complexity).
+  * Round 2: Data Wrangling, SQL CTEs & Window Functions, and Exploratory Data Analysis (EDA).
+  * Round 3: Machine Learning Mechanics & Mathematical Viva (Regularization, loss functions, bias-variance, evaluation metrics).
+  * Round 4: Flagship Project Defense & Zoho Business Case Solving.
+* **🎤 90-Sec Pitch & The Civil Pivot Defense**:
+  * Tailored 90-second self-introduction script.
+  * Airtight defense for transitioning from Civil Engineering to Data Science (connecting structural mechanics and spatial tensors to high-dimensional machine learning).
+  * Authentic "Why Zoho?" rationale highlighting Zoho's self-reliance, proprietary software engineering, and long-term craftsmanship.
+* **💻 10 Essential Zoho Python & SQL Drills**:
+  * Anagram frequency grouping, 60-day sliding window moving average, streaming large files via generators.
+  * SQL CTEs with `DENSE_RANK()` for 2nd highest salary, running cumulative revenue, and self-joins.
+* **🧠 30+ High-Yield Zoho ML & Data Viva Flashcards**:
+  * Deep mathematical explanations, Interviewer Trap warnings, and Feynman Technique simplifications.
+* **🛡️ Pravin's Flagship Project Defense Playbook**:
+  * **CryptoCast**: Why stationary log return? Why PatchTST over LSTM at 7 days? Walk-forward validation mechanics.
+  * **ERIA-GenAI**: Multi-agent self-correcting validation loop and grounding scoring ($\ge 8.5/10$).
+  * **soil-grain-size**: Multi-Task Elastic Net over Random Forest for small collinear datasets; OpenCV PPM spatial calibration.
+  * **Internship Studio**: 89.2% error reduction on 14,102 telemetry records (MAE 34.97 to 3.78, $R^2 = 0.9979$).
+* **🏢 Real-World Zoho Product System Design Cases**:
+  * **Zoho CRM**: Predictive lead scoring & churn risk pipeline with SHAP explainability.
+  * **Zoho Desk**: Automated ticket routing & SLA breach prediction.
+  * **Zoho Books**: Cash flow multi-horizon forecasting & invoice anomaly detection.
 
 ---
 
@@ -21,7 +49,7 @@ Most Data Science portfolios consist of static `.ipynb` Jupyter notebooks that s
 
 | Principle | Implementation in NeuroForge |
 |---|---|
-| **01. Active Recall** | Retrieval-based testing via 30+ Viva Q&A items across NLP, Classical ML, LSTMs, Transformers, and CNNs. |
+| **01. Active Recall** | Retrieval-based testing via 60+ Viva Q&A items across Zoho topics, NLP, ML, LSTMs, Transformers, and CNNs. |
 | **02. Interleaving** | Interleaved module navigation to force discrimination between sequence architectures. |
 | **03. Desirable Difficulty** | Fill-in-gap code challenges per module before revealing full solutions. |
 | **04. Dual Coding** | Concept explanations paired with dynamic sequence animations and hand-drawn mentor chalkboard sketches. |
@@ -32,55 +60,35 @@ Most Data Science portfolios consist of static `.ipynb` Jupyter notebooks that s
 
 ---
 
-## 🛠️ Project Showcase & Ground-Truth Architecture
+## 🛠️ Flagship Project Arsenal
 
-### 🎬 1. IMDb Movie Recommendation System
-* **Data Sources**: IMDb 2024 Scraped Movies (5,000+ titles via Selenium) + Top 1000 Classics.
-* **Vectorization**: `TfidfVectorizer(max_features=5000, ngram_range=(1,2))` + SOTA **Sentence-BERT (`all-MiniLM-L6-v2`)** dense embeddings.
-* **Similarity Search**: `NearestNeighbors(metric='cosine', algorithm='brute')` for sub-100ms lookups.
-* **Hybrid Scoring**: $\text{Score} = 0.7 \times (1 - \text{Cosine\_Dist}) + 0.3 \times \left(\frac{\text{Rating}}{5.0}\right)$.
-* **Explainability (XAI)**: LIME-style keyword extraction via `_get_matching_keywords()` sparse matrix overlap.
-
-### 📈 2. CryptoCast: Multi-Horizon Bitcoin Price Forecasting
-* **Dataset**: ~5,000 daily BTC records (Aug 2010 – Mar 2024) from Yahoo Finance (`data/btc_data.csv`).
-* **Sequence Window**: 60-day sliding window ($N, 60, 9$).
-* **Target Variable**: Stationary Log Return $r = \ln(P[t+h] / P[t])$ — avoids path-dependent $R^2$ artifacts (R² Paradox).
-* **Feature Engineering**: V1 (Reactive indicators: SMA, RSI, Volatility) vs V2 (Deterministic Satoshi Nakamoto whitepaper protocol features: `Block_Reward`, `Days_Since_Halving`, `Halving_Progress`).
-* **5 PyTorch Architectures**: 1D-CNN, RNN, LSTM, Transformer, and **PatchTST** (with Reversible Instance Normalization - RevIN).
-* **Leaderboard Results**:
-  * **1-Day Horizon**: **LSTM** (MAE: $730.98, MAPE: **2.06%**, $R^2$: 0.9921)
-  * **3-Day Horizon**: **PatchTST** (MAE: $1,347.56, MAPE: **3.85%**, $R^2$: 0.9768)
-  * **7-Day Horizon**: **PatchTST** (MAE: $2,097.01, MAPE: **5.93%**, $R^2$: 0.9446)
-* **Backtesting & Production**: Walk-Forward Validation (`src/step4_wfv.py`), 10-page Streamlit suite (`app.py`), and Groq LLM integration (`src/llm_insights.py`).
-
----
-
-## ⏱️ Live Evaluation & Presentation Kit Suite
-
-Aligned 100% with the **GUVI HCL Capstone Guidelines**:
-* **7-Step Text-Extraction Deck**: Project Intro, Objective, Scraping, NLP Preprocessing, Storage, Recommendation Algorithm, Business Solution.
-* **13-Step Model Building Deck**: Domain Intro, Problem Statement, Data Preprocessing, EDA, Feature Engineering, Stationarity (ADF Test), Scaling, Base Model, 5 DL Architectures, Metrics & R² Paradox, Final Model Selection, Limitations (Data Starvation & 2140 Protocol Boundary), Business Suggestions.
-* **30-Min Evaluation Timings & 60-Mark Rubric**: Self Intro (3m), Walkthrough (12m), Viva (10m), Feedback (5m).
-* **15-Question EDA Audit Guide**: Structured data exploration questions from the GUVI EDA Guide.
+* **📈 CryptoCast: Multi-Horizon Deep Sequence Forecaster** (`pravinkumardatafreak/cryptocast`)
+  * PyTorch 1D-CNN, RNN, LSTM, Transformer, and PatchTST with RevIN.
+  * 2.06% 1-day MAPE, walk-forward validation, Satoshi protocol supply features.
+* **🤖 ERIA: Education Regulation Impact Analyzer** (`pravinkumardatafreak/ERIA-Education-Analyzer`)
+  * Self-correcting multi-agent loop, Groq LLaMA 3.3 70B, DistilRoBERTa emotion telemetry, Pydantic schema validation.
+* **🔬 soil-grain-size: Automated Granulometry** (`pravinkumardatafreak/soil-grain-size-distribution`)
+  * OpenCV PPM camera calibration, group-sparse Multi-Task Elastic Net, 55.21 Out-of-Fold EMD.
+* **🎬 IMDb Movie Recommendation System** (`pravinkumardatafreak/IMDb-Movie-Recommender`)
+  * TF-IDF + Sentence-BERT dense embeddings, Cosine NearestNeighbors, Streamlit serving.
 
 ---
 
 ## 💻 Local Quickstart
 
-No complex dependencies required for the platform dashboard — pure Vanilla HTML5, CSS3, and ES6 JavaScript:
+No heavy dependencies required for the platform dashboard — pure Vanilla HTML5, CSS3, and ES6 JavaScript:
 
 ```bash
-# Clone the repository
-git clone https://github.com/pravinkumardatafreak/NeuroForge.git
+# Clone or navigate to the repository
 cd NeuroForge
 
 # Start local HTTP server
 python -m http.server 7800
 ```
-Open **`http://localhost:7800`** in your browser.
+Open **`http://localhost:7800`** (or **`http://localhost:7800/#zoho-mock`**) in your browser.
 
 ---
 
 ## 📜 License & Citation
 
-Distributed under the MIT License. Developed by **Pravin Kumar** for GUVI HCL Capstone & Advanced Data Science Portfolio.
+Distributed under the MIT License. Developed by **Pravin Kumar R** for Data Science & AI Interview Readiness.
