@@ -792,41 +792,68 @@ print(a)  # Output is [1, 2, 3, 4]! Both names point to the SAME object.</code>
 // Render Viva Mode full page
 window.renderVivaPage = function () {
   const el = document.getElementById('viva-content');
-  const cats = ['All', '🌟 GDrive Super Learner', 'Statistics & Probability', 'SQL & Data Engineering', 'Python & Pandas Pitfalls', 'EDA & Visualization', 'Quantitative & Telemetry', 'NLP', 'Classical ML', 'RNN/LSTM', 'Transformers', 'CNN', 'General'];
+  const cats = ['All', '📌 Needs Review', '🌟 GDrive Super Learner', 'Statistics & Probability', 'SQL & Data Engineering', 'Python & Pandas Pitfalls', 'EDA & Visualization', 'Quantitative & Telemetry', 'NLP', 'Classical ML', 'RNN/LSTM', 'Transformers', 'CNN', 'General'];
   let activeFilter = 'All';
   let score = 0;
 
+  function getMasteredMap() {
+    return JSON.parse(localStorage.getItem('nf_mastered_viva') || '{}');
+  }
+
   function filteredQuestions() {
+    const mastered = getMasteredMap();
     if (activeFilter === 'All') return VIVA_BANK;
+    if (activeFilter === '📌 Needs Review') return VIVA_BANK.filter(q => !mastered[q.id]);
     if (activeFilter === '🌟 GDrive Super Learner') return VIVA_BANK.filter(q => q.isGDrive);
     return VIVA_BANK.filter(q => q.topic === activeFilter);
   }
 
   function renderCards(qs) {
-    return qs.map(q => `
-      <div class="viva-card-full glass-card" id="vc-${q.id}">
+    const mastered = getMasteredMap();
+    if (!qs.length) {
+      return `<div class="glass-card" style="padding:2rem;text-align:center;color:var(--lime);grid-column:1/-1">🎉 All flashcards in this filter have been marked as Mastered! Switch to 'All' to review anytime.</div>`;
+    }
+    return qs.map(q => {
+      const isMastered = !!mastered[q.id];
+      return `
+      <div class="viva-card-full glass-card" id="vc-${q.id}" style="${isMastered ? 'border-color:rgba(132,204,22,0.45);background:rgba(132,204,22,0.03)' : ''}">
         <div class="viva-card-q" onclick="toggleVivaAnswer('${q.id}')">
           <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:0.5rem">
+            <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
               <span class="q-topic" style="color:${topicColor(q.topic)}">${q.topic}</span>
               ${q.isGDrive ? '<span class="tag violet" style="font-size:0.65rem;padding:0.1rem 0.4rem;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.35);color:#a78bfa">📁 Google Drive Vault</span>' : ''}
+              ${isMastered ? '<span class="tag" style="font-size:0.65rem;padding:0.1rem 0.45rem;background:rgba(132,204,22,0.15);border:1px solid rgba(132,204,22,0.4);color:var(--lime)">✓ Mastered</span>' : ''}
             </div>
             <div class="q-text">${q.q}</div>
           </div>
           <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;flex-shrink:0">
-            <span class="difficulty-badge diff-${q.difficulty}">${q.difficulty}</span>
-            <span style="font-size:0.7rem;color:var(--text-muted)">▼ reveal</span>
+            <div style="display:flex;align-items:center;gap:0.4rem">
+              <button class="btn-sm" onclick="event.stopPropagation(); toggleMasteredViva('${q.id}')" style="font-size:0.68rem;padding:0.18rem 0.5rem;border-color:${isMastered ? 'var(--lime)' : 'var(--border)'};color:${isMastered ? 'var(--lime)' : 'var(--text-muted)'}">
+                ${isMastered ? '✓ Mastered' : '○ Mark Mastered'}
+              </button>
+              <span class="difficulty-badge diff-${q.difficulty}">${q.difficulty}</span>
+            </div>
+            <span style="font-size:0.7rem;color:var(--text-muted)">▼ reveal answer</span>
           </div>
         </div>
         <div class="viva-card-a" id="va-${q.id}">${q.a}</div>
       </div>
-    `).join('');
+    `;
+    }).join('');
+  }
+
+  function updateMasteryCounter() {
+    const masteredCount = Object.keys(getMasteredMap()).length;
+    const scoreEl = document.getElementById('viva-score');
+    if (scoreEl) {
+      scoreEl.textContent = `Mastered: ${masteredCount} / ${VIVA_BANK.length} · Revealed: ${score}`;
+    }
   }
 
   el.innerHTML = `
     <div class="section-header">
-      <h2>🎤 Viva Mode &amp; Google Drive Question Vault</h2>
-      <p>Click any question. Read the answer. Then explain it in your own words. That's the only way it sticks.</p>
+      <h2>🎤 Viva Flashcards &amp; Spaced-Repetition Vault (90+ Q&amp;As)</h2>
+      <p>Active Recall Protocol: Read the question, speak your answer aloud in 30 seconds, reveal to verify, and mark <strong>✓ Mastered</strong> to filter down to <strong>📌 Needs Review</strong>.</p>
     </div>
     
     <!-- 📁 Google Drive Vault Banner -->
@@ -837,16 +864,19 @@ window.renderVivaPage = function () {
           <span class="tag violet" style="font-size:0.68rem;padding:0.15rem 0.45rem">+20 Super Learner Q&amp;As</span>
         </div>
         <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.3rem">
-          Sourced directly from your Google Drive files: <strong>super learner questions.gdoc</strong>, <strong># Interview Preparation Guide.gdoc</strong>, <strong>Stock Analysis Project</strong>, <strong>Fitbit Telemetry</strong>, and <strong>ubereats.db</strong>.
+          Sourced directly from your Google Drive notes: <strong>super learner questions.gdoc</strong>, <strong># Interview Preparation Guide.gdoc</strong>, <strong>Stock Analysis Project</strong>, <strong>Fitbit Telemetry</strong>, and <strong>ubereats.db</strong>.
         </div>
       </div>
-      <button class="btn-sm violet" onclick="setVivaFilter('🌟 GDrive Super Learner', document.querySelector('.filter-btn[data-cat=\'🌟 GDrive Super Learner\']'))">Filter GDrive Only &rarr;</button>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <button class="btn-sm" onclick="setVivaFilter('📌 Needs Review', document.querySelector('.filter-btn[data-cat=\\'📌 Needs Review\\']'))" style="border-color:var(--amber);color:var(--amber)">📌 Study Unmastered</button>
+        <button class="btn-sm violet" onclick="setVivaFilter('🌟 GDrive Super Learner', document.querySelector('.filter-btn[data-cat=\\'🌟 GDrive Super Learner\\']'))">Filter GDrive Vault &rarr;</button>
+      </div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem">
       <div class="viva-filters" id="viva-filters">
         ${cats.map(c => `<button class="filter-btn ${c==='All'?'active':''}" data-cat="${c}" onclick="setVivaFilter('${c}',this)">${c}</button>`).join('')}
       </div>
-      <div class="viva-score" id="viva-score">Revealed: 0 / ${VIVA_BANK.length}</div>
+      <div class="viva-score" id="viva-score">Mastered: ${Object.keys(getMasteredMap()).length} / ${VIVA_BANK.length} · Revealed: 0</div>
     </div>
     <div class="viva-grid" id="viva-grid">${renderCards(VIVA_BANK)}</div>
   `;
@@ -859,6 +889,19 @@ window.renderVivaPage = function () {
     document.getElementById('viva-grid').innerHTML = renderCards(filteredQuestions());
   };
 
+  window.toggleMasteredViva = function (id) {
+    const mastered = getMasteredMap();
+    if (mastered[id]) {
+      delete mastered[id];
+    } else {
+      mastered[id] = true;
+      window.addXP(20);
+    }
+    localStorage.setItem('nf_mastered_viva', JSON.stringify(mastered));
+    updateMasteryCounter();
+    document.getElementById('viva-grid').innerHTML = renderCards(filteredQuestions());
+  };
+
   window.toggleVivaAnswer = function (id) {
     const ansEl = document.getElementById('va-' + id);
     const q = VIVA_BANK.find(x => x.id === id);
@@ -866,7 +909,7 @@ window.renderVivaPage = function () {
     if (ansEl.classList.contains('show') && !q.seen) {
       q.seen = true;
       score++;
-      document.getElementById('viva-score').textContent = `Revealed: ${score} / ${VIVA_BANK.length}`;
+      updateMasteryCounter();
       window.addXP(15);
     }
   };
@@ -897,3 +940,4 @@ window.filterGDriveVault = function() {
     window.setVivaFilter('🌟 GDrive Super Learner', btn);
   }
 };
+

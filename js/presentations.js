@@ -1,8 +1,7 @@
 /* ═════════════════════════════════════════════════════════════════════
-   presentations.js — Complete Resume Flagship Projects Presentation Kit
-   Slide-by-Slide Live Decks, 2-Min Pitches & Interview Defense Q&As
-   Tailored for Pravin Kumar R · Aligned with GUVI & Enterprise Rubrics
-   Covers ALL 7 Flagship Projects from Pravin's Resume & Verified Stack
+   presentations.js — Unified Flagship Project Playbook & Code Pipelines
+   Consolidates Presentation Kit + Step-by-Step Code Walkthroughs
+   Covers ALL 7 Flagship Projects from Pravin's Resume & README.md
 ═════════════════════════════════════════════════════════════════════ */
 
 window.PRESENTATION_DATA = {
@@ -12,9 +11,29 @@ window.PRESENTATION_DATA = {
       id: 'openbim',
       title: '🏗️ OpenBIM BOQ Variance Engine',
       repo: 'pravinkumardatafreak/openbim-boq-variance-engine',
+      warRoom: 'Corridor B · ConTech Moat',
+      memoryHook: '1-in-10,000 Moat: Parse 3D IFC4 with IfcOpenShell → Join CPWD DSR 2023 via SQL CTEs → Flag cost variance in 45s (vs 21 days) with Isolation Forest + TreeSHAP + Three.js.',
       subtitle: 'Automated 3D IFC4 BIM Architectural Quantity Extraction & Schedule Rate Variance Auditing',
       tech: 'OpenBIM IFC4, IfcOpenShell, CPWD DSR 2023, Relational SQL CTEs, TreeSHAP, Three.js 3D WebGL',
-      metrics: '45-second automated audit vs. 3 weeks manual; 100% detection of quantity variance errors',
+      metrics: '45-second automated audit vs. 3 weeks manual; prevents 8–12% cost overrun; 100% synthetic error detection',
+      codeSnippet: `# Step 1: Parse 3D IFC4 Volumetric Quantities via IfcOpenShell
+import ifcopenshell
+import ifcopenshell.util.element as ElementUtil
+
+def extract_ifc_boq(ifc_path: str) -> list[dict]:
+    model = ifcopenshell.open(ifc_path)
+    records = []
+    for elem in model.by_type("IfcBuildingElement"):
+        psets = ElementUtil.get_psets(elem)
+        qto = psets.get("BaseQuantities", {})
+        records.append({
+            "global_id": elem.GlobalId,
+            "ifc_class": elem.is_a(),
+            "net_volume_m3": float(qto.get("NetVolume", 0.0)),
+            "net_area_m2": float(qto.get("NetArea", 0.0)),
+            "material": str(ElementUtil.get_material(elem))
+        })
+    return records  # Joined via SQL CTEs against CPWD DSR 2023 + TreeSHAP`,
       openingPitch: `"Hello everyone. In major construction projects, budget overruns of 10% to 15% routinely occur due to discrepancies between 3D Building Information Modeling (BIM) architectural models and the Central Public Works Department (CPWD) Schedule of Rates. Traditionally, quantity surveyors take 2 to 3 weeks manually cross-referencing blueprints with spreadsheets.
 
 I built the OpenBIM BOQ Variance Engine: a production AI auditing platform that programmatically parses volumetric geometry from IFC4 architectural files using IfcOpenShell, matches components against CPWD DSR 2023 item codes using relational SQL CTE joins, and isolates budget anomalies using an Isolation Forest coupled with TreeSHAP feature attribution. Evaluators can view flagged structural elements highlighted in red inside an interactive Three.js 3D WebGL viewer. The entire audit completes in 45 seconds."`,
@@ -112,9 +131,23 @@ I built the OpenBIM BOQ Variance Engine: a production AI auditing platform that 
       id: 'eria',
       title: '🤖 ERIA: Education Regulation Impact Analyzer',
       repo: 'pravinkumardatafreak/ERIA-Education-Analyzer',
+      warRoom: 'Corridor A · Multi-Agent RAG',
+      memoryHook: '4-Agent LangChain DAG (Extractor → Analyst → Planner → Critic) on Groq LLaMA 3.3 70B; Critic Gate ≥ 8.5/10 Grounding; Pydantic V2 JSON; <15s latency at $0.0087/run.',
       subtitle: 'Autonomous 4-Agent LangChain System for Structured Policy Extraction & Compliance Synthesis',
       tech: '4-Agent LangChain DAG, Groq LLaMA 3.3 70B, Critic Gate (LLM-as-a-Judge ≥ 8.5/10), Pydantic, FastAPI',
       metrics: 'Sub-15s response latency, $0.0087/run inference cost, 100% Pydantic JSON schema compliance',
+      codeSnippet: `# ERIA Critic Gate & Pydantic V2 Contract
+from pydantic import BaseModel, Field
+
+class PolicyImpactReport(BaseModel):
+    clause_id: str
+    risk_level: str = Field(pattern="^(LOW|MEDIUM|HIGH|CRITICAL)$")
+    grounding_score: float = Field(ge=0.0, le=10.0)
+    citation: str
+
+def run_critic_gate(report: PolicyImpactReport, threshold: float = 8.5) -> bool:
+    # Rejects ungrounded LLM claims and triggers self-healing retry (max_retries=2)
+    return report.grounding_score >= threshold and len(report.citation) > 15`,
       openingPitch: `"Hello everyone. When educational institutions, universities, and regulatory bodies receive multi-page policy mandates—such as UGC or AICTE circulars—human compliance teams spend days manually extracting requirements, cross-referencing deadlines, and assessing risk. Single-prompt LLM wrappers fail here because they hallucinate compliance criteria, drop critical clauses, and exceed latency budgets.
 
 To solve this, I engineered ERIA (Education Regulation Impact Analyzer): an autonomous 4-agent LangChain system powered by Groq LLaMA 3.3 70B. Instead of a naive prompt, ERIA executes a Directed Acyclic Graph: an Extractor Agent isolates clauses; an Analyst Agent computes compliance risk indicators; a Strategic Planner Agent creates action roadmaps; and a Critic Agent acts as an automated LLM-as-a-Judge, scoring extraction grounding on a 10-point scale and forcing self-correction if the score is below 8.5/10.
@@ -215,9 +248,23 @@ Served via an asynchronous FastAPI endpoint with strict Pydantic JSON schema val
       id: 'soil',
       title: '🔬 Soil Grain Size Distribution from Photography',
       repo: 'pravinkumardatafreak/soil-grain-size-distribution',
+      warRoom: 'Corridor A & Zoho · Physics-Grounded ML',
+      memoryHook: '24 soil specimens → OpenCV 15.0 PPM Calibration → EfficientNet-B0 + ResNet-34 (1,794 features) → MultiTaskElasticNet (Group-Lasso) + Monotonic CDF → 55.21 EMD (vs 86.14) & 8.61% MAE.',
       subtitle: 'Predicting Full 11-Point Particle Size Distribution from Smartphone Images using Computer Vision & ML',
       tech: 'OpenCV Pixels-Per-Millimeter (PPM), Dual CNN (EfficientNet-B0 + ResNet-34), MultiTaskElasticNet, Physical CDF Layer',
       metrics: 'Out-Of-Fold MAE of 8.61%, Weighted Earth Mover\'s Distance (EMD) 55.21 (vs 86.14 baseline)',
+      codeSnippet: `# Physics-Grounded Multi-Task Elastic Net + Monotonic CDF Projection
+import numpy as np
+from sklearn.linear_model import MultiTaskElasticNet
+
+def fit_and_project_cdf(X_train, Y_train, X_val):
+    # Joint L1/L2 Group-Lasso across all 11 sieve diameters simultaneously
+    model = MultiTaskElasticNet(alpha=0.15, l1_ratio=0.7, max_iter=5000)
+    model.fit(X_train, Y_train)
+    raw_preds = model.predict(X_val)
+    # Enforce Physical Axioms: Bounds [0, 100]% and Monotonic Non-Decreasing Sieves
+    clipped = np.clip(raw_preds, 0.0, 100.0)
+    return np.maximum.accumulate(clipped, axis=1)`,
       openingPitch: `"Hello everyone. In geotechnical and civil engineering, determining soil grain size distribution is foundational for foundation design, slope stability, and dam safety. Traditionally, engineers perform mechanical sieve analysis in laboratories—a destructive, time-consuming process requiring 24 hours of oven drying, mechanical shaking, and hydrometer sedimentation.
 
 My Capstone project built a non-destructive machine learning system that predicts the full 11-point cumulative percentage passing curve (from 0.002 mm clay up to 200 mm cobbles) directly from smartphone photography.
@@ -320,9 +367,25 @@ I solved this with a 4-tier physics-grounded pipeline: (1) Sensor Pixels-Per-Mil
       id: 'hubmap',
       title: '🧬 HuBMAP Functional Tissue Unit Segmentation',
       repo: 'pravinkumardatafreak/HuBMAP-Tissue-Unit-Segmentation-SOTA',
+      warRoom: 'Corridor A · Medical Vision & Uncertainty',
+      memoryHook: 'Gigapixel WSIs (512×512 tiles, 64px overlap) → Swin-TransUNet (Shifted-Window O(N) attention) + 0.5 BCE + 0.5 Dice Loss → Monte Carlo Dropout (T=10 passes) → 0.6782 Val Dice.',
       subtitle: 'SOTA Deep Learning Segmentation of Functional Tissue Units (FTUs) in Human Kidney Histological Scans',
       tech: 'PyTorch Swin-TransUNet, Shifted-Window Attention (W-MSA/SW-MSA), Monte Carlo Dropout (Epistemic Uncertainty), Tile Slicing',
       metrics: '0.6782 Validation Dice score; calibrated confidence heatmaps for high-stakes clinical decision support',
+      codeSnippet: `# Monte Carlo Dropout Inference for Epistemic Uncertainty Heatmaps
+import torch
+
+def mc_dropout_inference(model, tile_tensor: torch.Tensor, T: int = 10):
+    model.eval()
+    # Enable Dropout layers during inference to sample posterior weights
+    for m in model.modules():
+        if m.__class__.__name__.startswith('Dropout'):
+            m.train()
+    with torch.no_grad():
+        preds = torch.stack([torch.sigmoid(model(tile_tensor)) for _ in range(T)])
+    mean_mask = preds.mean(dim=0)
+    epistemic_var = preds.var(dim=0)  # Pathologist uncertainty heatmap
+    return mean_mask, epistemic_var`,
       openingPitch: `"Hello everyone. In clinical digital pathology and computational biology, identifying Functional Tissue Units (FTUs)—such as glomeruli in human kidney histology—is vital for staging chronic kidney disease and guiding transplants. However, Whole Slide Images (WSIs) are enormous gigapixel scans containing tens of thousands of microscopic tissue cells, where glomeruli occupy less than 2% of the pixel area.
 
 I engineered an end-to-end biomedical segmentation pipeline in PyTorch utilizing a hybrid Vision Transformer architecture: Swin-TransUNet.
@@ -424,9 +487,26 @@ Crucially, because medical AI cannot be a black box, I integrated Monte Carlo Dr
       id: 'telemetry',
       title: '📊 Production Sensor Telemetry Regressor',
       repo: 'Internship Studio (Verified Industry Experience)',
+      warRoom: 'All War Rooms · Verified Industry Impact',
+      memoryHook: '14,102 telemetry records → Robust IQR outlier filter → PCA + K-Means (3 metabolic regimes) → Non-linear MET interaction → Random Forest + TreeSHAP → 89.2% error reduction (MAE 34.97 → 3.78 kcal, R² = 0.9979).',
       subtitle: 'End-to-End Analytics & Predictive Modeling across 14,102 Physical Telemetry Records',
       tech: 'Python, Scikit-Learn, Robust IQR Auditing, PCA, K-Means Clustering, Random Forest, TreeSHAP',
       metrics: '89.2% error reduction (MAE 34.97 down to 3.78 kcal); R² lifted from 0.81 to 0.9979 across 14,102 records',
+      codeSnippet: `# Verified 4-Stage Telemetry Pipeline (14,102 Records -> R² = 0.9979)
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+from sklearn.ensemble import RandomForestRegressor
+
+def train_telemetry_pipeline(X_train, y_train, X_test):
+    # Stage 1: Unsupervised Metabolic Regime Segmentation (fit ONLY on train!)
+    pca = PCA(n_components=0.95, random_state=42).fit(X_train)
+    kmeans = KMeans(n_clusters=3, random_state=42).fit(pca.transform(X_train))
+    X_tr_aug = X_train.assign(regime=kmeans.labels_)
+    X_te_aug = X_test.assign(regime=kmeans.predict(pca.transform(X_test)))
+    # Stage 2: Random Forest Ensemble
+    rf = RandomForestRegressor(n_estimators=250, max_depth=16, random_state=42)
+    rf.fit(X_tr_aug, y_train)
+    return rf.predict(X_te_aug)`,
       openingPitch: `"Hello everyone. During my Data Science Internship at Internship Studio (Analytics & EdTech), I was tasked with solving a severe variance problem in the organization\'s student physical telemetry and calorie expenditure estimation engine.
 
 The baseline prediction model suffered from an unacceptably high Mean Absolute Error (MAE) of 34.97 kcal and an R² of only 0.81, causing erratic reporting across daily user wellness tracking.
@@ -532,9 +612,29 @@ The final model slashed MAE from 34.97 down to 3.78 kcal—an 89.2% error reduct
       id: 'crypto',
       title: '📈 CryptoCast & Space Telemetry Forecaster',
       repo: 'pravinkumardatafreak/cryptocast & space-telemetry-',
+      warRoom: 'Corridor B · Time-Series & RevIN',
+      memoryHook: 'Target = Stationary Log Returns (ADF p<0.001) → 60-day window → PyTorch RevIN Layer + 5 Models (LSTM wins 1D @ 2.06% MAPE; PatchTST wins 3D @ 3.85% & 7D @ 5.93%) under Walk-Forward Validation.',
       subtitle: 'Multi-Horizon Time-Series Forecasting with Reversible Instance Normalization (RevIN) & Walk-Forward Validation',
       tech: 'PyTorch, Multi-Channel LSTM, PatchTST, RevIN Layer, Chronological WFV, Groq LLaMA, Streamlit',
       metrics: '1-Day MAPE of 2.06% (R²=0.9921), 3-Day MAPE 3.85%, 7-Day MAPE 5.93%, zero future lookahead',
+      codeSnippet: `# PyTorch Reversible Instance Normalization (RevIN) + Multi-Horizon Log Return
+import torch
+import torch.nn as nn
+
+class RevIN(nn.Module):
+    def __init__(self, num_features: int, eps: float = 1e-5):
+        super().__init__()
+        self.eps = eps
+        self.gamma = nn.Parameter(torch.ones(1, 1, num_features))
+        self.beta = nn.Parameter(torch.zeros(1, 1, num_features))
+
+    def forward(self, x: torch.Tensor, mode: str = 'norm'):
+        if mode == 'norm':
+            self.mean = x.mean(dim=1, keepdim=True).detach()
+            self.stdev = torch.sqrt(x.var(dim=1, keepdim=True, unbiased=False) + self.eps).detach()
+            return ((x - self.mean) / self.stdev) * self.gamma + self.beta
+        elif mode == 'denorm':
+            return ((x - self.beta) / self.gamma) * self.stdev + self.mean`,
       openingPitch: `"Hello everyone. Financial markets and industrial telemetry operate with extreme non-stationary volatility, where statistical distributions drift constantly over time. Traditional econometric models fail to capture non-linear sequence dependencies, while standard deep neural networks suffer catastrophic distribution shift when test environments deviate from training regimes.
 
 I built CryptoCast and space-telemetry-: a multi-horizon deep learning forecasting system built in PyTorch that predicts sequence returns across 1-day, 3-day, and 7-day horizons from 60-day lookback sequences.
@@ -664,9 +764,27 @@ Evaluated using rigorous Chronological Walk-Forward Validation (WFV) with zero f
       id: 'imdb',
       title: '🎬 IMDb Movie Recommendation System',
       repo: 'pravinkumardatafreak/IMDb-Movie-Recommender',
+      warRoom: 'Core NLP & Classical ML',
+      memoryHook: 'Selenium Scraper → NLTK Stopwords → TF-IDF (5,000 features, 1–2 n-grams) → Brute-Force Cosine KNN on Sparse Matrix → Hybrid Score = 0.7×Sim + 0.3×(Rating/5) → <100ms Streamlit.',
       subtitle: 'Content-Based Filtering & Hybrid Re-Ranking Engine Built on NLP Storyline Semantics',
       tech: 'Python, Scikit-Learn, TF-IDF Vectorizer (1,2-grams), Cosine Similarity, NearestNeighbors, Streamlit',
       metrics: 'Sub-100ms inference latency, zero cold-start latency, hybrid 70% semantic + 30% rating scoring',
+      codeSnippet: `# Hybrid TF-IDF + Brute-Force Cosine KNN Recommender
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.neighbors import NearestNeighbors
+
+vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
+tfidf_matrix = vectorizer.fit_transform(df['clean_desc'])
+nn = NearestNeighbors(metric='cosine', algorithm='brute').fit(tfidf_matrix)
+
+def recommend(idx: int, n: int = 5, alpha: float = 0.7, beta: float = 0.3):
+    dists, indices = nn.kneighbors(tfidf_matrix[idx], n_neighbors=n + 1)
+    scored = []
+    for dist, i in zip(dists[0][1:], indices[0][1:]):
+        rating = float(df.iloc[i]['Rating'])
+        score = alpha * (1.0 - dist) + beta * (rating / 5.0)
+        scored.append((df.iloc[i]['Title'], rating, round(score, 4)))
+    return sorted(scored, key=lambda x: x[2], reverse=True)`,
       openingPitch: `"Hello everyone. Modern entertainment platforms like Netflix, Spotify, and IMDb face a major content discovery bottleneck: users are overwhelmed by thousands of choices, while newly released content struggles to get discovered because traditional collaborative filtering algorithms require existing user ratings to generate recommendations.
 
 I built the IMDb Movie Recommendation System: an end-to-end content-based recommendation engine built with Python, NLP, and Streamlit.
@@ -765,44 +883,65 @@ To balance relevance with quality, I designed a Hybrid Re-Ranking score: combini
   ]
 };
 
-// ── Render Function for Full Presentation Kit ──
-window.renderPresentationKit = function() {
+function escapeSnippetHTML(str) {
+  return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// ── Render Function for Unified Flagship Project Playbook ──
+window.renderPresentationKit = function(initialId) {
   const el = document.getElementById('present-content');
   if (!el) return;
 
   const data = window.PRESENTATION_DATA;
-  let activeProject = data.projects[0].id;
+  const startId = initialId || data.projects[0].id;
 
   function buildDeckHTML(proj) {
     return `
-      <div class="glass-card" style="padding:1.4rem;margin-bottom:1.5rem;border-color:rgba(0,255,200,0.25)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.8rem">
+      <div class="glass-card" style="padding:1.5rem;margin-bottom:1.5rem;border-color:rgba(0,255,200,0.25)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.75rem;margin-bottom:0.85rem">
           <div>
-            <h3 style="color:var(--cyan);font-size:1.25rem;margin:0 0 0.25rem 0">${proj.title}</h3>
-            <div style="font-size:0.82rem;color:var(--text-muted)">${proj.subtitle}</div>
+            <div style="font-size:0.72rem;font-family:var(--font-mono);color:var(--amber);margin-bottom:0.25rem">${proj.warRoom} · ${proj.repo}</div>
+            <h3 style="color:var(--cyan);font-size:1.3rem;margin:0 0 0.25rem 0">${proj.title}</h3>
+            <div style="font-size:0.84rem;color:var(--text-secondary)">${proj.subtitle}</div>
           </div>
-          <span class="tag cyan" style="font-size:0.7rem;font-weight:600">${proj.repo}</span>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1rem;font-size:0.8rem">
-          <span style="background:rgba(255,255,255,0.05);padding:0.3rem 0.6rem;border-radius:6px;color:var(--text-secondary)"><strong>Tech:</strong> ${proj.tech}</span>
-          <span style="background:rgba(0,255,200,0.06);border:1px solid rgba(0,255,200,0.2);padding:0.3rem 0.6rem;border-radius:6px;color:var(--green);font-weight:600">🏆 ${proj.metrics}</span>
         </div>
 
-        <!-- 2-Minute Opening Pitch -->
-        <div style="background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.25);border-radius:10px;padding:1rem;margin-bottom:1.5rem">
-          <div style="font-size:0.82rem;color:var(--violet);font-weight:700;margin-bottom:0.4rem">🎯 2-Minute Evaluator Presentation Script (The Opening Pitch)</div>
-          <div style="font-size:0.84rem;color:var(--text-primary);line-height:1.5;white-space:pre-line;font-style:italic">${proj.openingPitch}</div>
+        <!-- 1-Line Memory Anchor Box (For Fast Recall) -->
+        <div style="background:rgba(0,255,200,0.06);border:1px solid rgba(0,255,200,0.25);border-radius:10px;padding:0.9rem 1.1rem;margin-bottom:1.1rem">
+          <div style="font-size:0.74rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.25rem">⚡ 10-Second Memory Hook (Memorize This Chain First)</div>
+          <div style="font-size:0.88rem;color:var(--text-primary);font-weight:600;line-height:1.5">${proj.memoryHook}</div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.25rem;font-size:0.8rem">
+          <span style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:0.35rem 0.7rem;border-radius:6px;color:var(--text-secondary)"><strong>Core Stack:</strong> ${proj.tech}</span>
+          <span style="background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.25);padding:0.35rem 0.7rem;border-radius:6px;color:var(--lime);font-weight:600">🏆 Verified Benchmark: ${proj.metrics}</span>
+        </div>
+
+        <!-- Two-Column Study Layout: 2-Min Pitch + Core Code Blueprint -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));gap:1.1rem;margin-bottom:1.5rem">
+          <div style="background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.25);border-radius:10px;padding:1.1rem">
+            <div style="font-size:0.8rem;color:var(--violet);font-weight:700;margin-bottom:0.45rem">🎯 2-Minute Evaluator Opening Pitch</div>
+            <div style="font-size:0.83rem;color:var(--text-primary);line-height:1.55;white-space:pre-line">${proj.openingPitch}</div>
+          </div>
+
+          <div style="background:#080a14;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:1.1rem;display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+              <span style="font-size:0.78rem;color:var(--cyan);font-weight:700;font-family:var(--font-mono)">💻 Core Production Code Blueprint</span>
+              <button class="btn-sm accent" style="padding:0.2rem 0.6rem;font-size:0.72rem" onclick="navigator.clipboard.writeText(this.closest('div').nextElementSibling.innerText);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)">Copy</button>
+            </div>
+            <pre style="margin:0;overflow-x:auto;font-family:var(--font-mono);font-size:0.76rem;line-height:1.55;color:#e2e8f0;flex:1"><code>${escapeSnippetHTML(proj.codeSnippet)}</code></pre>
+          </div>
         </div>
 
         <!-- Slide Decks Grid -->
-        <h4 style="color:var(--text-primary);font-size:1rem;margin:1.2rem 0 0.8rem 0">📑 Slide-by-Slide Live Evaluation Deck (${proj.slides.length} Slides)</h4>
+        <h4 style="color:var(--text-primary);font-size:1rem;margin:1.2rem 0 0.8rem 0">📑 Slide-by-Slide Architecture Walkthrough (${proj.slides.length} Slides — Click to Expand/Collapse)</h4>
         <div class="slides-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:1rem;margin-bottom:1.5rem">
           ${proj.slides.map(s => `
             <div class="slide-card glass-card" onclick="toggleSlide(this,'${proj.id}-${s.num}')" style="cursor:pointer;padding:1rem">
-              <div class="slide-num" style="color:var(--${s.color});font-weight:700;font-size:0.75rem;margin-bottom:0.25rem">SLIDE ${s.num}</div>
+              <div class="slide-num" style="color:var(--${s.color});font-weight:700;font-size:0.75rem;margin-bottom:0.25rem">STAGE ${s.num}</div>
               <h4 style="font-size:0.92rem;margin:0 0 0.35rem 0;color:var(--text-primary)">${s.title}</h4>
               <p style="font-size:0.8rem;color:var(--text-secondary);margin:0 0 0.5rem 0">${s.summary}</p>
-              <div class="slide-expand" id="slide-${proj.id}-${s.num}">
+              <div class="slide-expand open" id="slide-${proj.id}-${s.num}">
                 <ul style="padding-left:1.1rem;margin:0;font-size:0.78rem;color:var(--text-muted);line-height:1.45">${s.bullets.map(b=>`<li style="margin-bottom:0.35rem">${b}</li>`).join('')}</ul>
               </div>
             </div>
@@ -810,12 +949,12 @@ window.renderPresentationKit = function() {
         </div>
 
         <!-- Top 5 Interview Defense Questions -->
-        <h4 style="color:var(--rose);font-size:1rem;margin:1.5rem 0 0.8rem 0">🎤 Top 5 Technical Defense Questions & Winning Answers</h4>
+        <h4 style="color:var(--rose);font-size:1rem;margin:1.5rem 0 0.8rem 0">🎤 Top 5 Technical Defense Questions &amp; Winning Answers</h4>
         <div style="display:flex;flex-direction:column;gap:0.85rem">
           ${proj.vivaQuestions.map(q => `
-            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--rose);border-radius:8px;padding:0.9rem">
-              <div style="font-size:0.86rem;font-weight:700;color:var(--text-primary);margin-bottom:0.35rem">${q.q}</div>
-              <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5">${q.a}</div>
+            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.95rem">
+              <div style="font-size:0.86rem;font-weight:700;color:var(--cyan);margin-bottom:0.35rem">${q.q}</div>
+              <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.55">${q.a}</div>
             </div>
           `).join('')}
         </div>
@@ -825,22 +964,22 @@ window.renderPresentationKit = function() {
 
   el.innerHTML = `
     <div class="section-header">
-      <h2>📊 Live Presentation Kit & Defense War Room</h2>
-      <p>Slide-by-slide talking scripts, opening pitches, and technical defense Q&As for ALL 7 flagship projects on Pravin's resume.</p>
+      <h2>🛠️ Unified Flagship Project Playbook &amp; Code Pipelines</h2>
+      <p>All 7 flagship projects from your README &amp; resume in one place: 10-second memory hooks, 2-minute opening scripts, core code blueprints, slide walkthroughs, and viva defense Q&amp;As.</p>
     </div>
 
     <!-- Project Tabs Navigation -->
     <div class="viva-filters" style="margin-bottom:1.5rem;flex-wrap:wrap">
-      ${data.projects.map((p, idx) => `
-        <button class="filter-btn ${idx===0?'active':''}" onclick="switchProjectDeck('${p.id}', this)">${p.title}</button>
+      ${data.projects.map((p) => `
+        <button class="filter-btn ${p.id===startId?'active':''}" data-proj="${p.id}" onclick="switchProjectDeck('${p.id}', this)">${p.title}</button>
       `).join('')}
-      <button class="filter-btn" onclick="switchProjectDeck('eval', this)">⏱️ 30-Min Rubric</button>
-      <button class="filter-btn" onclick="switchProjectDeck('eda', this)">🔍 15-Point EDA</button>
+      <button class="filter-btn" data-proj="eval" onclick="switchProjectDeck('eval', this)">⏱️ 30-Min Evaluation Rubric</button>
+      <button class="filter-btn" data-proj="eda" onclick="switchProjectDeck('eda', this)">🔍 15-Point EDA Checklist</button>
     </div>
 
     <!-- Project Content Views -->
-    ${data.projects.map((p, idx) => `
-      <div id="deck-${p.id}" class="deck-content" style="${idx===0?'display:block':'display:none'}">
+    ${data.projects.map((p) => `
+      <div id="deck-${p.id}" class="deck-content" style="${p.id===startId?'display:block':'display:none'}">
         ${buildDeckHTML(p)}
       </div>
     `).join('')}
@@ -852,36 +991,36 @@ window.renderPresentationKit = function() {
           <h3 style="color:var(--cyan);font-size:1rem;margin-bottom:1rem">⏱️ Live Evaluation Schedule (30 Mins Total)</h3>
           <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem">
             <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
-              <span>1. Self Introduction & Moat</span><strong style="color:var(--cyan)">3 Mins</strong>
+              <span>1. Self Introduction &amp; Civil Moat</span><strong style="color:var(--cyan)">3 Mins</strong>
             </div>
             <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
-              <span>2. Problem Statement & Walkthrough</span><strong style="color:var(--violet)">12 Mins</strong>
+              <span>2. Problem Statement &amp; Code Walkthrough</span><strong style="color:var(--violet)">12 Mins</strong>
             </div>
             <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
               <span>3. Mock Viva Questions Defense</span><strong style="color:var(--rose)">10 Mins</strong>
             </div>
             <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
-              <span>4. Mentor Feedback & Score</span><strong style="color:var(--amber)">5 Mins</strong>
+              <span>4. Evaluator Feedback &amp; Score</span><strong style="color:var(--amber)">5 Mins</strong>
             </div>
           </div>
         </div>
         <div class="glass-card" style="padding:1.25rem">
-          <h3 style="color:var(--green);font-size:1rem;margin-bottom:1rem">🏆 Evaluation Scoring Rubric (60 Marks Total)</h3>
+          <h3 style="color:var(--lime);font-size:1rem;margin-bottom:1rem">🏆 Evaluation Scoring Rubric (60 Marks Total)</h3>
           <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem">
             <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Code Quality & Modular Data Engineering</span><strong>10 Marks</strong>
+              <span>Code Quality &amp; Modular Data Engineering</span><strong>10 Marks</strong>
             </div>
             <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Documentation & Architecture Diagrams</span><strong>10 Marks</strong>
+              <span>Documentation &amp; Architecture Diagrams</span><strong>10 Marks</strong>
             </div>
             <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
               <span>Code Reusability (PEP-8 Modular Code)</span><strong>10 Marks</strong>
             </div>
             <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Presentation Quality & Pitch Delivery</span><strong>10 Marks</strong>
+              <span>Presentation Quality &amp; Pitch Delivery (130 WPM)</span><strong>10 Marks</strong>
             </div>
             <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Task Accomplishment & Accuracy</span><strong>10 Marks</strong>
+              <span>Task Accomplishment &amp; Benchmark Accuracy</span><strong>10 Marks</strong>
             </div>
             <div style="display:flex;justify-content:space-between;padding-bottom:0.4rem">
               <span>5 Mock Viva Questions Defense</span><strong>10 Marks</strong>
@@ -894,8 +1033,8 @@ window.renderPresentationKit = function() {
     <!-- TAB: 15-POINT EDA -->
     <div id="deck-eda" class="deck-content" style="display:none">
       <div style="padding:1rem;background:rgba(56,189,248,0.04);border:1px solid rgba(56,189,248,0.15);border-radius:12px;margin-bottom:1.2rem">
-        <div style="font-size:0.85rem;color:var(--cyan);font-weight:700;margin-bottom:0.3rem">🔍 15 Core EDA Questions (GUVI EDA Guide Reference)</div>
-        <div style="font-size:0.82rem;color:var(--text-secondary)">Use these 15 questions to structure your exploratory data analysis narrative during the live evaluation.</div>
+        <div style="font-size:0.85rem;color:var(--cyan);font-weight:700;margin-bottom:0.3rem">🔍 15 Core EDA Questions (GUVI EDA Audit Framework)</div>
+        <div style="font-size:0.82rem;color:var(--text-secondary)">Use these 15 questions in sequence to defend any exploratory data analysis pipeline during live interviews.</div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:0.75rem">
         <div class="glass-card" style="padding:0.9rem"><div style="font-size:0.7rem;color:var(--cyan);font-weight:700">QUESTION 01</div><div style="font-size:0.85rem;font-weight:700;margin:0.2rem 0">What are the basic characteristics?</div><div style="font-size:0.78rem;color:var(--text-secondary)">Identify observations count, variable types, and memory footprints.</div></div>
@@ -918,11 +1057,15 @@ window.renderPresentationKit = function() {
   `;
 
   window.switchProjectDeck = function(deckId, btn) {
-    document.querySelectorAll('.deck-content').forEach(d => d.style.display = 'none');
-    document.querySelectorAll('.viva-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#present-content .deck-content').forEach(d => d.style.display = 'none');
+    document.querySelectorAll('#present-content .viva-filters .filter-btn').forEach(b => b.classList.remove('active'));
     const target = document.getElementById('deck-' + deckId);
     if (target) target.style.display = 'block';
     if (btn) btn.classList.add('active');
+    else {
+      const matchBtn = document.querySelector(`#present-content .filter-btn[data-proj="${deckId}"]`);
+      if (matchBtn) matchBtn.classList.add('active');
+    }
     if (window.addXP) window.addXP(10);
   };
 
@@ -931,4 +1074,11 @@ window.renderPresentationKit = function() {
     if (el) el.classList.toggle('open');
     if (window.addXP) window.addXP(5);
   };
+};
+
+window.openProjectDirectly = function(projId) {
+  navigateTo('present');
+  if (typeof window.switchProjectDeck === 'function') {
+    window.switchProjectDeck(projId);
+  }
 };

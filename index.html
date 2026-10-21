@@ -27,47 +27,67 @@
         <span>Pravin Kumar R</span>
         <span class="cand-card-score">98.3% Match</span>
       </div>
-      <div class="cand-card-title">Data Scientist @ Zoho IT</div>
+      <div class="cand-card-title">B.E. Civil (Hons) · IIT-M GUVI DS</div>
+    </div>
+
+    <!-- Daily Study Goal Tracker -->
+    <div class="nav-daily-goal" id="nav-daily-goal">
+      <div class="daily-goal-header">
+        <span class="daily-goal-label">🎯 Daily Study Goal</span>
+        <div class="daily-goal-controls" title="Adjust daily module target">
+          <button type="button" class="goal-step-btn" onclick="adjustDailyGoalTarget(-1)" aria-label="Decrease daily target">−</button>
+          <span class="daily-goal-target-pill" id="daily-goal-target-pill">Goal: 5</span>
+          <button type="button" class="goal-step-btn" onclick="adjustDailyGoalTarget(1)" aria-label="Increase daily target">+</button>
+        </div>
+      </div>
+      <div class="daily-goal-bar-wrap">
+        <div class="daily-goal-bar" id="daily-goal-bar"></div>
+      </div>
+      <div class="daily-goal-footer">
+        <span class="daily-goal-value" id="daily-goal-value">0 / 5 Modules</span>
+        <button type="button" class="daily-goal-log-btn" id="daily-goal-log-btn" onclick="completeStudyModuleToday()">+1 Module</button>
+      </div>
     </div>
 
     <div class="nav-xp">
-      <div class="xp-label">Job Readiness XP</div>
+      <div class="xp-label">Study &amp; Readiness XP</div>
       <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar"></div></div>
       <div class="xp-value" id="xp-value">0 XP</div>
     </div>
 
     <ul class="nav-links" id="nav-links">
+      <!-- 1. COMMAND CENTER & ROADMAP -->
+      <li class="nav-group-label">01 · Command Center</li>
       <li><a href="#" data-section="home" class="nav-item active" id="nav-home">
-        <span class="nav-icon">🏠</span><span>Dashboard</span>
+        <span class="nav-icon">🧭</span><span>Study Map &amp; Cheat Sheet</span>
+      </a></li>
+      <li><a href="#" data-section="accelerator" class="nav-item highlight-accelerator" id="nav-accelerator">
+        <span class="nav-icon">🎯</span><span>10-Step Path &amp; STAR Vault</span>
       </a></li>
 
-      <!-- Priority Enterprise War Rooms -->
-      <li class="nav-group-label" style="color:var(--cyan)">🔥 Enterprise War Rooms</li>
+      <!-- 2. ENTERPRISE WAR ROOMS (62+ JDs) -->
+      <li class="nav-group-label" style="color:var(--cyan)">02 · Enterprise War Rooms</li>
       <li><a href="#" data-section="corridor-a" class="nav-item highlight-corridor-a" id="nav-corridor-a">
         <span class="nav-icon">🤖</span><span>Corridor A: AI &amp; Vision</span>
-        <span class="badge" style="background:rgba(0,255,200,0.2);color:var(--cyan)">36 JDs</span>
+        <span class="nav-meta-tag" style="color:var(--cyan)">36 JDs</span>
       </a></li>
       <li><a href="#" data-section="corridor-b" class="nav-item highlight-corridor-b" id="nav-corridor-b">
-        <span class="nav-icon">⚡</span><span>Corridor B: Time-Series &amp; ConTech</span>
-        <span class="badge" style="background:rgba(245,158,11,0.2);color:var(--amber)">26 JDs</span>
+        <span class="nav-icon">⚡</span><span>Corridor B: Time-Series</span>
+        <span class="nav-meta-tag" style="color:var(--amber)">26 JDs</span>
       </a></li>
       <li><a href="#" data-section="zoho-mock" class="nav-item highlight-zoho" id="nav-zoho-mock">
         <span class="nav-icon">🏢</span><span>Zoho IT Solutions Mock</span>
-        <span class="badge badge-pulse">WAR ROOM</span>
+        <span class="nav-meta-tag" style="color:var(--rose)">130 WPM</span>
       </a></li>
 
-      <!-- Career Accelerator Highlight -->
-      <li class="nav-group-label" style="color:var(--violet)">🎯 Career Accelerator</li>
-      <li><a href="#" data-section="accelerator" class="nav-item highlight-accelerator" id="nav-accelerator">
-        <span class="nav-icon">🎯</span><span>Career Accelerator</span>
-        <span class="badge" style="background:rgba(139,92,246,0.25);color:var(--violet)">JOB READY</span>
+      <!-- 3. FLAGSHIP PROJECT PLAYBOOK (Unified 7 Projects + Code Pipelines) -->
+      <li class="nav-group-label" style="color:var(--amber)">03 · Flagship Playbook</li>
+      <li><a href="#" data-section="present" class="nav-item" id="nav-present">
+        <span class="nav-icon">🛠️</span><span>7 Projects &amp; Code Pipelines</span>
       </a></li>
 
-      <li class="nav-group-label">Learning Systems</li>
-      <li><a href="#" data-section="roadmap" class="nav-item" id="nav-roadmap">
-        <span class="nav-icon">🗺️</span><span>Learning Roadmap</span>
-      </a></li>
-      <li class="nav-group-label">Core Modules</li>
+      <!-- 4. CORE ML & DL FOUNDATIONS -->
+      <li class="nav-group-label">04 · Core ML Foundations</li>
       <li><a href="#" data-section="nlp" class="nav-item" id="nav-nlp">
         <span class="nav-icon">📝</span><span>NLP &amp; Text AI</span>
         <span class="badge" id="badge-nlp"></span>
@@ -77,34 +97,25 @@
         <span class="badge" id="badge-classical"></span>
       </a></li>
       <li><a href="#" data-section="rnn" class="nav-item" id="nav-rnn">
-        <span class="nav-icon">🔄</span><span>RNN / LSTM</span>
+        <span class="nav-icon">🔄</span><span>RNN &amp; RevIN LSTM</span>
         <span class="badge" id="badge-rnn"></span>
       </a></li>
       <li><a href="#" data-section="transformer" class="nav-item" id="nav-transformer">
-        <span class="nav-icon">🤖</span><span>Transformers</span>
+        <span class="nav-icon">🤖</span><span>Transformers &amp; Attention</span>
         <span class="badge" id="badge-transformer"></span>
       </a></li>
       <li><a href="#" data-section="cnn" class="nav-item" id="nav-cnn">
-        <span class="nav-icon">👁️</span><span>CNN</span>
+        <span class="nav-icon">👁️</span><span>CNN &amp; Spatial Vision</span>
         <span class="badge" id="badge-cnn"></span>
       </a></li>
-      <li class="nav-group-label">Flagship Codebases</li>
-      <li><a href="#" data-section="crypto" class="nav-item" id="nav-crypto">
-        <span class="nav-icon">📈</span><span>Crypto Forecaster</span>
-      </a></li>
-      <li><a href="#" data-section="imdb" class="nav-item" id="nav-imdb">
-        <span class="nav-icon">🎬</span><span>IMDB Recommender</span>
-      </a></li>
-      <li class="nav-group-label">Interview Prep</li>
+
+      <!-- 5. ACTIVE RECALL & AI MENTOR -->
+      <li class="nav-group-label" style="color:var(--violet)">05 · Active Recall &amp; Coach</li>
       <li><a href="#" data-section="viva" class="nav-item" id="nav-viva">
-        <span class="nav-icon">🎤</span><span>Viva Mode</span>
-      </a></li>
-      <li><a href="#" data-section="present" class="nav-item" id="nav-present">
-        <span class="nav-icon">📊</span><span>Presentation Kit</span>
+        <span class="nav-icon">🎤</span><span>90+ Viva Flashcard Vault</span>
       </a></li>
       <li><a href="#" data-section="ai-mentor" class="nav-item" id="nav-ai-mentor" style="color:var(--violet)">
-        <span class="nav-icon">🤖</span><span>AI Mentor Coach</span>
-        <span class="badge visible" style="background:linear-gradient(135deg,#8b5cf6,#00ffc8);color:#0b0f19;font-weight:700">LLM</span>
+        <span class="nav-icon">🧠</span><span>AI Mentor Coach</span>
       </a></li>
     </ul>
   </nav>
@@ -112,107 +123,241 @@
   <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
   <main id="main-content">
 
-    <!-- ══════ HOME ══════ -->
+    <!-- ══════ HOME: README-ALIGNED STUDY MAP & MEMORY CHEAT SHEET ══════ -->
     <section id="section-home" class="section active">
       <div class="hero-grid">
         <div class="hero-left">
-          <div class="hero-eyebrow">🎯 Personalized Career Accelerator · Corridor A &amp; B War Rooms Ready</div>
-          <h1 class="hero-title">Learn it. <span class="gradient-text">Build it.</span><br/>Defend it.</h1>
-          <p class="hero-sub">The Data Science &amp; AI Career Accelerator personalized for <strong>Pravin Kumar R</strong>. Built directly on 62+ enterprise Job Descriptions to master technical rounds in Applied GenAI, Time-Series Telemetry, ConTech AI, and Zoho IT Solutions.</p>
-          <div class="hero-cta-row" style="flex-wrap:wrap;gap:0.75rem">
-            <button class="btn-primary" onclick="navigateTo('accelerator')" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);border-color:#8b5cf6">🎯 Career Accelerator</button>
-            <button class="btn-primary" onclick="navigateTo('corridor-a')">🤖 Corridor A: AI &amp; Vision</button>
-            <button class="btn-primary" onclick="navigateTo('corridor-b')" style="background:linear-gradient(135deg,#f59e0b,#d97706);border-color:#f59e0b">⚡ Corridor B: Time-Series &amp; ConTech</button>
-            <button class="btn-ghost" onclick="navigateTo('zoho-mock')">🏢 Zoho Mock</button>
-            <button class="btn-ghost" onclick="navigateTo('roadmap')">Learning Roadmap</button>
-            <button class="btn-ghost" onclick="navigateTo('viva')">🎤 Practice Viva</button>
+          <div class="hero-eyebrow">⚡ NeuroForge Study Architecture · Reverse-Engineered from 104 Enterprise JDs</div>
+          <h1 class="hero-title">Learn it. <span class="gradient-text">Build it.</span><br/>Defend it Cold.</h1>
+          <p class="hero-sub">
+            Streamlined, zero-duplication study cockpit for <strong>Pravin Kumar R</strong> (B.E. Civil Engineering First Class Honors &rarr; IIT-M Incubated GUVI Master Data Science). Everything is organized into <strong>5 structured study stages</strong> so you can memorize your numbers, rehearse your pitches, and pass live coding rounds with ease.
+          </p>
+          <div class="hero-cta-row">
+            <button class="btn-primary" onclick="navigateTo('accelerator')">1. Start 10-Step Path &amp; STAR</button>
+            <button class="btn-primary" onclick="navigateTo('present')" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">2. Study 7 Flagship Projects</button>
+            <button class="btn-ghost" onclick="navigateTo('viva')">3. Drill 90+ Viva Cards</button>
           </div>
           <div class="hero-stats">
-            <div class="stat"><span class="stat-n">96.8%</span><span class="stat-l">Readiness Score</span></div>
-            <div class="stat"><span class="stat-n">104</span><span class="stat-l">Analyzed JDs</span></div>
-            <div class="stat"><span class="stat-n">22</span><span class="stat-l">Coding Drills</span></div>
-            <div class="stat"><span class="stat-n">90+</span><span class="stat-l">Viva Flashcards</span></div>
+            <div class="stat"><span class="stat-n">104</span><span class="stat-l">Enterprise JDs Mined</span></div>
+            <div class="stat"><span class="stat-n">3</span><span class="stat-l">Live War Rooms</span></div>
+            <div class="stat"><span class="stat-n">7</span><span class="stat-l">Flagship Defenses</span></div>
+            <div class="stat"><span class="stat-n">90+</span><span class="stat-l">Active Recall Cards</span></div>
           </div>
         </div>
+
+        <!-- Right Column: README Architectural Mission (The 5 Core Gaps Solved) -->
         <div class="hero-right">
           <div class="techniques-card glass-card">
-            <h3>🧠 The 8 Secret Learning Techniques</h3>
+            <h3>🧭 The 5 Core Interview Gaps We Solve (From README)</h3>
             <div class="technique-list">
-              <div class="technique-item"><span class="t-num">01</span><div><strong>Active Recall</strong><p>Retrieval beats re-reading by 2–3× (Roediger &amp; Karpicke, 2006)</p></div></div>
-              <div class="technique-item"><span class="t-num">02</span><div><strong>Interleaving</strong><p>Mix Python, SQL, ML tabs — forces discrimination</p></div></div>
-              <div class="technique-item"><span class="t-num">03</span><div><strong>Desirable Difficulty</strong><p>Fill-in-gap code before seeing the answer</p></div></div>
-              <div class="technique-item"><span class="t-num">04</span><div><strong>Dual Coding</strong><p>Every concept = visual diagram + production code</p></div></div>
-              <div class="technique-item"><span class="t-num">05</span><div><strong>Feynman Technique</strong><p>"Explain to a 5-year-old" box per module</p></div></div>
-              <div class="technique-item"><span class="t-num">06</span><div><strong>Spaced Repetition</strong><p>Ebbinghaus curve — optimal review intervals</p></div></div>
-              <div class="technique-item"><span class="t-num">07</span><div><strong>Elaborative Interrogation</strong><p>"Why does this work?" for every formula &amp; metric</p></div></div>
-              <div class="technique-item"><span class="t-num">08</span><div><strong>Worked Example Effect</strong><p>Full solutions first, then solve alone (Sweller, 1988)</p></div></div>
+              <div class="technique-item">
+                <span class="t-num">01</span>
+                <div>
+                  <strong>Live Problem Solving Under Pressure</strong>
+                  <p>Production-clean Python OOP, Generators &amp; SQL Window Functions (<code>LEAD</code>/<code>LAG</code>, <code>DENSE_RANK</code>, Island-Gaps) in &lt;12 mins.</p>
+                </div>
+              </div>
+              <div class="technique-item">
+                <span class="t-num">02</span>
+                <div>
+                  <strong>First-Principles Mathematical Defense</strong>
+                  <p>Defend Group-Lasso row sparsity, L1/L2 geometry, ADF stationarity, and Earth Mover's Distance beyond boilerplate API calls.</p>
+                </div>
+              </div>
+              <div class="technique-item">
+                <span class="t-num">03</span>
+                <div>
+                  <strong>Escaping the "GenAI Bubble" Trap</strong>
+                  <p>No toy prompt wrappers: 4-Agent LangChain DAGs, Critic LLM-as-a-Judge gates (&ge;8.5/10), and strict Pydantic V2 contracts.</p>
+                </div>
+              </div>
+              <div class="technique-item">
+                <span class="t-num">04</span>
+                <div>
+                  <strong>Physical &amp; Temporal Grounding</strong>
+                  <p>Reversible Instance Normalization (RevIN) for time-series drift, OpenCV PPM camera calibration, and Monte Carlo Dropout.</p>
+                </div>
+              </div>
+              <div class="technique-item">
+                <span class="t-num">05</span>
+                <div>
+                  <strong>The 1-in-10,000 Civil Engineering Moat</strong>
+                  <p>Frame B.E. Civil Engineering (First Class Honors) + OpenBIM IFC4 + PyTorch as an unfair domain moat, never an apology.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- ══════ MASTER NUMBERS & METRICS CHEAT SHEET (1-GLANCE MEMORIZATION) ══════ -->
+      <div class="glass-card study-cheatsheet-card" style="margin-bottom:2rem">
+        <div class="cheatsheet-header">
+          <div>
+            <div class="cheatsheet-kicker">📌 HIGH-RETENTION MEMORY ANCHOR · MEMORIZE THESE EXACT NUMBERS</div>
+            <h3>Pravin's Master Metrics &amp; Architecture Cheat-Sheet</h3>
+            <p>Never give vague answers in interviews. Quote these exact numbers in Sentence 1 of your response to immediately anchor technical authority.</p>
+          </div>
+          <button class="btn-sm accent" onclick="navigateTo('present')">Open Full Project Playbook &rarr;</button>
+        </div>
+
+        <div class="cheatsheet-table-wrap">
+          <table class="cheatsheet-table">
+            <thead>
+              <tr>
+                <th>Flagship Project / Experience</th>
+                <th>Core Architecture &amp; Math</th>
+                <th>Exact Metrics to Quote Cold</th>
+                <th>Primary War Room</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>📊 Internship Studio Telemetry</strong><br/><span class="table-sub">Verified Data Science Internship</span></td>
+                <td>IQR Audit &rarr; PCA + K-Means (3 Regimes) &rarr; Random Forest + TreeSHAP</td>
+                <td><span class="metric-highlight">14,102 records</span> · <span class="metric-highlight">89.2% error drop</span><br/>MAE <code>34.97 &rarr; 3.78 kcal</code> · <code>R² = 0.9979</code></td>
+                <td>All War Rooms &amp; STAR #2</td>
+                <td><button class="btn-sm accent" onclick="openProjectDirectly('telemetry')">Study</button></td>
+              </tr>
+              <tr>
+                <td><strong>🤖 ERIA Regulation Analyzer</strong><br/><span class="table-sub">ERIA-Education-Analyzer</span></td>
+                <td>4-Agent LangChain DAG (Extractor, Analyst, Planner, Critic) · Groq LLaMA 3.3 70B · Pydantic V2</td>
+                <td>Critic Gate <span class="metric-highlight">&ge; 8.5 / 10</span> · <span class="metric-highlight">Sub-15s</span> latency<br/><span class="metric-highlight">$0.0087 / run</span> · 100% JSON schema pass</td>
+                <td>Corridor A (AI &amp; RAG)</td>
+                <td><button class="btn-sm accent" onclick="openProjectDirectly('eria')">Study</button></td>
+              </tr>
+              <tr>
+                <td><strong>📈 CryptoCast &amp; Space Telemetry</strong><br/><span class="table-sub">cryptocast &amp; space-telemetry-</span></td>
+                <td>PyTorch LSTM &amp; PatchTST · <strong>RevIN</strong> layer · Stationary Log Returns · Walk-Forward Validation</td>
+                <td>1D MAPE <span class="metric-highlight">2.06%</span> (LSTM, <code>R²=0.9921</code>)<br/>3D MAPE <code>3.85%</code> · 7D MAPE <code>5.93%</code> (PatchTST)</td>
+                <td>Corridor B (Time-Series)</td>
+                <td><button class="btn-sm accent" onclick="openProjectDirectly('crypto')">Study</button></td>
+              </tr>
+              <tr>
+                <td><strong>🏗️ OpenBIM BOQ Variance Engine</strong><br/><span class="table-sub">openbim-boq-variance-engine</span></td>
+                <td>IfcOpenShell (IFC4) &rarr; SQL CTE Joins (CPWD DSR 2023) &rarr; Isolation Forest + TreeSHAP + Three.js</td>
+                <td><span class="metric-highlight">45 seconds</span> vs 21 days manual audit<br/>Prevents <span class="metric-highlight">8%–12%</span> cost overrun</td>
+                <td>Corridor B (ConTech Moat)</td>
+                <td><button class="btn-sm accent" onclick="openProjectDirectly('openbim')">Study</button></td>
+              </tr>
+              <tr>
+                <td><strong>🔬 Soil Grain Size Distribution</strong><br/><span class="table-sub">soil-grain-size-distribution</span></td>
+                <td>OpenCV <strong>15.0 PPM</strong> Calibration &rarr; EfficientNet-B0 + ResNet-34 &rarr; <code>MultiTaskElasticNet</code> + Monotonic CDF</td>
+                <td>Weighted EMD <span class="metric-highlight">55.21</span> (vs 86.14 baseline)<br/>Out-of-Fold MAE <span class="metric-highlight">8.61%</span> across 11 sieves</td>
+                <td>Corridor A &amp; Zoho Defense</td>
+                <td><button class="btn-sm accent" onclick="openProjectDirectly('soil')">Study</button></td>
+              </tr>
+              <tr>
+                <td><strong>🧬 HuBMAP Tissue Segmentation</strong><br/><span class="table-sub">HuBMAP-Tissue-Unit-Segmentation</span></td>
+                <td>PyTorch <strong>Swin-TransUNet</strong> (Shifted-Window $\mathcal{O}(N)$) · <strong>Monte Carlo Dropout</strong> ($T=10$ passes)</td>
+                <td>Validation Dice <span class="metric-highlight">0.6782</span> (vs 0.5841 U-Net)<br/>Pixel-wise Epistemic Uncertainty Heatmaps</td>
+                <td>Corridor A (Computer Vision)</td>
+                <td><button class="btn-sm accent" onclick="openProjectDirectly('hubmap')">Study</button></td>
+              </tr>
+              <tr>
+                <td><strong>🎬 IMDb Hybrid Recommender</strong><br/><span class="table-sub">IMDb-Movie-Recommender</span></td>
+                <td>TF-IDF (5,000 features, 1–2 n-grams) · Brute-Force Cosine KNN · Hybrid Re-Ranking + Streamlit</td>
+                <td><code>Score = 0.7×Sim + 0.3×(Rating/5)</code><br/><span class="metric-highlight">Sub-100ms</span> query · Zero Cold-Start</td>
+                <td>Core NLP &amp; Classical ML</td>
+                <td><button class="btn-sm accent" onclick="openProjectDirectly('imdb')">Study</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════ ORGANIZED 4-PILLAR STUDY ARCHITECTURE ══════ -->
+      <div class="section-header" style="margin-bottom:1.25rem">
+        <h2>🗂️ Structured Study Tracks (Zero Overlap)</h2>
+        <p>Follow these 4 organized tracks in order — from your 10-step career foundation to live company simulations.</p>
+      </div>
+
+      <div class="study-tracks-grid" style="margin-bottom:2.25rem">
+        <!-- Track 1: Career Accelerator -->
+        <div class="glass-card study-track-card" onclick="navigateTo('accelerator')">
+          <div class="track-step-tag" style="color:var(--violet)">STAGE 01 · FOUNDATION &amp; STORY</div>
+          <h3>🎯 Career Accelerator, 10-Step Roadmap &amp; STAR Vault</h3>
+          <p>Unified 10-step mastery checklist, 6-dimension skill gap matrix, 4 battle-tested STAR behavioral stories, and 3 ROI business cases.</p>
+          <div class="track-meta-footer">10 Checkpoints · 4 STAR Stories · 3 ROI Cases &rarr;</div>
+        </div>
+
+        <!-- Track 2: Corridor A -->
+        <div class="glass-card study-track-card" onclick="navigateTo('corridor-a')">
+          <div class="track-step-tag" style="color:var(--cyan)">STAGE 02A · 36 ENTERPRISE JDs</div>
+          <h3>🤖 Corridor A War Room: Applied AI, RAG &amp; Vision</h3>
+          <p>Siemens Energy, eGov, M3 USA, Backbase. 45-min audio simulator + 6 production drills (Pydantic, Critic Gate, Token Profiler, OpenCV PPM, Swin-TransUNet, FastAPI).</p>
+          <div class="track-meta-footer">45-Min Exam · 6 Code Drills (A1–A6) · Viva &rarr;</div>
+        </div>
+
+        <!-- Track 3: Corridor B -->
+        <div class="glass-card study-track-card" onclick="navigateTo('corridor-b')">
+          <div class="track-step-tag" style="color:var(--amber)">STAGE 02B · 26 ENTERPRISE JDs</div>
+          <h3>⚡ Corridor B War Room: Time-Series &amp; ConTech AI</h3>
+          <p>Siemens Turbines, TE Connectivity, Elements Energy, L&amp;T BIM. 45-min simulator + 6 drills (SQL LAG Islands, 7D Rolling Window, ADF Test, RevIN LSTM, Autoencoder, OpenBIM).</p>
+          <div class="track-meta-footer">45-Min Exam · 6 Code Drills (B1–B6) · Viva &rarr;</div>
+        </div>
+
+        <!-- Track 4: Zoho Mock -->
+        <div class="glass-card study-track-card" onclick="navigateTo('zoho-mock')">
+          <div class="track-step-tag" style="color:var(--rose)">STAGE 02C · CAMPUS DRIVE TRACK</div>
+          <h3>🏢 Zoho IT Solutions Mock &amp; 130 WPM Pace Trainer</h3>
+          <p>Fixes the 48 WPM token-starvation trap while keeping 10/10 filler control. Includes live WPM pace trainer, 10 Python/SQL drills, and Zoho CRM/Desk/Books system design.</p>
+          <div class="track-meta-footer">WPM Pace Trainer · 10 Drills · Zoho Cases &rarr;</div>
+        </div>
+
+        <!-- Track 5: Flagship Playbook -->
+        <div class="glass-card study-track-card" onclick="navigateTo('present')">
+          <div class="track-step-tag" style="color:var(--sky)">STAGE 03 · PROJECT DEFENSE</div>
+          <h3>🛠️ 7 Flagship Projects, Decks &amp; Code Pipelines</h3>
+          <p>Single consolidated hub for all 7 resume projects: 2-minute opening scripts, 7-slide decks, interactive step-by-step code walkthroughs, and 15-point EDA guide.</p>
+          <div class="track-meta-footer">7 Slide Decks · Interactive Code Steps · 35 Defense Q&amp;As &rarr;</div>
+        </div>
+
+        <!-- Track 6: Active Recall Vault -->
+        <div class="glass-card study-track-card" onclick="navigateTo('viva')">
+          <div class="track-step-tag" style="color:var(--lime)">STAGE 04 · SPACED REPETITION</div>
+          <h3>🎤 90+ Viva Flashcard Vault &amp; Core ML Modules</h3>
+          <p>Active recall flashcards across SQL, Statistics, Python Pitfalls, NLP, Classical ML, RNN/LSTM, Transformers, and CNN—with personal Mastery Checkboxes.</p>
+          <div class="track-meta-footer">90+ Flashcards · GDrive Super Learner Vault &rarr;</div>
+        </div>
+      </div>
+
+      <!-- ══════ CORE ML FOUNDATIONS STRIP ══════ -->
+      <div class="section-header" style="margin-bottom:1rem">
+        <h2>📐 Core ML &amp; Deep Learning Concept Modules</h2>
+        <p>Each module pairs a Mentor Blackboard Diagram + Formula Cheat-Sheet + Production Code + Fill-in-Blank Challenge.</p>
+      </div>
       <div class="module-cards-grid">
-        <!-- Career Accelerator Card Highlight -->
-        <div class="module-card glass-card" style="border-color:rgba(139,92,246,0.4);background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(0,255,200,0.06))" onclick="navigateTo('accelerator')">
-          <div class="mc-icon">🎯</div>
-          <h3 style="color:var(--violet)">Data Science Career Accelerator</h3>
-          <p>10-step curriculum, 6-dimension skill gap audit, 4 STAR behavioral stories &amp; ROI case studies</p>
-          <div class="mc-project" style="color:var(--violet)">⭐ GUVI Transition Cockpit &rarr;</div>
-        </div>
-
-        <!-- Corridor A Card Highlight -->
-        <div class="module-card glass-card" style="border-color:rgba(0,255,200,0.4);background:linear-gradient(135deg,rgba(0,255,200,0.08),rgba(124,58,237,0.08))" onclick="navigateTo('corridor-a')">
-          <div class="mc-icon">🤖</div>
-          <h3 style="color:var(--cyan)">Corridor A: Applied AI &amp; Vision</h3>
-          <p>Multi-Agent LangChain, Critic gates, Swin-TransUNet MC Dropout, OpenCV PPM, FastAPI &amp; Docker</p>
-          <div class="mc-project" style="color:var(--cyan)">🔥 36 Enterprise JDs · Siemens Energy &amp; eGov &rarr;</div>
-        </div>
-
-        <!-- Corridor B Card Highlight -->
-        <div class="module-card glass-card" style="border-color:rgba(245,158,11,0.4);background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(0,255,200,0.06))" onclick="navigateTo('corridor-b')">
-          <div class="mc-icon">⚡</div>
-          <h3 style="color:var(--amber)">Corridor B: Time-Series &amp; ConTech</h3>
-          <p>SQL Window Functions, PyTorch RevIN LSTM, Anomaly Detection &amp; OpenBIM IFC4 BOQ Engine</p>
-          <div class="mc-project" style="color:var(--amber)">⚡ 26 Enterprise JDs · Siemens Turbines &amp; L&amp;T BIM &rarr;</div>
-        </div>
-
-        <!-- Zoho Mock Card Highlight -->
-        <div class="module-card glass-card" style="border-color:rgba(0,255,200,0.35);background:rgba(0,255,200,0.06)" onclick="navigateTo('zoho-mock')">
-          <div class="mc-icon">🏢</div>
-          <h3 style="color:var(--cyan)">Zoho IT Solutions Mock</h3>
-          <p>45-min live simulation, 4-round strategy, 10 coding drills, 30+ ML viva &amp; project defense</p>
-          <div class="mc-project" style="color:var(--amber)">⚡ Dedicated War Room &rarr;</div>
-        </div>
-
         <div class="module-card glass-card" onclick="navigateTo('nlp')">
           <div class="mc-icon">📝</div>
-          <h3>NLP &amp; Text AI</h3>
-          <p>TF-IDF, tokenization, stopwords, cosine similarity</p>
-          <div class="mc-project">&rarr; IMDB &amp; ERIA Recommenders</div>
+          <h3>01. NLP &amp; Text AI</h3>
+          <p>TF-IDF math, bigrams, cosine angle, sparse matrices</p>
+          <div class="mc-project">&rarr; IMDb &amp; ERIA</div>
         </div>
         <div class="module-card glass-card" onclick="navigateTo('classical')">
           <div class="mc-icon">📐</div>
-          <h3>Classical ML</h3>
-          <p>KNN, Random Forest, ElasticNet, K-Means, model evaluation</p>
-          <div class="mc-project">&rarr; Telemetry &amp; Granulometry</div>
+          <h3>02. Classical ML</h3>
+          <p>KNN, Random Forest, Multi-Task Elastic Net, PCA + K-Means</p>
+          <div class="mc-project">&rarr; Telemetry &amp; Soil</div>
         </div>
         <div class="module-card glass-card" onclick="navigateTo('rnn')">
           <div class="mc-icon">🔄</div>
-          <h3>RNN / LSTM</h3>
-          <p>Vanishing gradients, gates, BPTT, time-series forecasting</p>
-          <div class="mc-project">&rarr; Crypto Forecaster</div>
+          <h3>03. RNN &amp; LSTM</h3>
+          <p>Vanishing gradients, 4 LSTM gates, RevIN, Walk-Forward Val</p>
+          <div class="mc-project">&rarr; CryptoCast</div>
         </div>
         <div class="module-card glass-card" onclick="navigateTo('transformer')">
           <div class="mc-icon">🤖</div>
-          <h3>Transformers</h3>
-          <p>Self-attention, Q/K/V, positional encoding, BERT, PatchTST</p>
-          <div class="mc-project">&rarr; CryptoCast &amp; ERIA</div>
+          <h3>04. Transformers</h3>
+          <p>Scaled dot-product Q/K/V, positional encoding, BERT vs GPT, PatchTST</p>
+          <div class="mc-project">&rarr; ERIA &amp; PatchTST</div>
         </div>
         <div class="module-card glass-card" onclick="navigateTo('cnn')">
           <div class="mc-icon">👁️</div>
-          <h3>CNN</h3>
-          <p>Convolution, pooling, receptive field, spatial calibration</p>
-          <div class="mc-project">&rarr; Soil Granulometry</div>
+          <h3>05. CNN &amp; Vision</h3>
+          <p>Convolution math, receptive field, OpenCV PPM, Swin-TransUNet</p>
+          <div class="mc-project">&rarr; Soil &amp; HuBMAP</div>
         </div>
       </div>
     </section>
@@ -232,48 +377,25 @@
       <div id="zoho-mock-content"></div>
     </section>
 
-    <!-- ══════ ROADMAP ══════ -->
-    <section id="section-roadmap" class="section">
-      <div class="section-header">
-        <h2>🗺️ Your Learning Roadmap</h2>
-        <p>A carefully sequenced path — each module unlocks interview confidence for the next</p>
-      </div>
-      <div class="roadmap-timeline" id="roadmap-timeline"></div>
-    </section>
-
-    <!-- ══════ NLP MODULE ══════ -->
+    <!-- ══════ CORE ML MODULES (NLP, CLASSICAL, RNN, TRANSFORMER, CNN) ══════ -->
     <section id="section-nlp" class="section">
       <div id="module-nlp-content"></div>
     </section>
 
-    <!-- ══════ CLASSICAL ML MODULE ══════ -->
     <section id="section-classical" class="section">
       <div id="module-classical-content"></div>
     </section>
 
-    <!-- ══════ RNN MODULE ══════ -->
     <section id="section-rnn" class="section">
       <div id="module-rnn-content"></div>
     </section>
 
-    <!-- ══════ TRANSFORMER MODULE ══════ -->
     <section id="section-transformer" class="section">
       <div id="module-transformer-content"></div>
     </section>
 
-    <!-- ══════ CNN MODULE ══════ -->
     <section id="section-cnn" class="section">
       <div id="module-cnn-content"></div>
-    </section>
-
-    <!-- ══════ IMDB PROJECT ══════ -->
-    <section id="section-imdb" class="section">
-      <div id="imdb-content"></div>
-    </section>
-
-    <!-- ══════ CRYPTO PROJECT ══════ -->
-    <section id="section-crypto" class="section">
-      <div id="crypto-content"></div>
     </section>
 
     <!-- ══════ VIVA MODE ══════ -->
@@ -281,12 +403,12 @@
       <div id="viva-content"></div>
     </section>
 
-    <!-- ══════ CAREER ACCELERATOR ══════ -->
+    <!-- ══════ CAREER ACCELERATOR (UNIFIED WITH 10-STEP ROADMAP) ══════ -->
     <section id="section-accelerator" class="section">
       <div id="accelerator-content"></div>
     </section>
 
-    <!-- ══════ PRESENTATION KIT ══════ -->
+    <!-- ══════ UNIFIED FLAGSHIP PROJECT PLAYBOOK & PIPELINES ══════ -->
     <section id="section-present" class="section">
       <div id="present-content"></div>
     </section>
@@ -298,15 +420,14 @@
 
   </main>
 
-  <script src="js/animations.js?v=20261021"></script>
-  <script src="js/quiz.js?v=20261021"></script>
-  <script src="js/projects.js?v=20261021"></script>
-  <script src="js/zoho.js?v=20261021"></script>
-  <script src="js/corridor_a.js?v=20261021"></script>
-  <script src="js/corridor_b.js?v=20261021"></script>
-  <script src="js/accelerator.js?v=20261021"></script>
-  <script src="js/presentations.js?v=20261021"></script>
-  <script src="js/mentor.js?v=20261021"></script>
-  <script src="js/app.js?v=20261021"></script>
+  <script src="js/animations.js?v=20261022"></script>
+  <script src="js/quiz.js?v=20261022"></script>
+  <script src="js/zoho.js?v=20261022"></script>
+  <script src="js/corridor_a.js?v=20261022"></script>
+  <script src="js/corridor_b.js?v=20261022"></script>
+  <script src="js/accelerator.js?v=20261022"></script>
+  <script src="js/presentations.js?v=20261022"></script>
+  <script src="js/mentor.js?v=20261022"></script>
+  <script src="js/app.js?v=20261022"></script>
 </body>
 </html>

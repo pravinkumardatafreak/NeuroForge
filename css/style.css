@@ -97,6 +97,103 @@ body {
   letter-spacing: -0.02em;
 }
 
+.nav-daily-goal {
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0, 255, 200, 0.02);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.nav-daily-goal.goal-completed {
+  background: rgba(132, 204, 22, 0.06);
+  border-bottom-color: rgba(132, 204, 22, 0.28);
+}
+.daily-goal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  margin-bottom: 0.45rem;
+}
+.daily-goal-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+}
+.daily-goal-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.goal-step-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.goal-step-btn:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: rgba(0, 255, 200, 0.08);
+}
+.daily-goal-target-pill {
+  font-size: 0.66rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  padding: 0.05rem 0.3rem;
+}
+.daily-goal-bar-wrap {
+  height: 6px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.45rem;
+}
+.daily-goal-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--amber), var(--lime), var(--cyan));
+  border-radius: 10px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.daily-goal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+.daily-goal-value {
+  font-size: 0.73rem;
+  color: var(--amber);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.daily-goal-log-btn {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 0.16rem 0.48rem;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  background: rgba(0, 255, 200, 0.08);
+  color: var(--cyan);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.daily-goal-log-btn:hover {
+  background: rgba(0, 255, 200, 0.18);
+  border-color: var(--cyan);
+}
+
 .nav-xp {
   padding: 1rem 1.2rem;
   border-bottom: 1px solid var(--border);
@@ -1100,27 +1197,7 @@ body {
   .zoho-candidate-bar { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ── Corridor A & B Nav Highlights ── */
-.highlight-corridor-a {
-  background: rgba(0, 255, 200, 0.08) !important;
-  border: 1px solid rgba(0, 255, 200, 0.35) !important;
-  color: var(--cyan) !important;
-  font-weight: 700 !important;
-}
-
-.highlight-corridor-b {
-  background: rgba(245, 158, 11, 0.08) !important;
-  border: 1px solid rgba(245, 158, 11, 0.35) !important;
-  color: var(--amber) !important;
-  font-weight: 700 !important;
-}
-
-.corridor-tab-pane,
-.corridor-b-tab-pane {
-  animation: fadeIn 0.25s ease-out;
-}
-
-/* ── Corridor A & B Nav Highlights ── */
+/* ── Corridor A, B & Accelerator Nav Highlights ── */
 .highlight-corridor-a {
   background: rgba(0, 255, 200, 0.08) !important;
   border: 1px solid rgba(0, 255, 200, 0.35) !important;
@@ -1147,3 +1224,149 @@ body {
 .acc-tab-content {
   animation: fadeIn 0.25s ease-out;
 }
+
+/* ── Sidebar Meta Tag ── */
+.nav-meta-tag {
+  margin-left: auto;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* ── Master Metrics & Architecture Cheat-Sheet Table ── */
+.study-cheatsheet-card {
+  margin: 1.5rem 0 2rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 255, 200, 0.28);
+  background: linear-gradient(145deg, rgba(13, 19, 33, 0.92), rgba(0, 255, 200, 0.03));
+}
+
+.cheatsheet-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.cheatsheet-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+  margin-bottom: 0.25rem;
+}
+
+.cheatsheet-table-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.cheatsheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  text-align: left;
+}
+
+.cheatsheet-table th {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cheatsheet-table td {
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.cheatsheet-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.cheatsheet-table tbody tr:hover {
+  background: rgba(0, 255, 200, 0.05);
+}
+
+.table-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.metric-highlight {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--lime);
+  background: rgba(132, 204, 22, 0.1);
+  border: 1px solid rgba(132, 204, 22, 0.28);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* ── 4-Stage Study System Grid ── */
+.study-tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.15rem;
+  margin-bottom: 2rem;
+}
+
+.study-track-card {
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.study-track-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.study-track-card h3 {
+  font-size: 1.02rem;
+  margin: 0.45rem 0;
+  color: var(--text-primary);
+}
+
+.study-track-card p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.track-step-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid;
+}
+
+.track-meta-footer {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
