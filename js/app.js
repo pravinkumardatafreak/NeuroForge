@@ -29,6 +29,8 @@ window.navigateTo = function (sectionId) {
   if (navItem) navItem.classList.add('active');
 
   // Lazy render sections
+  if (sectionId === 'corridor-a') { if (typeof renderCorridorASection === 'function') renderCorridorASection(); }
+  if (sectionId === 'corridor-b') { if (typeof renderCorridorBSection === 'function') renderCorridorBSection(); }
   if (sectionId === 'zoho-mock') { if (typeof renderZohoMockSection === 'function') renderZohoMockSection(); }
   if (sectionId === 'roadmap') renderRoadmap();
   if (sectionId === 'nlp') renderModule('nlp');

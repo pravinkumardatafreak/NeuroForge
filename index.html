@@ -41,11 +41,19 @@
         <span class="nav-icon">🏠</span><span>Dashboard</span>
       </a></li>
 
-      <!-- Priority Zoho Mock Module -->
-      <li class="nav-group-label" style="color:var(--cyan)">🔥 Priority Live Mock</li>
+      <!-- Priority Enterprise War Rooms -->
+      <li class="nav-group-label" style="color:var(--cyan)">🔥 Enterprise War Rooms</li>
+      <li><a href="#" data-section="corridor-a" class="nav-item highlight-corridor-a" id="nav-corridor-a">
+        <span class="nav-icon">🤖</span><span>Corridor A: AI &amp; Vision</span>
+        <span class="badge" style="background:rgba(0,255,200,0.2);color:var(--cyan)">36 JDs</span>
+      </a></li>
+      <li><a href="#" data-section="corridor-b" class="nav-item highlight-corridor-b" id="nav-corridor-b">
+        <span class="nav-icon">⚡</span><span>Corridor B: Time-Series &amp; ConTech</span>
+        <span class="badge" style="background:rgba(245,158,11,0.2);color:var(--amber)">26 JDs</span>
+      </a></li>
       <li><a href="#" data-section="zoho-mock" class="nav-item highlight-zoho" id="nav-zoho-mock">
         <span class="nav-icon">🏢</span><span>Zoho IT Solutions Mock</span>
-        <span class="badge badge-pulse">TOMORROW</span>
+        <span class="badge badge-pulse">WAR ROOM</span>
       </a></li>
 
       <li class="nav-group-label">Learning Systems</li>
@@ -97,19 +105,21 @@
     <section id="section-home" class="section active">
       <div class="hero-grid">
         <div class="hero-left">
-          <div class="hero-eyebrow">🎯 Personalized Interview Readiness · Zoho Mock Tomorrow</div>
+          <div class="hero-eyebrow">🎯 Personalized Career Accelerator · Corridor A &amp; B War Rooms Ready</div>
           <h1 class="hero-title">Learn it. <span class="gradient-text">Build it.</span><br/>Defend it.</h1>
-          <p class="hero-sub">The AI/DS learning &amp; defense cockpit personalized for <strong>Pravin Kumar R</strong>. Built to conquer tomorrow's Zoho IT Solutions mock interview and defend every line of code with first-principles authority.</p>
-          <div class="hero-cta-row">
-            <button class="btn-primary" onclick="navigateTo('zoho-mock')">🏢 Launch Zoho Mock Session</button>
+          <p class="hero-sub">The Data Science &amp; AI Career Accelerator personalized for <strong>Pravin Kumar R</strong>. Built directly on 62+ enterprise Job Descriptions to master technical rounds in Applied GenAI, Time-Series Telemetry, ConTech AI, and Zoho IT Solutions.</p>
+          <div class="hero-cta-row" style="flex-wrap:wrap;gap:0.75rem">
+            <button class="btn-primary" onclick="navigateTo('corridor-a')">🤖 Corridor A: AI &amp; Vision</button>
+            <button class="btn-primary" onclick="navigateTo('corridor-b')" style="background:linear-gradient(135deg,#f59e0b,#d97706);border-color:#f59e0b">⚡ Corridor B: Time-Series &amp; ConTech</button>
+            <button class="btn-ghost" onclick="navigateTo('zoho-mock')">🏢 Zoho Mock</button>
             <button class="btn-ghost" onclick="navigateTo('roadmap')">Learning Roadmap</button>
             <button class="btn-ghost" onclick="navigateTo('viva')">🎤 Practice Viva</button>
           </div>
           <div class="hero-stats">
-            <div class="stat"><span class="stat-n">98.3%</span><span class="stat-l">Zoho Fit Score</span></div>
-            <div class="stat"><span class="stat-n">45m</span><span class="stat-l">Mock Simulator</span></div>
-            <div class="stat"><span class="stat-n">10</span><span class="stat-l">Coding Drills</span></div>
-            <div class="stat"><span class="stat-n">30+</span><span class="stat-l">Zoho Viva Q&amp;As</span></div>
+            <div class="stat"><span class="stat-n">96.5%</span><span class="stat-l">Corridor Match</span></div>
+            <div class="stat"><span class="stat-n">62+</span><span class="stat-l">Enterprise JDs</span></div>
+            <div class="stat"><span class="stat-n">22</span><span class="stat-l">Coding Drills</span></div>
+            <div class="stat"><span class="stat-n">90+</span><span class="stat-l">Viva Flashcards</span></div>
           </div>
         </div>
         <div class="hero-right">
@@ -130,12 +140,28 @@
       </div>
 
       <div class="module-cards-grid">
+        <!-- Corridor A Card Highlight -->
+        <div class="module-card glass-card" style="border-color:rgba(0,255,200,0.4);background:linear-gradient(135deg,rgba(0,255,200,0.08),rgba(124,58,237,0.08))" onclick="navigateTo('corridor-a')">
+          <div class="mc-icon">🤖</div>
+          <h3 style="color:var(--cyan)">Corridor A: Applied AI &amp; Vision</h3>
+          <p>Multi-Agent LangChain, Critic gates, Swin-TransUNet MC Dropout, OpenCV PPM, FastAPI &amp; Docker</p>
+          <div class="mc-project" style="color:var(--cyan)">🔥 36 Enterprise JDs · Siemens Energy &amp; eGov &rarr;</div>
+        </div>
+
+        <!-- Corridor B Card Highlight -->
+        <div class="module-card glass-card" style="border-color:rgba(245,158,11,0.4);background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(0,255,200,0.06))" onclick="navigateTo('corridor-b')">
+          <div class="mc-icon">⚡</div>
+          <h3 style="color:var(--amber)">Corridor B: Time-Series &amp; ConTech</h3>
+          <p>SQL Window Functions, PyTorch RevIN LSTM, Anomaly Detection &amp; OpenBIM IFC4 BOQ Engine</p>
+          <div class="mc-project" style="color:var(--amber)">⚡ 26 Enterprise JDs · Siemens Turbines &amp; L&amp;T BIM &rarr;</div>
+        </div>
+
         <!-- Zoho Mock Card Highlight -->
         <div class="module-card glass-card" style="border-color:rgba(0,255,200,0.35);background:rgba(0,255,200,0.06)" onclick="navigateTo('zoho-mock')">
           <div class="mc-icon">🏢</div>
           <h3 style="color:var(--cyan)">Zoho IT Solutions Mock</h3>
           <p>45-min live simulation, 4-round strategy, 10 coding drills, 30+ ML viva &amp; project defense</p>
-          <div class="mc-project" style="color:var(--amber)">⚡ Priority Prep for Tomorrow &rarr;</div>
+          <div class="mc-project" style="color:var(--amber)">⚡ Dedicated War Room &rarr;</div>
         </div>
 
         <div class="module-card glass-card" onclick="navigateTo('nlp')">
@@ -169,6 +195,16 @@
           <div class="mc-project">&rarr; Soil Granulometry</div>
         </div>
       </div>
+    </section>
+
+    <!-- ══════ CORRIDOR A WAR ROOM ══════ -->
+    <section id="section-corridor-a" class="section">
+      <div id="corridor-a-content"></div>
+    </section>
+
+    <!-- ══════ CORRIDOR B WAR ROOM ══════ -->
+    <section id="section-corridor-b" class="section">
+      <div id="corridor-b-content"></div>
     </section>
 
     <!-- ══════ ZOHO MOCK SUITE ══════ -->
@@ -236,6 +272,8 @@
   <script src="js/quiz.js"></script>
   <script src="js/projects.js"></script>
   <script src="js/zoho.js"></script>
+  <script src="js/corridor_a.js"></script>
+  <script src="js/corridor_b.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
