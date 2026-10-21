@@ -2,23 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>NeuroForge Academy — Pravin's AI/DS Interview & Presentation Cockpit</title>
   <meta name="description" content="Personalized AI/Data Science interview preparation and live evaluation suite for Pravin Kumar R. Features full Zoho IT Solutions mock interview simulator, code drills, 30+ ML viva flashcards, and project defense." />
+  <meta name="theme-color" content="#07070f" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="NeuroForge" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/pwa-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/pwa-512x512.png" />
+  <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="./css/style.css?v=20261025" />
 </head>
 <body>
 
   <!-- ═══════════════════════ ANIMATED BG ═══════════════════════ -->
   <canvas id="neural-canvas"></canvas>
 
+  <!-- ═══════════════════════ MOBILE STICKY TOP HEADER (≤768px) ═══════════════════════ -->
+  <header id="mobile-topbar" class="mobile-topbar" aria-label="Mobile Navigation Header">
+    <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="Open study navigation drawer" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <div class="mobile-topbar-center" onclick="navigateTo('home')">
+      <span class="mobile-brand-mark">⚡ NeuroForge</span>
+      <span class="mobile-section-sep">·</span>
+      <span class="mobile-section-title" id="mobile-section-title">Study Map</span>
+    </div>
+    <div class="mobile-topbar-actions">
+      <span class="mobile-xp-readout" id="mobile-xp-readout">0 XP</span>
+      <button type="button" class="mobile-install-chip" id="mobile-install-btn" onclick="triggerPWAInstall()" title="Install NeuroForge on your phone or view GitHub Pages setup">
+        📲 App
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════ SIDEBAR BACKDROP SCRIM (MOBILE) ═══════════════════════ -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="closeMobileSidebar()" aria-hidden="true"></div>
+
   <!-- ═══════════════════════ SIDEBAR NAV ═══════════════════════ -->
-  <nav id="sidebar">
+  <nav id="sidebar" aria-label="Primary Study Navigation">
     <div class="nav-brand">
       <span class="brand-icon">⚡</span>
       <span class="brand-text">NeuroForge</span>
+      <button type="button" class="sidebar-close-btn" onclick="closeMobileSidebar()" aria-label="Close navigation drawer">✕</button>
     </div>
 
     <!-- Candidate Profile Card -->
@@ -118,6 +154,18 @@
         <span class="nav-icon">🧠</span><span>AI Mentor Coach</span>
       </a></li>
     </ul>
+
+    <!-- PWA Install & GitHub Pages Quick Actions -->
+    <div class="sidebar-pwa-footer">
+      <button type="button" class="pwa-install-btn" id="sidebar-install-btn" onclick="triggerPWAInstall()">
+        <span>📲</span>
+        <span id="sidebar-install-label">Install Mobile App (Free)</span>
+      </button>
+      <button type="button" class="pwa-deploy-btn" onclick="openDeployGuideModal()">
+        <span>🚀</span>
+        <span>GitHub.io Live &amp; Auto-Update Guide</span>
+      </button>
+    </div>
   </nav>
 
   <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
@@ -420,14 +468,109 @@
 
   </main>
 
-  <script src="js/animations.js?v=20261022"></script>
-  <script src="js/quiz.js?v=20261022"></script>
-  <script src="js/zoho.js?v=20261022"></script>
-  <script src="js/corridor_a.js?v=20261022"></script>
-  <script src="js/corridor_b.js?v=20261022"></script>
-  <script src="js/accelerator.js?v=20261022"></script>
-  <script src="js/presentations.js?v=20261022"></script>
-  <script src="js/mentor.js?v=20261022"></script>
-  <script src="js/app.js?v=20261022"></script>
+  <!-- ═══════════════════════ MOBILE BOTTOM 5-TAB QUICK NAV (≤768px) ═══════════════════════ -->
+  <nav id="mobile-bottom-nav" class="mobile-bottom-nav" aria-label="Mobile Quick Navigation">
+    <button type="button" class="mobile-bottom-item active" data-bottom-sec="home" onclick="navigateTo('home')">
+      <span class="mb-icon">🧭</span>
+      <span class="mb-label">Map</span>
+    </button>
+    <button type="button" class="mobile-bottom-item" data-bottom-sec="accelerator" onclick="navigateTo('accelerator')">
+      <span class="mb-icon">🎯</span>
+      <span class="mb-label">10-Step</span>
+    </button>
+    <button type="button" class="mobile-bottom-item" data-bottom-sec="present" onclick="navigateTo('present')">
+      <span class="mb-icon">🛠️</span>
+      <span class="mb-label">Projects</span>
+    </button>
+    <button type="button" class="mobile-bottom-item" data-bottom-sec="viva" onclick="navigateTo('viva')">
+      <span class="mb-icon">🎤</span>
+      <span class="mb-label">90+ Viva</span>
+    </button>
+    <button type="button" class="mobile-bottom-item" data-bottom-sec="zoho-mock" onclick="navigateTo('zoho-mock')">
+      <span class="mb-icon">🏢</span>
+      <span class="mb-label">War Room</span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════ OFFLINE / PWA UPDATE TOAST ═══════════════════════ -->
+  <div id="pwa-status-toast" class="pwa-status-toast" role="status" aria-live="polite"></div>
+
+  <!-- ═══════════════════════ PWA INSTALL & GITHUB PAGES MODAL ═══════════════════════ -->
+  <div id="pwa-deploy-modal" class="pwa-modal-backdrop" onclick="if(event.target===this) closeDeployGuideModal()" aria-hidden="true">
+    <div class="pwa-modal-card glass-card" role="dialog" aria-modal="true" aria-labelledby="pwa-modal-title">
+      <div class="pwa-modal-header">
+        <div>
+          <div class="cheatsheet-kicker">📲 100% FREE · OFFLINE-READY · AUTO-UPDATING</div>
+          <h3 id="pwa-modal-title">Mobile App Installation &amp; GitHub.io Live Publishing</h3>
+        </div>
+        <button type="button" class="pwa-modal-close" onclick="closeDeployGuideModal()" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="pwa-modal-body">
+        <!-- 1. Install on Mobile -->
+        <div class="pwa-guide-section">
+          <h4>1. Open &amp; Install on Your Phone (Android &amp; iOS)</h4>
+          <p>NeuroForge is a standards-based <strong>Progressive Web App (PWA)</strong>. It costs <strong>$0 forever</strong>, works offline on planes or commutes, and automatically updates whenever you push new changes to GitHub.</p>
+          <div class="pwa-platform-grid">
+            <div class="pwa-platform-box">
+              <strong>🤖 Android (Chrome / Edge / Brave)</strong>
+              <ol>
+                <li>Open your live link on your phone.</li>
+                <li>Tap the <strong>📲 Install Mobile App</strong> button below (or tap the browser menu <code>⋮</code> &rarr; <strong>Add to Home screen / Install app</strong>).</li>
+              </ol>
+              <button type="button" class="btn-sm accent" id="modal-native-install-btn" style="margin-top:0.6rem;width:100%" onclick="promptNativeInstallFromModal()">
+                📲 Trigger Browser Install Prompt
+              </button>
+            </div>
+            <div class="pwa-platform-box">
+              <strong>🍎 iPhone / iPad (Safari)</strong>
+              <ol>
+                <li>Open your live link in <strong>Safari</strong>.</li>
+                <li>Tap the <strong>Share</strong> button (square with arrow pointing up <code>↑</code>) at the bottom of Safari.</li>
+                <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Publish Live on GitHub.io -->
+        <div class="pwa-guide-section">
+          <h4>2. Publish Live on Free GitHub Pages (<code>github.io</code>)</h4>
+          <p>This project already includes <code>.github/workflows/deploy.yml</code>, <code>.nojekyll</code>, and relative paths (<code>./</code>) so it works out-of-the-box on <code>https://&lt;your-username&gt;.github.io/&lt;repo-name&gt;/</code>:</p>
+          <div class="code-block" style="margin-top:0.5rem">
+            <div class="code-header"><span>Terminal — First-Time Push &amp; Future Updates</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+            <pre><code># 1. Push your project to a GitHub repository
+git init
+git add .
+git commit -m "Deploy NeuroForge Academy PWA"
+git branch -M main
+git remote add origin https://github.com/pravinkumardatafreak/neuroforge-academy.git
+git push -u origin main
+
+# 2. In GitHub repo: go to Settings -> Pages -> Build and deployment
+#    Set Source to "GitHub Actions" (runs automatically on every push!)
+
+# 3. Whenever you edit flashcards or projects in the future:
+git add . && git commit -m "Update study notes" && git push</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="pwa-modal-footer">
+        <span style="font-size:0.75rem;color:var(--text-secondary)">✅ Service Worker caches all 13 sections &amp; 90+ Viva cards for offline study.</span>
+        <button type="button" class="btn-sm accent" onclick="closeDeployGuideModal()">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/animations.js?v=20261024"></script>
+  <script src="./js/quiz.js?v=20261024"></script>
+  <script src="./js/zoho.js?v=20261024"></script>
+  <script src="./js/corridor_a.js?v=20261024"></script>
+  <script src="./js/corridor_b.js?v=20261024"></script>
+  <script src="./js/accelerator.js?v=20261024"></script>
+  <script src="./js/presentations.js?v=20261024"></script>
+  <script src="./js/mentor.js?v=20261024"></script>
+  <script src="./js/app.js?v=20261024"></script>
 </body>
 </html>

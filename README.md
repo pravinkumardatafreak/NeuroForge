@@ -109,6 +109,42 @@ Open your browser to:
 
 ---
 
+## 📲 Mobile App (PWA) & Free GitHub Pages (`github.io`) Deployment
+
+NeuroForge is architected as a **100% static, installable Progressive Web App (PWA)** with relative paths (`./`), `.nojekyll`, and an automated GitHub Actions deployment workflow (`.github/workflows/deploy.yml`).
+
+### 1. Publish Live on `github.io` (Free Forever)
+1. Create a new repository on GitHub (for example, `neuroforge-academy`) and push the code:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial deploy: NeuroForge Academy PWA"
+   git branch -M main
+   git remote add origin https://github.com/pravinkumardatafreak/neuroforge-academy.git
+   git push -u origin main
+   ```
+2. In your GitHub repository, navigate to **Settings → Pages**.
+3. Under **Build and deployment → Source**, select **GitHub Actions** (or **Deploy from a branch** → `main` / `/ (root)`).
+4. Within ~30 seconds, your app will be live at:
+   `https://pravinkumardatafreak.github.io/neuroforge-academy/`
+
+### 2. How Future Updates Work
+Whenever you add new flashcards, interview scripts, or projects in the future, simply run:
+```bash
+git add .
+git commit -m "Add new study notes"
+git push
+```
+* **GitHub Actions** automatically redeploys your live site in seconds.
+* **Service Worker (`sw.js`)** uses a **Network-First** strategy for HTML/CSS/JS when online (with full offline cache fallback), so both web visitors and your installed phone app immediately receive your newest changes.
+
+### 3. Install on Your Mobile Home Screen (Offline Study)
+* **Android (Chrome / Edge / Brave)**: Open your live URL and tap the **📲 App / Install Mobile App** button inside NeuroForge (or tap browser menu `⋮` → **Install app / Add to Home screen**).
+* **iPhone / iPad (Safari)**: Open your live URL in Safari, tap the **Share** button (`↑`), and select **Add to Home Screen**.
+
+---
+
 ## 📜 License & Citation
 
 Distributed under the MIT License. Developed by **Pravin Kumar R** for Data Science & AI Career Acceleration.
+

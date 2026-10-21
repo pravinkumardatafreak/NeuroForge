@@ -12,15 +12,19 @@ window.addXP = function (pts) {
   localStorage.setItem('nf_xp', totalXP);
   const bar = document.getElementById('xp-bar');
   const val = document.getElementById('xp-value');
+  const mobVal = document.getElementById('mobile-xp-readout');
   if (bar) bar.style.width = (totalXP / MAX_XP * 100) + '%';
   if (val) val.textContent = totalXP + ' XP';
+  if (mobVal) mobVal.textContent = totalXP + ' XP';
 };
 
 function initXP() {
   const bar = document.getElementById('xp-bar');
   const val = document.getElementById('xp-value');
+  const mobVal = document.getElementById('mobile-xp-readout');
   if (bar) bar.style.width = (totalXP / MAX_XP * 100) + '%';
   if (val) val.textContent = totalXP + ' XP';
+  if (mobVal) mobVal.textContent = totalXP + ' XP';
 }
 
 /* ─── Daily Study Goal Tracker ─── */
@@ -113,6 +117,42 @@ window.copyCode = function (btn) {
   });
 };
 
+/* ─── Mobile Sidebar Drawer Controls ─── */
+const SECTION_LABELS = {
+  'home': 'Study Map',
+  'accelerator': '10-Step & STAR',
+  'corridor-a': 'Corridor A · AI',
+  'corridor-b': 'Corridor B · TS',
+  'zoho-mock': 'Zoho War Room',
+  'present': '7 Projects',
+  'nlp': '01 · NLP & Text',
+  'classical': '02 · Classical ML',
+  'rnn': '03 · RNN & LSTM',
+  'transformer': '04 · Transformers',
+  'cnn': '05 · CNN & Vision',
+  'viva': '90+ Viva Vault',
+  'ai-mentor': 'AI Mentor Coach'
+};
+
+window.toggleMobileSidebar = function () {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  if (!sidebar) return;
+  const isOpen = sidebar.classList.toggle('mobile-open');
+  if (backdrop) backdrop.classList.toggle('visible', isOpen);
+  if (menuBtn) menuBtn.setAttribute('aria-expanded', String(isOpen));
+};
+
+window.closeMobileSidebar = function () {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  if (sidebar) sidebar.classList.remove('mobile-open');
+  if (backdrop) backdrop.classList.remove('visible');
+  if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+};
+
 /* ─── Router (Consolidates Legacy Routes into Unified Hubs) ─── */
 window.navigateTo = function (sectionId) {
   // Redirect consolidated legacy routes
@@ -138,6 +178,18 @@ window.navigateTo = function (sectionId) {
   if (section) section.classList.add('active');
   const navItem = document.getElementById('nav-' + sectionId);
   if (navItem) navItem.classList.add('active');
+
+  // Sync mobile topbar title & bottom 5-tab bar active state
+  const mobTitle = document.getElementById('mobile-section-title');
+  if (mobTitle) mobTitle.textContent = SECTION_LABELS[sectionId] || 'Study Cockpit';
+
+  const bottomTarget = (sectionId === 'corridor-a' || sectionId === 'corridor-b') ? 'zoho-mock' : sectionId;
+  document.querySelectorAll('.mobile-bottom-item').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-bottom-sec') === bottomTarget);
+  });
+
+  // Always close mobile drawer on navigation
+  window.closeMobileSidebar();
 
   // Lazy render sections
   if (sectionId === 'accelerator') { if (typeof renderAccelerator === 'function') renderAccelerator(); }
@@ -193,7 +245,7 @@ const MODULE_DATA = {
           <span class="sketch-tag">✏️ Mentor's Blackboard Diagram</span>
           <span style="font-size:0.7rem;color:var(--text-muted)">Dual-Coding Visual Anchor</span>
         </div>
-        <img src="assets/mentor_tfidf.png" alt="TF-IDF & Cosine Similarity Sketch" class="sketch-img" />
+        <img src="./assets/mentor_tfidf.png" alt="TF-IDF & Cosine Similarity Sketch" class="sketch-img" />
         <div class="sketch-caption">Figure 1: How TF-IDF weights rare plot words ("zombie", "space") &amp; Cosine similarity calculates angle between movie storyline vectors.</div>
       </div>
 
@@ -350,7 +402,7 @@ score = alpha * similarity + beta * norm_rating
           <span class="sketch-tag">✏️ Mentor's Blackboard Diagram</span>
           <span style="font-size:0.7rem;color:var(--text-muted)">Dual-Coding Visual Anchor</span>
         </div>
-        <img src="assets/mentor_lstm.png" alt="LSTM Memory Gates Sketch" class="sketch-img" />
+        <img src="./assets/mentor_lstm.png" alt="LSTM Memory Gates Sketch" class="sketch-img" />
         <div class="sketch-caption">Figure 2: Handwritten breakdown of LSTM Forget, Input, Cell Update, and Output gates controlling gradient flow across time.</div>
       </div>
 
@@ -424,7 +476,7 @@ X = np.array(X).reshape(-1, WINDOW, ___BLANK_D___)
           <span class="sketch-tag">✏️ Mentor's Blackboard Diagram</span>
           <span style="font-size:0.7rem;color:var(--text-muted)">Dual-Coding Visual Anchor</span>
         </div>
-        <img src="assets/mentor_attention.png" alt="Self-Attention Mechanism Sketch" class="sketch-img" />
+        <img src="./assets/mentor_attention.png" alt="Self-Attention Mechanism Sketch" class="sketch-img" />
         <div class="sketch-caption">Figure 3: Handwritten diagram of Query (Q), Key (K), and Value (V) attention weights connecting context words in parallel.</div>
       </div>
 
@@ -495,7 +547,7 @@ def scaled_dot_product_attention(Q, K, V):
           <span class="sketch-tag">✏️ Mentor's Blackboard Diagram</span>
           <span style="font-size:0.7rem;color:var(--text-muted)">Dual-Coding Visual Anchor</span>
         </div>
-        <img src="assets/mentor_cnn.png" alt="CNN Feature Detection Sketch" class="sketch-img" />
+        <img src="./assets/mentor_cnn.png" alt="CNN Feature Detection Sketch" class="sketch-img" />
         <div class="sketch-caption">Figure 4: Handwritten illustration of 3×3 convolution sliding kernel producing spatial edge and texture feature maps.</div>
       </div>
 
@@ -746,12 +798,137 @@ window.toggleVivaCard = function (btn, answerId) {
   if (btn) btn.classList.toggle('open');
 };
 
+/* ─── PWA Install, Offline Indicator & GitHub Pages Guide Controller ─── */
+let deferredInstallPrompt = null;
+
+function isRunningStandalone() {
+  return (
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true
+  );
+}
+
+function showPWAStatusToast(htmlContent, durationMs = 4500) {
+  const toast = document.getElementById('pwa-status-toast');
+  if (!toast) return;
+  toast.innerHTML = htmlContent;
+  toast.classList.add('visible');
+  if (durationMs > 0) {
+    clearTimeout(toast._hideTimer);
+    toast._hideTimer = setTimeout(() => {
+      toast.classList.remove('visible');
+    }, durationMs);
+  }
+}
+
+function updateInstallButtonsUI() {
+  const mobBtn = document.getElementById('mobile-install-btn');
+  const sideBtn = document.getElementById('sidebar-install-btn');
+  const sideLbl = document.getElementById('sidebar-install-label');
+  if (isRunningStandalone()) {
+    if (mobBtn) mobBtn.style.display = 'none';
+    if (sideBtn) sideBtn.style.display = 'none';
+    return;
+  }
+  if (deferredInstallPrompt && sideLbl) {
+    sideLbl.textContent = 'Install App Now (1-Click)';
+  }
+}
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  updateInstallButtonsUI();
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  updateInstallButtonsUI();
+  showPWAStatusToast('✅ NeuroForge installed on your device! Works 100% offline.');
+});
+
+window.triggerPWAInstall = async function () {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    const choice = await deferredInstallPrompt.userChoice;
+    if (choice && choice.outcome === 'accepted') {
+      deferredInstallPrompt = null;
+      updateInstallButtonsUI();
+    }
+    return;
+  }
+  window.openDeployGuideModal();
+};
+
+window.promptNativeInstallFromModal = async function () {
+  if (deferredInstallPrompt) {
+    await window.triggerPWAInstall();
+    window.closeDeployGuideModal();
+  } else {
+    showPWAStatusToast('ℹ️ Use your browser menu (⋮ → Add to Home screen / Install app) or Safari Share → Add to Home Screen.');
+  }
+};
+
+window.openDeployGuideModal = function () {
+  window.closeMobileSidebar();
+  const modal = document.getElementById('pwa-deploy-modal');
+  if (modal) {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+};
+
+window.closeDeployGuideModal = function () {
+  const modal = document.getElementById('pwa-deploy-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+};
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    window.closeMobileSidebar();
+    window.closeDeployGuideModal();
+  }
+});
+
+/* ─── Online / Offline Connectivity & Service Worker Registration ─── */
+window.addEventListener('offline', () => {
+  showPWAStatusToast('📡 Offline Mode — Studying from local cached flashcards & modules.', 0);
+});
+
+window.addEventListener('online', () => {
+  showPWAStatusToast('⚡ Back Online — Synced with latest study version.', 3200);
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js', { scope: './' }).then(reg => {
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        if (!newWorker) return;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            showPWAStatusToast(
+              '🔄 New study update ready! <button class="btn-sm accent" style="margin-left:0.5rem;padding:0.2rem 0.55rem" onclick="window.location.reload()">Refresh</button>',
+              0
+            );
+          }
+        });
+      });
+    }).catch(() => {});
+  });
+}
+
 /* ─── Init ─── */
 initXP();
 updateDailyGoalUI();
+updateInstallButtonsUI();
 const hashSec = window.location.hash.replace('#', '');
 if (hashSec) {
   navigateTo(hashSec);
 } else {
   navigateTo('home');
 }
+
