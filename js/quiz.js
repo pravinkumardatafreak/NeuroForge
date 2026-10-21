@@ -557,6 +557,236 @@ print(a)  # Output is [1, 2, 3, 4]! Both names point to the SAME object.</code>
 <br><br><em>Source: Google Drive · ## Stock Analysis Project - Live Evaluation Ready.gdoc</em>`
   }
 
+,
+  // ── Google Drive Super Learner & Interview Vault ──
+  {
+    id: 'gd_stat1', topic: 'Statistics & Probability', difficulty: 'medium', isGDrive: true,
+    q: 'When do you use a Student\'s t-test versus a Normal distribution (Z-test)?',
+    a: `Use a <strong>Student\'s t-test</strong> when:
+<br><br>1. Sample size is small (<strong>n < 30</strong>), AND
+<br>2. The true population standard deviation (σ) is <strong>unknown</strong> (estimated via sample standard deviation s).
+<br><br>• <strong>Why t-distribution?</strong> Because s is an estimate of σ, there is extra sampling error. The t-distribution accounts for this with <strong>fatter tails</strong>, requiring a larger critical value to reject the null hypothesis.
+<br>• <strong>Convergence:</strong> As sample size n increases (n ≥ 30 by the Central Limit Theorem), degrees of freedom (df = n - 1) increase, and the t-distribution converges directly to the standard normal Z-distribution.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_stat2', topic: 'Statistics & Probability', difficulty: 'medium', isGDrive: true,
+    q: 'What is the difference between a Chi-Square (χ²) Goodness-of-Fit test and a Test of Independence?',
+    a: `Both use the formula: <code>χ² = Σ [ (O - E)² / E ]</code> (where O = Observed, E = Expected frequency), but answer different questions:
+<br><br>• <strong>Goodness-of-Fit</strong>: Tests a <strong>single categorical variable</strong> against a known or theoretical distribution. Example: <em>"Are user signups equally distributed across all 7 days of the week?"</em> Degrees of freedom: <code>df = k - 1</code>.
+<br><br>• <strong>Test of Independence</strong>: Tests whether <strong>two categorical variables</strong> are related or independent in a contingency table. Example: <em>"Is customer churn rate independent of customer subscription tier (Basic, Pro, Enterprise)?"</em> Degrees of freedom: <code>df = (rows - 1) × (cols - 1)</code>.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_stat3', topic: 'Statistics & Probability', difficulty: 'hard', isGDrive: true,
+    q: 'What is the Poisson distribution and when do you choose it over a Binomial distribution?',
+    a: `The <strong>Poisson distribution</strong> models the probability of a given number of events occurring in a <strong>fixed interval of time or space</strong>:
+<br><br><code>P(X = k) = (λ^k · e^(-λ)) / k!</code>
+<br><br>• <strong>Key Property:</strong> <strong>Mean = Variance = λ</strong> (the average arrival rate).
+<br>• <strong>When to choose Poisson over Binomial:</strong> Use Poisson when trials n is very large and success probability p is very small (n → ∞, p → 0, with np = λ constant).
+<br>• <strong>Real-world examples:</strong> Server 500 error spikes per minute, website visitor arrivals per hour, machine failures per month, call center incoming queries.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_stat4', topic: 'Statistics & Probability', difficulty: 'easy', isGDrive: true,
+    q: 'What is the exact definition of a p-value? What is the common interview trap?',
+    a: `<strong>Exact Definition:</strong> A p-value is the probability of obtaining test results at least as extreme as the observed results, <strong>assuming that the null hypothesis (H₀) is strictly true</strong>: <code>P(Data ≥ Observed | H₀ is true)</code>.
+<br><br>⚠️ <strong>Common Interview Gotchas / Misconceptions:</strong>
+<br>1. <em>WRONG:</em> "The p-value is the probability that the null hypothesis is true." (Never say this!).
+<br>2. <em>WRONG:</em> "1 - p is the probability that the alternative hypothesis is true."
+<br><br>• <strong>Decision Rule:</strong> If p-value < α (usually 0.05), the observed data is too unlikely under H₀, so we <strong>reject H₀</strong>. Setting α = 0.05 means we accept a 5% chance of a False Positive (Type I Error).
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_stat5', topic: 'Statistics & Probability', difficulty: 'medium', isGDrive: true,
+    q: 'Explain the difference between Point Estimation and Interval Estimation (Confidence Intervals).',
+    a: `• <strong>Point Estimation:</strong> Provides a single numerical value as the best guess of an unknown population parameter (e.g., sample mean x̄ = 42.5 ms latency). Computed via Maximum Likelihood Estimation (MLE) or Method of Moments.
+<br><br>• <strong>Interval Estimation (Confidence Interval):</strong> Provides a plausible range of values with an associated confidence level: <code>CI = x̄ ± (Critical_Value × Standard_Error)</code>.
+<br><br>• <strong>Why Interval is Superior in Business:</strong> A point estimate conveys false certainty and hides volatility. Reporting: <em>"Our model inference takes 42ms"</em> is misleading if the 95% CI is [10ms, 250ms]. Confidence intervals communicate sample precision and risk bounds to engineering leadership.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_ab1', topic: 'Statistics & Probability', difficulty: 'hard', isGDrive: true,
+    q: 'How do you design an A/B test? What is the Minimum Detectable Effect (MDE)?',
+    a: `<strong>A/B Testing Framework:</strong>
+<br><br>1. <strong>Hypothesis:</strong> H₀: Conversion(B) = Conversion(A); H₁: Conversion(B) > Conversion(A).
+<br>2. <strong>Metrics:</strong> Primary metric (e.g., Checkout Conversion) + Guardrail metrics (e.g., Latency, Cancellation rate).
+<br>3. <strong>Sample Size Determination:</strong> Based on:
+<br>&nbsp;&nbsp;• Significance level (α = 0.05 → False Positive rate)
+<br>&nbsp;&nbsp;• Statistical Power (1 - β = 0.80 → 80% chance of detecting a true effect)
+<br>&nbsp;&nbsp;• Baseline conversion rate (p₀)
+<br>&nbsp;&nbsp;• <strong>Minimum Detectable Effect (MDE):</strong> The smallest percentage uplift that is practically meaningful to the business (e.g., +2% checkout uplift).
+<br><br>• <strong>Math Law:</strong> Sample size scales inversely with MDE squared: <code>N ∝ 1 / MDE²</code>. Detecting a tiny 0.5% effect requires 16× more users than detecting a 2.0% effect!
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_ab2', topic: 'Statistics & Probability', difficulty: 'medium', isGDrive: true,
+    q: 'Distinguish Type I and Type II errors. Which is worse in Healthcare vs E-Commerce?',
+    a: `• <strong>Type I Error (α / False Positive):</strong> Rejecting H₀ when H₀ is actually TRUE. "Crying wolf" — saying a drug works or fraud happened when it didn\'t.
+<br><br>• <strong>Type II Error (β / False Negative):</strong> Failing to reject H₀ when H₀ is actually FALSE. Missing the reality — failing to diagnose cancer or missing fraudulent theft.
+<br><br>• <strong>Healthcare / Pathology (HuBMAP):</strong> <strong>Type II is far worse</strong>. Missing malignant glomerulosclerosis or cancerous tissue can be fatal. We tune models for maximum <strong>Recall</strong>.
+<br>• <strong>E-Commerce / Feature Launch (UberEats):</strong> <strong>Type I is often worse</strong>. Rolling out a buggy recommendation algorithm to 10M live users damages brand trust and infrastructure.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_sql1', topic: 'SQL & Data Engineering', difficulty: 'medium', isGDrive: true,
+    q: 'What is the exact difference between ROW_NUMBER(), RANK(), and DENSE_RANK() in SQL Window Functions?',
+    a: `All three are window functions evaluated over <code>OVER (PARTITION BY ... ORDER BY col DESC)</code>:
+<br><br>Given scores: [100, 90, 90, 80]:
+<br>• <code>ROW_NUMBER()</code>: Assigns strictly sequential unique integers: <strong>1, 2, 3, 4</strong> (arbitrary tie-break).
+<br>• <code>RANK()</code>: Assigns same rank to ties, then <strong>SKIPS</strong> next rank count: <strong>1, 2, 2, 4</strong>.
+<br>• <code>DENSE_RANK()</code>: Assigns same rank to ties, but <strong>DOES NOT SKIP</strong>: <strong>1, 2, 2, 3</strong>.
+<br><br>• <strong>Superpower of Window Functions:</strong> They compute aggregate and ranking values across partitions <strong>WITHOUT collapsing rows</strong>, preserving full row-level detail.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_sql2', topic: 'SQL & Data Engineering', difficulty: 'easy', isGDrive: true,
+    q: 'Explain the mechanics, row counts, and NULL behavior of all major SQL joins.',
+    a: `• <strong>INNER JOIN:</strong> Returns only rows where the join predicate matches in BOTH tables. Unmatched rows in either table are discarded.
+<br>• <strong>LEFT JOIN:</strong> Returns ALL rows from the left table. If no match in right table, right columns are filled with <code>NULL</code>.
+<br>• <strong>RIGHT JOIN:</strong> Returns ALL rows from the right table, filling left columns with <code>NULL</code> where unmatched.
+<br>• <strong>FULL OUTER JOIN:</strong> Returns all rows from both tables, filling with <code>NULL</code> on whichever side lacks a key match.
+<br>• <strong>CROSS JOIN (Cartesian Product):</strong> Pairs every row of Table A (M rows) with every row of Table B (N rows), returning <code>M × N</code> rows. No join key needed.
+<br><br>⚠️ <strong>Interview Gotcha:</strong> If you filter a LEFT JOIN using a <code>WHERE right_table.column = 'X'</code>, you inadvertently convert it into an INNER JOIN because NULLs are excluded! Put the condition in the <code>ON</code> clause instead.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_sql3', topic: 'SQL & Data Engineering', difficulty: 'medium', isGDrive: true,
+    q: 'What is the execution order difference between WHERE and HAVING? DDL vs DML?',
+    a: `• <strong>WHERE vs HAVING:</strong>
+<br>&nbsp;&nbsp;• <code>WHERE</code> filters <strong>individual raw rows BEFORE</strong> any aggregation occurs. It cannot contain aggregate functions like <code>SUM()</code> or <code>AVG()</code>.
+<br>&nbsp;&nbsp;• <code>HAVING</code> filters <strong>summarized groups AFTER</strong> the <code>GROUP BY</code> clause has collapsed rows.
+<br>&nbsp;&nbsp;• <em>SQL Logical Execution Order:</em> FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT.
+<br><br>• <strong>DDL vs DML:</strong>
+<br>&nbsp;&nbsp;• <strong>DDL (Data Definition Language):</strong> <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>, <code>TRUNCATE</code> — defines/modifies database schema structures. Auto-commits in most RDBMS.
+<br>&nbsp;&nbsp;• <strong>DML (Data Manipulation Language):</strong> <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> — queries and manipulates row data inside tables.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_sql4', topic: 'SQL & Data Engineering', difficulty: 'hard', isGDrive: true,
+    q: 'Write the SQL query to find the top 3 highest-spending customers per city (UberEats Schema).',
+    a: `Use a Common Table Expression (CTE) with <code>DENSE_RANK()</code>:
+<pre><code>WITH CitySpenders AS (
+  SELECT 
+    r.city,
+    o.customer_id,
+    SUM(o.total_amount) AS total_spent,
+    DENSE_RANK() OVER (
+      PARTITION BY r.city 
+      ORDER BY SUM(o.total_amount) DESC
+    ) AS rank_pos
+  FROM orders o
+  JOIN restaurants r ON o.restaurant_id = r.restaurant_id
+  WHERE o.status = 'DELIVERED'
+  GROUP BY r.city, o.customer_id
+)
+SELECT city, customer_id, total_spent, rank_pos
+FROM CitySpenders
+WHERE rank_pos <= 3
+ORDER BY city, rank_pos;</code></pre>
+<br>• <strong>Why DENSE_RANK()?</strong> Ensures exactly the top 3 spending tiers are included without skipping ranks if customers tie.
+<br><br><em>Source: Google Drive · uberproject1 (ubereats.db)</em>`
+  },
+  {
+    id: 'gd_py1', topic: 'Python & Pandas Pitfalls', difficulty: 'medium', isGDrive: true,
+    q: 'In Python, what happens when you write b = a and modify b? How do you create true independent copies?',
+    a: `In Python, variables do not store values directly; they store <strong>memory references</strong> to objects.
+<br><br><code>a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)  # Output is [1, 2, 3, 4]! Both names point to the SAME object.</code>
+<br><br>• <strong>To create an independent copy:</strong>
+<br>1. <strong>Shallow Copy:</strong> <code>b = a.copy()</code> or <code>b = list(a)</code> or <code>b = a[:]</code>. (Copies the outer container, but nested mutable objects inside are still shared!).
+<br>2. <strong>Deep Copy:</strong> For nested structures (lists of dictionaries), use: <code>import copy; b = copy.deepcopy(a)</code>.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_py2', topic: 'Python & Pandas Pitfalls', difficulty: 'easy', isGDrive: true,
+    q: 'What is the critical difference between .loc[] and .iloc[] in Pandas?',
+    a: `• <code>.iloc[]</code> is <strong>integer-position based</strong> (0 to N-1). Follows standard Python slicing rules: <strong>the stop index is EXCLUSIVE</strong>.
+<br>&nbsp;&nbsp;Example: <code>df.iloc[0:3]</code> returns rows 0, 1, 2 (3 rows).
+<br><br>• <code>.loc[]</code> is <strong>label/index based</strong>. In <code>.loc[]</code>, <strong>the stop boundary is INCLUSIVE</strong>!
+<br>&nbsp;&nbsp;Example: <code>df.loc['2026-01-01':'2026-01-03']</code> returns the 1st, 2nd, AND 3rd of January.
+<br><br>⚠️ <strong>Gotcha:</strong> If a DataFrame has integer index labels that are shuffled (e.g. [5, 2, 8]), <code>df.loc[2]</code> looks for label 2, whereas <code>df.iloc[2]</code> looks for the 3rd physical row.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_py3', topic: 'Python & Pandas Pitfalls', difficulty: 'hard', isGDrive: true,
+    q: 'Why is simple Mean or Median imputation dangerous in machine learning? What are the alternatives?',
+    a: `<strong>3 Critical Dangers of Mean/Median Imputation:</strong>
+<br><br>1. <strong>Artificially Compresses Variance:</strong> Replacing 20% missing values with the exact mean shrinks standard deviation, creating false certainty.
+<br>2. <strong>Distorts Covariance & Feature Correlations:</strong> It introduces a constant, weakening the mathematical relationship between the feature and other predictors.
+<br>3. <strong>Creates Bizarre Probability Spikes:</strong> It transforms continuous smooth bells into sharp Dirac delta spikes at the mean.
+<br><br>• <strong>Production Alternatives:</strong>
+<br>• Add a companion binary indicator column: <code>df['col_was_missing'] = df['col'].isna().astype(int)</code>
+<br>• Use <code>IterativeImputer</code> (MICE - Multivariate Imputation by Chained Equations) or <code>KNNImputer</code>.
+<br>• Use gradient boosted trees (LightGBM/XGBoost) that natively route missing values to optimal split branches.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_py4', topic: 'Python & Pandas Pitfalls', difficulty: 'easy', isGDrive: true,
+    q: 'Why should you call df.reset_index(drop=True) after filtering rows in Pandas?',
+    a: `When filtering a DataFrame (e.g., <code>df_filtered = df[df['score'] > 80]</code>), Pandas <strong>retains the original row index labels</strong> (e.g., index 0, 4, 9, 23).
+<br><br>• <strong>Why this breaks downstream code:</strong>
+<br>1. If you iterate with <code>for i in range(len(df_filtered)): df_filtered.loc[i]</code>, it crashes with <code>KeyError</code> because index 1, 2, 3 do not exist!
+<br>2. If you concatenate or assign a new Series, Pandas aligns on index labels, producing unexpected <code>NaN</code> values on mismatched rows.
+<br><br>• <strong>Solution:</strong> <code>df_filtered = df_filtered.reset_index(drop=True)</code> re-indexes from 0 to N-1 and drops the old index column.
+<br><br><em>Source: Google Drive · super learner questions.gdoc</em>`
+  },
+  {
+    id: 'gd_eda1', topic: 'EDA & Visualization', difficulty: 'medium', isGDrive: true,
+    q: 'When should you use IQR outlier filtering instead of Z-scores? How do they behave on skewed data?',
+    a: `• <strong>Z-Score:</strong> <code>Z = (X - μ) / σ</code>. Assumes data is normally distributed.
+<br>&nbsp;&nbsp;⚠️ <strong>Flaw:</strong> Both mean (μ) and standard deviation (σ) are extremely sensitive to outliers! A massive outlier inflates μ and σ, which artificially lowers its own Z-score.
+<br><br>• <strong>IQR (Interquartile Range):</strong> <code>IQR = Q3 - Q1</code>. Bounds: <code>[Q1 - 1.5×IQR, Q3 + 1.5×IQR]</code>.
+<br>&nbsp;&nbsp;• <strong>Why IQR is Superior for Skewed Data:</strong> Percentiles (Q1, Q3) are based on order ranks, making them <strong>robust and immune</strong> to extreme outlier magnitudes.
+<br>&nbsp;&nbsp;• In our verified Internship Studio telemetry audit (14,102 rows), we used IQR filtering on heart-rate and duration to eliminate sensor transmission spikes without skewing baseline physiology.
+<br><br><em>Source: Google Drive · # Interview Preparation Guide.gdoc</em>`
+  },
+  {
+    id: 'gd_eda2', topic: 'EDA & Visualization', difficulty: 'easy', isGDrive: true,
+    q: 'Explain the difference between Exploratory Data Analysis (EDA) visuals and Explanatory stakeholder visuals.',
+    a: `• <strong>Exploratory Visuals (For the Data Scientist):</strong>
+<br>&nbsp;&nbsp;• High-density diagnostic tools: Pairplots, missingness heatmaps, correlation matrices, boxplots across all features.
+<br>&nbsp;&nbsp;• Goal: Discover unknown patterns, anomalies, multicollinearity, and test modeling hypotheses. Messy and complex.
+<br><br>• <strong>Explanatory Visuals (For Stakeholders & Evaluators):</strong>
+<br>&nbsp;&nbsp;• Minimalist, high-impact storytelling: Single focal point, annotated milestone bars, high contrast.
+<br>&nbsp;&nbsp;• Goal: Answer <em>"So What?"</em> and drive executive action (e.g., "Feature X reduced customer churn by 14%").
+<br>&nbsp;&nbsp;• <em>Rule of Thumb:</em> If a stakeholder cannot understand the chart within 5 seconds, it is an exploratory chart that should not be in an executive presentation deck!
+<br><br><em>Source: Google Drive · # Interview Preparation Guide.gdoc</em>`
+  },
+  {
+    id: 'gd_eda3', topic: 'EDA & Visualization', difficulty: 'medium', isGDrive: true,
+    q: 'Compare a Boxplot and a Violin Plot. When does a Boxplot fail to reveal distribution shape?',
+    a: `• <strong>Boxplot:</strong> Displays 5-number summary: Min, Q1, Median, Q3, Max, plus individual outlier points beyond 1.5×IQR.
+<br>&nbsp;&nbsp;⚠️ <strong>Major Blindspot:</strong> A Boxplot is <strong>completely blind to multi-modality</strong>! A bimodal distribution (two distinct clusters) and a uniform flat distribution look identical in a boxplot if their medians and quartiles match.
+<br><br>• <strong>Violin Plot:</strong> Combines a boxplot with a <strong>Kernel Density Estimate (KDE)</strong> plotted symmetrically on both sides.
+<br>&nbsp;&nbsp;• Visually reveals peaks, valleys, multi-modality, and asymmetric probability density across continuous ranges.
+<br><br><em>Source: Google Drive · # Interview Preparation Guide.gdoc</em>`
+  },
+  {
+    id: 'gd_quant1', topic: 'Quantitative & Telemetry', difficulty: 'hard', isGDrive: true,
+    q: 'In physical sensor telemetry (Fitbit & Internship Studio), how did you engineer metabolic features from physiological signals?',
+    a: `Rather than relying solely on raw sensor readings (heart rate, step count, duration), we engineered domain features grounded in physical exercise thermodynamics:
+<br><br>1. <strong>Metabolic Equivalent of Task (MET) Non-Linear Interaction:</strong>
+<br>&nbsp;&nbsp;<code>MET_Interaction = Heart_Rate × Duration × Body_Temp</code>
+<br>&nbsp;&nbsp;Caloric burn is non-linear; exercising at 160 bpm for 30 minutes burns exponentially more calories than 80 bpm for 60 minutes due to anaerobic threshold shifts.
+<br>2. <strong>Heart Rate Reserve (HRR):</strong> <code>HRR = Current_HR - Resting_HR</code>, isolating true physical exertion from baseline cardiovascular fitness.
+<br>3. <strong>Unsupervised Activity Regime Clustering:</strong> Used PCA + K-Means on sensor variance to assign records to discrete behavioral states (Sedentary, Active Endurance, Peak Exertion), feeding regime embeddings into our Random Forest. Slashed MAE by 89.2% (34.97 → 3.78 kcal, R² = 0.9979).
+<br><br><em>Source: Google Drive · Colab Notebooks/FITBIT project & Internship Studio</em>`
+  },
+  {
+    id: 'gd_quant2', topic: 'Quantitative & Telemetry', difficulty: 'medium', isGDrive: true,
+    q: 'What is the mathematical and practical difference between a Simple Moving Average (SMA) and an Exponential Moving Average (EMA)?',
+    a: `• <strong>Simple Moving Average (SMA):</strong> Applies equal 1/N weight to all past N observations:
+<br><code>SMA_t = (1 / N) × Σ P_(t-i)</code>
+<br>⚠️ <em>Problem:</em> Exhibits heavy lag and the "drop-off effect" — when an old extreme price point drops out of the N-day window, the SMA line artificially jumps even if current prices are stable.
+<br><br>• <strong>Exponential Moving Average (EMA):</strong> Applies exponentially decreasing weights, giving highest priority to recent prices:
+<br><code>EMA_t = α · P_t + (1 - α) · EMA_(t-1)</code>, where smoothing factor <code>α = 2 / (N + 1)</code>.
+<br><br>• <strong>Practical Advantage:</strong> For N=20, α = 2/21 ≈ 0.095. Recent price movements register immediately without the drop-off artifact. Essential for algorithmic momentum trading and volatility modeling.
+<br><br><em>Source: Google Drive · ## Stock Analysis Project - Live Evaluation Ready.gdoc</em>`
+  }
+
 ];
 
 // Render Viva Mode full page
@@ -659,3 +889,11 @@ function topicColor(topic) {
   };
   return map[topic] || '#fff';
 }
+
+
+window.filterGDriveVault = function() {
+  const btn = document.querySelector('.filter-btn[data-cat="🌟 GDrive Super Learner"]');
+  if (typeof window.setVivaFilter === 'function') {
+    window.setVivaFilter('🌟 GDrive Super Learner', btn);
+  }
+};

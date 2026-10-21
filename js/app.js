@@ -43,6 +43,7 @@ window.navigateTo = function (sectionId) {
   if (sectionId === 'crypto') renderCryptoProject();
   if (sectionId === 'viva') renderVivaPage();
   if (sectionId === 'present') renderPresentationKit();
+  if (sectionId === 'ai-mentor') { if (typeof renderMentorSection === 'function') renderMentorSection(); }
 };
 
 document.querySelectorAll('.nav-item').forEach(a => {
