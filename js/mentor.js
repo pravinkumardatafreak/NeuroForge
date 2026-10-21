@@ -342,89 +342,29 @@ def process_data_pipeline(data: list) -> dict:
    - Anchor your answer in a real project you built (e.g., OpenBIM BOQ Engine, HuBMAP Tissue Segmentation, or CryptoCast).
 
 ---
-💡 *Tip: You can connect your personal **Google Gemini API Key** or **Groq Key** using the ⚙️ Settings button above to unlock unlimited open-ended conversations on any topic!*`;
+💡 *Tip: Click **🎙️ Evaluate My Spoken Answer** above or tap the **🎙️** microphone button next to the input box to speak your answer aloud and get evaluated with **gemini-3.5-transcribe**!*`;
   }
 
-  // ── Call Gemini API ──
-  async function callGemini(prompt, apiKey) {
+  // ── Call Server-Side Gemini API (/api/mentor/chat) ──
+  async function callServerGemini(prompt) {
     const persona = PERSONAS[currentPersona];
-    const candidateModels = [
-      'gemini-flash-lite-latest',
-      'gemini-3.8-flash',
-      'gemini-3.5-flash',
-      'gemini-flash-latest'
-    ];
-
-    let lastError = null;
-    for (const model of candidateModels) {
-      try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-        const body = {
-          contents: [
-            {
-              role: 'user',
-              parts: [{ text: `${persona.systemPrompt}\n\nCandidate Question: ${prompt}` }]
-            }
-          ],
-          generationConfig: {
-            temperature: currentPersona === 'interviewer' ? 0.3 : 0.6,
-            maxOutputTokens: 2048
-          }
-        };
-
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body)
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (text) return text;
-        } else {
-          const errData = await res.json().catch(() => ({}));
-          lastError = new Error(errData.error?.message || `HTTP ${res.status}`);
-        }
-      } catch (err) {
-        lastError = err;
-      }
-    }
-
-    throw lastError || new Error("Failed to connect to Gemini API.");
-  }
-
-  // ── Call Groq API ──
-  async function callGroq(prompt, apiKey) {
-    const persona = PERSONAS[currentPersona];
-    const url = 'https://api.groq.com/openai/v1/chat/completions';
-
-    const body = {
-      model: 'llama-3.3-70b-versatile',
-      messages: [
-        { role: 'system', content: persona.systemPrompt },
-        { role: 'user', content: prompt }
-      ],
-      temperature: currentPersona === 'interviewer' ? 0.3 : 0.6,
-      max_tokens: 2048
-    };
-
-    const res = await fetch(url, {
+    const res = await fetch('./api/mentor/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(body)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        prompt,
+        systemInstruction: persona.systemPrompt,
+        temperature: currentPersona === 'interviewer' ? 0.3 : 0.6,
+      }),
     });
 
     if (!res.ok) {
       const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.error?.message || `Groq API Error (HTTP ${res.status})`);
+      throw new Error(errData.error || `HTTP ${res.status}`);
     }
-
     const data = await res.json();
-    return data.choices?.[0]?.message?.content || "No response received from Groq.";
+    if (!data.text) throw new Error('Empty response from server.');
+    return data.text;
   }
 
   // ── Markdown Formatter ──
@@ -471,25 +411,14 @@ def process_data_pipeline(data: list) -> dict:
     const el = document.getElementById('ai-mentor-content');
     if (!el) return;
 
-    const geminiKey = localStorage.getItem(STORAGE_KEY_GEMINI) || '';
-    const groqKey = localStorage.getItem(STORAGE_KEY_GROQ) || '';
-    const provider = localStorage.getItem(STORAGE_KEY_PROVIDER) || (geminiKey ? 'gemini' : groqKey ? 'groq' : 'builtin');
-
-    const statusBadge = provider === 'gemini' && geminiKey
-      ? '<span class="tag green" style="font-size:0.72rem">🟢 Gemini Flash Live AI Connected (Project: neuroforge)</span>'
-      : provider === 'groq' && groqKey
-      ? '<span class="tag amber" style="font-size:0.72rem">⚡ Groq LLaMA 3.3 Connected</span>'
-      : '<span class="tag violet" style="font-size:0.72rem">🧠 Built-In Knowledge Engine (Free &amp; Offline)</span>';
-
     el.innerHTML = `
       <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem">
         <div>
-          <h2>🤖 AI Mentor &amp; Technical Interview Coach</h2>
-          <p>Ask anything: Python OOP, SQL Window Functions, PyTorch Architectures, or Mock Interview drills.</p>
+          <h2>🤖 AI Mentor &amp; Voice Presentation Coach</h2>
+          <p>Ask anything or speak your interview answers aloud for live transcription (<code>gemini-3.5-transcribe</code>) and tone &amp; presentation evaluation.</p>
         </div>
-        <div style="display:flex;align-items:center;gap:0.75rem">
-          ${statusBadge}
-          <button class="btn-sm ghost" onclick="openMentorSettings()" style="border:1px solid rgba(255,255,255,0.2)">⚙️ LLM Settings</button>
+        <div style="display:flex;align-items:center;gap:0.65rem;flex-wrap:wrap">
+          <button class="btn-sm accent" onclick="openVoiceEvaluator()" style="font-weight:700;padding:0.45rem 0.95rem">🎙️ Evaluate My Spoken Answer</button>
         </div>
       </div>
 
@@ -525,10 +454,18 @@ def process_data_pipeline(data: list) -> dict:
         </div>
 
         <!-- Input Area -->
-        <div style="padding:1rem;background:rgba(15,23,42,0.6);border-top:1px solid rgba(255,255,255,0.1);display:flex;gap:0.75rem;align-items:flex-end">
+        <div style="padding:1rem;background:rgba(15,23,42,0.6);border-top:1px solid rgba(255,255,255,0.1);display:flex;gap:0.6rem;align-items:flex-end">
+          <button
+            type="button"
+            id="mentor-mic-btn"
+            class="mentor-dictate-btn"
+            onclick="toggleMentorMicInput(this)"
+            title="Speak with microphone (transcribed via gemini-3.5-transcribe)"
+            aria-label="Dictate with microphone"
+          >🎙️</button>
           <textarea 
             id="mentor-user-input" 
-            placeholder="Ask your mentor anything (e.g., 'Teach me Python OOP', 'Explain Dunder methods', 'How does self-attention work?')..." 
+            placeholder="Type or tap 🎙️ to speak your question or answer..." 
             rows="2"
             style="flex:1;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:0.75rem;color:#fff;font-family:inherit;font-size:0.88rem;resize:none;outline:none"
             onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();submitMentorQuestion();}"
@@ -543,37 +480,6 @@ def process_data_pipeline(data: list) -> dict:
           </button>
         </div>
 
-      </div>
-
-      <!-- Settings Modal Container -->
-      <div id="mentor-settings-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1rem">
-        <div class="glass-card" style="width:100%;max-width:520px;padding:1.5rem;border-color:rgba(139,92,246,0.5);box-shadow:0 20px 40px rgba(0,0,0,0.8)">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
-            <h3 style="margin:0;color:var(--violet)">⚙️ LLM Provider &amp; API Key Configuration</h3>
-            <button onclick="closeMentorSettings()" style="background:none;border:none;color:var(--text-muted);font-size:1.25rem;cursor:pointer">✕</button>
-          </div>
-          
-          <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:1rem;line-height:1.45">
-            Configure your own <strong>Google Gemini</strong> or <strong>Groq</strong> API key to unlock unlimited, live multi-turn AI reasoning. Keys are stored safely in your browser\\'s local storage.
-          </div>
-
-          <div style="margin-bottom:1rem">
-            <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--cyan);margin-bottom:0.35rem">Google Gemini API Key (Gemini 2.5 Flash):</label>
-            <input type="password" id="input-gemini-key" value="${geminiKey}" placeholder="AIzaSy..." style="width:100%;padding:0.6rem;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-family:monospace;font-size:0.82rem">
-            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.25rem">Get your free key from <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--cyan)">Google AI Studio</a>.</div>
-          </div>
-
-          <div style="margin-bottom:1.25rem">
-            <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--amber);margin-bottom:0.35rem">Groq API Key (LLaMA 3.3 70B):</label>
-            <input type="password" id="input-groq-key" value="${groqKey}" placeholder="gsk_..." style="width:100%;padding:0.6rem;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-family:monospace;font-size:0.82rem">
-            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.25rem">Get your key from <a href="https://console.groq.com/keys" target="_blank" style="color:var(--amber)">Groq Console</a>.</div>
-          </div>
-
-          <div style="display:flex;justify-content:flex-end;gap:0.75rem">
-            <button class="btn-sm ghost" onclick="closeMentorSettings()">Cancel</button>
-            <button class="btn-sm violet" onclick="saveMentorSettings()">Save Settings</button>
-          </div>
-        </div>
       </div>
     `;
 
@@ -605,7 +511,6 @@ def process_data_pipeline(data: list) -> dict:
     });
     if (btn) btn.className = `btn-sm ${pKey==='teacher'?'violet':pKey==='interviewer'?'rose':'accent'}`;
     
-    // Add system notification in chat
     chatHistory.push({
       sender: 'mentor',
       text: `🔄 *Switched Persona to **${PERSONAS[pKey].name}** (${PERSONAS[pKey].tag}). Ready for your next question!*`
@@ -631,30 +536,16 @@ def process_data_pipeline(data: list) -> dict:
     btn.disabled = true;
     btn.innerHTML = '<span>Thinking...</span>';
 
-    // 1. Add user message
     chatHistory.push({ sender: 'user', text: query });
     window.renderMentorSection();
 
-    // 2. Fetch answer
     let answer = '';
-    const geminiKey = localStorage.getItem(STORAGE_KEY_GEMINI) || '';
-    const groqKey = localStorage.getItem(STORAGE_KEY_GROQ) || '';
-
     try {
-      if (geminiKey) {
-        answer = await callGemini(query, geminiKey);
-      } else if (groqKey) {
-        answer = await callGroq(query, groqKey);
-      } else {
-        // Built-in intelligent response engine
-        answer = getBuiltinResponse(query);
-      }
+      answer = await callServerGemini(query);
     } catch (err) {
-      console.error('LLM Mentor Error:', err);
-      answer = `⚠️ **LLM Connection Error**: ${err.message}\n\nFalling back to Built-In Knowledge Engine:\n\n${getBuiltinResponse(query)}`;
+      answer = getBuiltinResponse(query);
     }
 
-    // 3. Add mentor response
     chatHistory.push({ sender: 'mentor', text: answer });
     window.renderMentorSection();
 
@@ -670,28 +561,5 @@ def process_data_pipeline(data: list) -> dict:
     setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
   };
 
-  window.openMentorSettings = function () {
-    const modal = document.getElementById('mentor-settings-modal');
-    if (modal) modal.style.display = 'flex';
-  };
-
-  window.closeMentorSettings = function () {
-    const modal = document.getElementById('mentor-settings-modal');
-    if (modal) modal.style.display = 'none';
-  };
-
-  window.saveMentorSettings = function () {
-    const gemini = document.getElementById('input-gemini-key').value.trim();
-    const groq = document.getElementById('input-groq-key').value.trim();
-
-    if (gemini) localStorage.setItem(STORAGE_KEY_GEMINI, gemini);
-    else localStorage.removeItem(STORAGE_KEY_GEMINI);
-
-    if (groq) localStorage.setItem(STORAGE_KEY_GROQ, groq);
-    else localStorage.removeItem(STORAGE_KEY_GROQ);
-
-    closeMentorSettings();
-    window.renderMentorSection();
-  };
-
 })();
+

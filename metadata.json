@@ -1,5 +1,6 @@
 {
   "name": "NeuroForge Academy — Pravin's AI/DS Interview & Presentation Cockpit",
   "description": "Personalized AI/Data Science interview preparation and live evaluation suite for Pravin Kumar R. Features full Zoho IT Solutions mock interview simulator, code drills, 30+ ML viva flashcards, and project defense.",
-  "requestFramePermissions": []
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

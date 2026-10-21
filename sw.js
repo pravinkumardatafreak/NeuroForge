@@ -4,7 +4,7 @@
    Works on both root domains and GitHub Pages subpaths (/NeuroForge/)
 ═══════════════════════════════════════════════════════════════════ */
 
-const CACHE_VERSION = 'neuroforge-v2026.10.25';
+const CACHE_VERSION = 'neuroforge-v2026.10.26';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -19,6 +19,7 @@ const CORE_ASSETS = [
   './js/accelerator.js',
   './js/presentations.js',
   './js/mentor.js',
+  './js/voice_evaluator.js',
   './js/app.js',
   './assets/icon.svg',
   './assets/pwa-192x192.png',

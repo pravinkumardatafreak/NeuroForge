@@ -40,6 +40,9 @@
     </div>
     <div class="mobile-topbar-actions">
       <span class="mobile-xp-readout" id="mobile-xp-readout">0 XP</span>
+      <button type="button" class="mobile-install-chip" onclick="openVoiceEvaluator()" title="Speak your answer aloud &amp; get evaluated">
+        🎙️ Speak
+      </button>
       <button type="button" class="mobile-install-chip" id="mobile-install-btn" onclick="triggerPWAInstall()" title="Install NeuroForge on your phone or view GitHub Pages setup">
         📲 App
       </button>
@@ -155,8 +158,12 @@
       </a></li>
     </ul>
 
-    <!-- PWA Install & GitHub Pages Quick Actions -->
+    <!-- PWA Install, Voice Evaluator & GitHub Pages Quick Actions -->
     <div class="sidebar-pwa-footer">
+      <button type="button" class="pwa-install-btn" onclick="openVoiceEvaluator()" style="background:rgba(244,63,94,0.12);border-color:rgba(244,63,94,0.4);color:#fda4af">
+        <span>🎙️</span>
+        <span>Speak &amp; Evaluate Answer</span>
+      </button>
       <button type="button" class="pwa-install-btn" id="sidebar-install-btn" onclick="triggerPWAInstall()">
         <span>📲</span>
         <span id="sidebar-install-label">Install Mobile App (Free)</span>
@@ -181,6 +188,7 @@
             Streamlined, zero-duplication study cockpit for <strong>Pravin Kumar R</strong> (B.E. Civil Engineering First Class Honors &rarr; IIT-M Incubated GUVI Master Data Science). Everything is organized into <strong>5 structured study stages</strong> so you can memorize your numbers, rehearse your pitches, and pass live coding rounds with ease.
           </p>
           <div class="hero-cta-row">
+            <button class="btn-primary" onclick="openVoiceEvaluator()" style="background:linear-gradient(135deg,#f43f5e,#8b5cf6)">🎙️ Speak &amp; Evaluate My Answer</button>
             <button class="btn-primary" onclick="navigateTo('accelerator')">1. Start 10-Step Path &amp; STAR</button>
             <button class="btn-primary" onclick="navigateTo('present')" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">2. Study 7 Flagship Projects</button>
             <button class="btn-ghost" onclick="navigateTo('viva')">3. Drill 90+ Viva Cards</button>
@@ -563,14 +571,68 @@ git add . && git commit -m "Update study notes" && git push</code></pre>
     </div>
   </div>
 
-  <script src="./js/animations.js?v=20261024"></script>
-  <script src="./js/quiz.js?v=20261024"></script>
-  <script src="./js/zoho.js?v=20261024"></script>
-  <script src="./js/corridor_a.js?v=20261024"></script>
-  <script src="./js/corridor_b.js?v=20261024"></script>
-  <script src="./js/accelerator.js?v=20261024"></script>
-  <script src="./js/presentations.js?v=20261024"></script>
-  <script src="./js/mentor.js?v=20261024"></script>
-  <script src="./js/app.js?v=20261024"></script>
+  <!-- ═══════════════════════ VOICE ANSWER & TONE EVALUATOR MODAL ═══════════════════════ -->
+  <div id="voice-eval-modal" class="pwa-modal-backdrop" onclick="if(event.target===this) closeVoiceEvaluator()" aria-hidden="true">
+    <div class="pwa-modal-card ve-modal-card glass-card" role="dialog" aria-modal="true" aria-labelledby="ve-modal-title">
+      <div class="pwa-modal-header">
+        <div>
+          <div class="cheatsheet-kicker" id="ve-topic-badge">🎙️ LIVE SPOKEN EVALUATION · GEMINI-3.5-TRANSCRIBE</div>
+          <h3 id="ve-modal-title">Spoken Answer, Tone &amp; Presentation Evaluator</h3>
+        </div>
+        <button type="button" class="pwa-modal-close" onclick="closeVoiceEvaluator()" aria-label="Close voice evaluator">✕</button>
+      </div>
+
+      <div class="ve-controls-section">
+        <div class="ve-field-row">
+          <label for="ve-preset-select">Select Interview Prompt or Viva Question:</label>
+          <select id="ve-preset-select" class="ve-select" onchange="selectVoicePreset(this.value)">
+            <option value="intro_zoho">🏢 90-Second Zoho &amp; Enterprise Self-Introduction</option>
+            <option value="proj_telemetry">📊 Internship Studio Telemetry Defense (14,102 rows · R²=0.9979)</option>
+            <option value="proj_eria">🤖 ERIA 4-Agent LangChain DAG &amp; Critic Gate Defense</option>
+            <option value="proj_crypto">📈 CryptoCast: RevIN LSTM, PatchTST &amp; The R² Paradox</option>
+            <option value="proj_soil_hubmap">👁️ Computer Vision Defense: Soil 15.0 PPM &amp; HuBMAP Swin-TransUNet</option>
+            <option value="proj_openbim">🏗️ OpenBIM BOQ Variance Engine (Civil + AI Moat)</option>
+            <option value="custom">🎤 Selected Viva Card / Custom Question</option>
+          </select>
+        </div>
+
+        <div class="ve-field-row">
+          <label for="ve-question-input">Active Question Prompt (Editable):</label>
+          <textarea id="ve-question-input" class="ve-textarea" rows="2"></textarea>
+        </div>
+
+        <!-- Microphone Deck + Waveform Visualizer -->
+        <div class="ve-recorder-deck">
+          <div class="ve-wave-box" aria-hidden="true">
+            <span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span>
+            <span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span>
+            <span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span>
+            <span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span><span class="ve-wave-bar"></span>
+          </div>
+          <div class="ve-timer-digits" id="ve-timer">00:00</div>
+          <button type="button" id="ve-record-btn" class="ve-mic-btn" onclick="toggleVoiceRecording()">
+            <span>🎙️</span><span>Start Speaking Answer</span>
+          </button>
+        </div>
+        <div id="ve-status-text" class="ve-status-text">
+          Tap the microphone, speak your answer aloud (30–60s), and tap Stop for instant Gemini 3.5 transcription &amp; tone evaluation.
+        </div>
+      </div>
+
+      <!-- Dynamic Evaluation Scorecard Output -->
+      <div id="ve-results-container"></div>
+    </div>
+  </div>
+
+  <script src="./js/animations.js?v=20261025"></script>
+  <script src="./js/quiz.js?v=20261025"></script>
+  <script src="./js/zoho.js?v=20261025"></script>
+  <script src="./js/corridor_a.js?v=20261025"></script>
+  <script src="./js/corridor_b.js?v=20261025"></script>
+  <script src="./js/accelerator.js?v=20261025"></script>
+  <script src="./js/presentations.js?v=20261025"></script>
+  <script src="./js/mentor.js?v=20261025"></script>
+  <script src="./js/voice_evaluator.js?v=20261025"></script>
+  <script src="./js/app.js?v=20261025"></script>
 </body>
 </html>

@@ -827,7 +827,10 @@ window.renderVivaPage = function () {
             <div class="q-text">${q.q}</div>
           </div>
           <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;flex-shrink:0">
-            <div style="display:flex;align-items:center;gap:0.4rem">
+            <div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end">
+              <button class="btn-sm accent" onclick="event.stopPropagation(); launchVivaVoiceEval('${q.id}')" style="font-size:0.68rem;padding:0.18rem 0.55rem" title="Speak your answer aloud and get evaluated for tone &amp; presentation">
+                🎙️ Speak
+              </button>
               <button class="btn-sm" onclick="event.stopPropagation(); toggleMasteredViva('${q.id}')" style="font-size:0.68rem;padding:0.18rem 0.5rem;border-color:${isMastered ? 'var(--lime)' : 'var(--border)'};color:${isMastered ? 'var(--lime)' : 'var(--text-muted)'}">
                 ${isMastered ? '✓ Mastered' : '○ Mark Mastered'}
               </button>
@@ -851,9 +854,12 @@ window.renderVivaPage = function () {
   }
 
   el.innerHTML = `
-    <div class="section-header">
-      <h2>🎤 Viva Flashcards &amp; Spaced-Repetition Vault (90+ Q&amp;As)</h2>
-      <p>Active Recall Protocol: Read the question, speak your answer aloud in 30 seconds, reveal to verify, and mark <strong>✓ Mastered</strong> to filter down to <strong>📌 Needs Review</strong>.</p>
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem">
+      <div>
+        <h2>🎤 Viva Flashcards &amp; Spaced-Repetition Vault (90+ Q&amp;As)</h2>
+        <p>Active Recall Protocol: Tap <strong>🎙️ Speak</strong> on any card to record your answer aloud, transcribe it with <code>gemini-3.5-transcribe</code>, and get evaluated on your tone, WPM cadence, and technical accuracy.</p>
+      </div>
+      <button class="btn-sm accent" onclick="openVoiceEvaluator()" style="font-weight:700;padding:0.45rem 0.95rem">🎙️ Open Voice &amp; Tone Studio</button>
     </div>
     
     <!-- 📁 Google Drive Vault Banner -->
