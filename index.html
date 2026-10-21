@@ -56,6 +56,13 @@
         <span class="badge badge-pulse">WAR ROOM</span>
       </a></li>
 
+      <!-- Career Accelerator Highlight -->
+      <li class="nav-group-label" style="color:var(--violet)">🎯 Career Accelerator</li>
+      <li><a href="#" data-section="accelerator" class="nav-item highlight-accelerator" id="nav-accelerator">
+        <span class="nav-icon">🎯</span><span>Career Accelerator</span>
+        <span class="badge" style="background:rgba(139,92,246,0.25);color:var(--violet)">JOB READY</span>
+      </a></li>
+
       <li class="nav-group-label">Learning Systems</li>
       <li><a href="#" data-section="roadmap" class="nav-item" id="nav-roadmap">
         <span class="nav-icon">🗺️</span><span>Learning Roadmap</span>
@@ -109,6 +116,7 @@
           <h1 class="hero-title">Learn it. <span class="gradient-text">Build it.</span><br/>Defend it.</h1>
           <p class="hero-sub">The Data Science &amp; AI Career Accelerator personalized for <strong>Pravin Kumar R</strong>. Built directly on 62+ enterprise Job Descriptions to master technical rounds in Applied GenAI, Time-Series Telemetry, ConTech AI, and Zoho IT Solutions.</p>
           <div class="hero-cta-row" style="flex-wrap:wrap;gap:0.75rem">
+            <button class="btn-primary" onclick="navigateTo('accelerator')" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);border-color:#8b5cf6">🎯 Career Accelerator</button>
             <button class="btn-primary" onclick="navigateTo('corridor-a')">🤖 Corridor A: AI &amp; Vision</button>
             <button class="btn-primary" onclick="navigateTo('corridor-b')" style="background:linear-gradient(135deg,#f59e0b,#d97706);border-color:#f59e0b">⚡ Corridor B: Time-Series &amp; ConTech</button>
             <button class="btn-ghost" onclick="navigateTo('zoho-mock')">🏢 Zoho Mock</button>
@@ -116,8 +124,8 @@
             <button class="btn-ghost" onclick="navigateTo('viva')">🎤 Practice Viva</button>
           </div>
           <div class="hero-stats">
-            <div class="stat"><span class="stat-n">96.5%</span><span class="stat-l">Corridor Match</span></div>
-            <div class="stat"><span class="stat-n">62+</span><span class="stat-l">Enterprise JDs</span></div>
+            <div class="stat"><span class="stat-n">96.8%</span><span class="stat-l">Readiness Score</span></div>
+            <div class="stat"><span class="stat-n">104</span><span class="stat-l">Analyzed JDs</span></div>
             <div class="stat"><span class="stat-n">22</span><span class="stat-l">Coding Drills</span></div>
             <div class="stat"><span class="stat-n">90+</span><span class="stat-l">Viva Flashcards</span></div>
           </div>
@@ -140,6 +148,14 @@
       </div>
 
       <div class="module-cards-grid">
+        <!-- Career Accelerator Card Highlight -->
+        <div class="module-card glass-card" style="border-color:rgba(139,92,246,0.4);background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(0,255,200,0.06))" onclick="navigateTo('accelerator')">
+          <div class="mc-icon">🎯</div>
+          <h3 style="color:var(--violet)">Data Science Career Accelerator</h3>
+          <p>10-step curriculum, 6-dimension skill gap audit, 4 STAR behavioral stories &amp; ROI case studies</p>
+          <div class="mc-project" style="color:var(--violet)">⭐ GUVI Transition Cockpit &rarr;</div>
+        </div>
+
         <!-- Corridor A Card Highlight -->
         <div class="module-card glass-card" style="border-color:rgba(0,255,200,0.4);background:linear-gradient(135deg,rgba(0,255,200,0.08),rgba(124,58,237,0.08))" onclick="navigateTo('corridor-a')">
           <div class="mc-icon">🤖</div>
@@ -261,6 +277,11 @@
       <div id="viva-content"></div>
     </section>
 
+    <!-- ══════ CAREER ACCELERATOR ══════ -->
+    <section id="section-accelerator" class="section">
+      <div id="accelerator-content"></div>
+    </section>
+
     <!-- ══════ PRESENTATION KIT ══════ -->
     <section id="section-present" class="section">
       <div id="present-content"></div>
@@ -274,6 +295,8 @@
   <script src="js/zoho.js"></script>
   <script src="js/corridor_a.js"></script>
   <script src="js/corridor_b.js"></script>
+  <script src="js/accelerator.js"></script>
+  <script src="js/presentations.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

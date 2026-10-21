@@ -1119,3 +1119,31 @@ body {
 .corridor-b-tab-pane {
   animation: fadeIn 0.25s ease-out;
 }
+
+/* ── Corridor A & B Nav Highlights ── */
+.highlight-corridor-a {
+  background: rgba(0, 255, 200, 0.08) !important;
+  border: 1px solid rgba(0, 255, 200, 0.35) !important;
+  color: var(--cyan) !important;
+  font-weight: 700 !important;
+}
+
+.highlight-corridor-b {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+  color: var(--amber) !important;
+  font-weight: 700 !important;
+}
+
+.highlight-accelerator {
+  background: rgba(139, 92, 246, 0.08) !important;
+  border: 1px solid rgba(139, 92, 246, 0.35) !important;
+  color: var(--violet) !important;
+  font-weight: 700 !important;
+}
+
+.corridor-tab-pane,
+.corridor-b-tab-pane,
+.acc-tab-content {
+  animation: fadeIn 0.25s ease-out;
+}

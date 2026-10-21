@@ -29,6 +29,7 @@ window.navigateTo = function (sectionId) {
   if (navItem) navItem.classList.add('active');
 
   // Lazy render sections
+  if (sectionId === 'accelerator') { if (typeof renderAccelerator === 'function') renderAccelerator(); }
   if (sectionId === 'corridor-a') { if (typeof renderCorridorASection === 'function') renderCorridorASection(); }
   if (sectionId === 'corridor-b') { if (typeof renderCorridorBSection === 'function') renderCorridorBSection(); }
   if (sectionId === 'zoho-mock') { if (typeof renderZohoMockSection === 'function') renderZohoMockSection(); }
@@ -52,20 +53,21 @@ document.querySelectorAll('.nav-item').forEach(a => {
   });
 });
 
-/* ─── Roadmap ─── */
+/* ─── Roadmap: 10-Step Career Accelerator ─── */
 function renderRoadmap() {
   const el = document.getElementById('roadmap-timeline');
   if (el.innerHTML.trim()) return;
   const steps = [
-    { num:'01', color:'cyan', title:'NLP & Text AI', desc:'Learn how machines read and understand text. Master TF-IDF, tokenization, and stopwords — the backbone of the IMDB project.', tags:['TF-IDF','NLTK','Cosine Similarity','Bigrams'], section:'nlp', time:'~3 hours', milestone:'Can explain TF-IDF formula from memory' },
-    { num:'02', color:'cyan', title:'Classical ML — KNN & Recommenders', desc:'Understand how similarity-based retrieval works. Implement the full IMDB hybrid scoring pipeline.', tags:['KNN','Cosine Distance','Hybrid Score','Sparse Matrix'], section:'classical', time:'~4 hours', milestone:'Can implement IMDB recommender from scratch' },
-    { num:'03', color:'violet', title:'RNN & LSTM — Sequence Modeling', desc:'Understand how neural networks handle time series and sequential data. Build the Crypto price forecaster.', tags:['LSTM','BPTT','Vanishing Gradient','Sliding Window'], section:'rnn', time:'~5 hours', milestone:'Can explain all 4 LSTM gates and why they solve vanishing gradient' },
-    { num:'04', color:'rose', title:'Transformers & Attention', desc:'The architecture that powers GPT, BERT, and modern AI. Understand self-attention, Q/K/V, and positional encoding.', tags:['Self-Attention','Q/K/V','BERT','Positional Encoding'], section:'transformer', time:'~5 hours', milestone:'Can draw the Transformer architecture and explain each component' },
-    { num:'05', color:'amber', title:'CNN — Convolutional Networks', desc:'How neural networks see. Understand convolution, pooling, receptive fields, and transfer learning.', tags:['Convolution','Max Pooling','Feature Maps','Transfer Learning'], section:'cnn', time:'~4 hours', milestone:'Can calculate output dimensions after conv + pool layers' },
-    { num:'06', color:'cyan', title:'Capstone: IMDB Recommender', desc:'Full end-to-end walkthrough. Build it, understand it, explain it. Pipeline: Load → EDA → Preprocess → TF-IDF → KNN → Hybrid Score → Streamlit.', tags:['End-to-End','Live Demo','Streamlit','7 Steps'], section:'imdb', time:'~3 hours', milestone:'Can present and defend every design decision' },
-    { num:'07', color:'violet', title:'Capstone: Crypto Forecaster', desc:'Full LSTM time-series pipeline. Sliding window, normalization, model training, evaluation.', tags:['LSTM','Time Series','MinMaxScaler','MAE/RMSE'], section:'crypto', time:'~3 hours', milestone:'Can explain why you never shuffle time series data' },
-    { num:'08', color:'rose', title:'Interview Mode — 60+ Viva Q&As', desc:'Active recall across all 5 modules. Cover easy → hard. Use the Feynman technique on every answer.', tags:['Active Recall','Viva Prep','Mock Interview'], section:'viva', time:'~2 hours', milestone:'Can answer any question without looking at notes' },
-    { num:'09', color:'amber', title:'Presentation Kit', desc:'Slide-by-slide talking points for your live evaluation. Know exactly what to say, when to say it.', tags:['Live Evaluation','Presentation','Talking Points'], section:'present', time:'~1 hour', milestone:'Confident, fluid 10-minute project presentation' },
+    { num:'01', color:'cyan', title:'01. Python Fundamentals & Modular OOP', desc:'Clean architecture, generators for memory-efficient streaming, dunder methods, decorators, and PEP-8 modular src/ packaging.', tags:['OOP','Generators','Decorators','Clean Code'], section:'accelerator', time:'~30 hours', milestone:'Write modular data stream pipeline without RAM spikes' },
+    { num:'02', color:'cyan', title:'02. SQL for Data Science & Warehousing', desc:'Multi-table relational JOINs, CTEs, Window Functions (LEAD/LAG, DENSE_RANK, SUM OVER), and island-gap grouping.', tags:['CTEs','Window Functions','LEAD/LAG','Island Gaps'], section:'accelerator', time:'~35 hours', milestone:'Solve complex enterprise LeetCode SQL in < 12 mins' },
+    { num:'03', color:'violet', title:'03. Applied Statistics & Hypothesis Testing', desc:'Central Limit Theorem, p-value defense, ANOVA, Augmented Dickey-Fuller (ADF) stationarity, and Earth Mover’s Distance (EMD).', tags:['Hypothesis Testing','ADF Stationarity','EMD','p-Values'], section:'accelerator', time:'~25 hours', milestone:'Defend statistical significance to executive stakeholders' },
+    { num:'04', color:'violet', title:'04. Machine Learning Foundations & Math', desc:'Supervised & unsupervised learning: Multi-Task Elastic Net (L1/L2), Random Forest, PCA, K-Means clustering, and loss surfaces.', tags:['Random Forest','Elastic Net','PCA','K-Means'], section:'classical', time:'~40 hours', milestone:'Explain mathematical loss surfaces live on whiteboard' },
+    { num:'05', color:'amber', title:'05. Real-World Data Analysis & 15-Point EDA', desc:'15-question EDA audit framework, robust outlier filtering (IQR), distribution normalization, and correlation heatmaps.', tags:['15-Point EDA','IQR Auditing','Feature Engineering'], section:'present', time:'~30 hours', milestone:'Uncover non-obvious business anomalies from raw data' },
+    { num:'06', color:'amber', title:'06. Business Case Studies & ROI Translation', desc:'Translate technical metrics ($R^2$, MAPE, Dice) into dollar savings, claim denial prevention, and grid penalty avoidance.', tags:['Business ROI','Cost Reduction','Claims Denial'], section:'accelerator', time:'~20 hours', milestone:'Frame every algorithm in terms of bottom-line ROI' },
+    { num:'07', color:'rose', title:'07. Behavioral Interview Preparation (STAR)', desc:'Situation-Task-Action-Result methodology, 60s opening hook, Civil Engineering to Data Science pivot, and 130 WPM pacing.', tags:['STAR Method','60s Opening Hook','Civil Moat'], section:'accelerator', time:'~15 hours', milestone:'Deliver 2-minute elevator pitch with zero fillers' },
+    { num:'08', color:'rose', title:'08. Mock Interview Simulations & War Rooms', desc:'45-minute live audio-prompted mock interviews across Zoho IT Solutions, Corridor A (AI/Vision), and Corridor B (Time-Series).', tags:['Zoho Mock','Corridor A','Corridor B'], section:'zoho-mock', time:'~35 hours', milestone:'Score ≥90% on technical accuracy & speech pacing' },
+    { num:'09', color:'cyan', title:'09. Project Portfolio Development', desc:'Public GitHub repos with clean commit histories, architecture diagrams, Streamlit/FastAPI interactive apps, and Pytest harnesses.', tags:['GitHub Ready','Streamlit','Docker','FastAPI'], section:'imdb', time:'~30 hours', milestone:'Working live demo and reproducible README for every repo' },
+    { num:'10', color:'green', title:'10. Job Application Readiness & Rational JD Matching', desc:'104 enterprise JDs analyzed, 5-Dimension Rational Scoring Formula, strict 1-page ATS resumes (< 2 MB law), 0–2 YOE target roles.', tags:['5D Score','ATS Resumes < 2MB','Early-Career'], section:'corridor-a', time:'~20 hours', milestone:'Submit high-density resumes with >90 ATS score' },
   ];
   el.innerHTML = steps.map(s => `
     <div class="roadmap-node">
@@ -665,197 +667,8 @@ window.toggleVivaCard = function (btn, answerId) {
 };
 
 /* ─── Presentation Kit (GUVI Evaluation PDF Aligned) ─── */
-function renderPresentationKit() {
-  const el = document.getElementById('present-content');
-  if (el.innerHTML.trim()) return;
-
-  const imdbSlides = [
-    { num:'01', title:'1. Project Introduction', color:'cyan', summary:'Intro in 2 lines (GUVI PDF Standard)', bullets:['"IMDb Movie Recommendation System Using Storylines is an end-to-end content-based filtering engine built with Python, NLP, and Streamlit."', '"It allows users to search by movie title or custom plot ideas to instantly receive the top 5 most similar movies based on plot semantics and ratings."'] },
-    { num:'02', title:'2. Objective of Project', color:'cyan', summary:'Explain objective in 2 lines', bullets:['"Primary objective: Solve the content discovery bottleneck by transforming raw unstructured storylines into 5,000-dimensional TF-IDF vectors."', '"Secondary objective: Deploy a zero-cold-start interactive Streamlit dashboard that ranks recommendations using a hybrid score of similarity (70%) and user ratings (30%)."'] },
-    { num:'03', title:'3. Text Scraping & Extraction', color:'violet', summary:'Selenium web scraping process', bullets:['Automated scraping of 5,000+ movies from IMDb 2024 Advanced Search using Selenium WebDriver.', 'Extracted target fields: Movie Title, Storyline (Plot Summary), Rating, Certificate, and Genres.', 'Reference script: src/scraper.py — handles dynamic page scrolling, popups, and element waiting.'] },
-    { num:'04', title:'4. Text Preprocessing & Vectorization', color:'violet', summary:'NLP pipeline techniques', bullets:['Cleaning (src/preprocess.py): Lowercasing, string.punctuation stripping with maketrans, NLTK stopword removal.', 'TF-IDF Vectorization: TfidfVectorizer(max_features=5000, ngram_range=(1,2)). Captures unigrams & bigrams.', 'Dense Embeddings (SOTA): Optional Sentence-BERT (all-MiniLM-L6-v2) embedding generator for semantic capture.'] },
-    { num:'05', title:'5. Data Storage & Architecture', color:'rose', summary:'CSV versioning & modular design', bullets:['Stored scraped data as CSV (data/imdb_movies_2024.csv and data/imdb_top_1000_CLEAN.csv).', 'Modular PEP-8 codebase: preprocess.py, recommender.py, app.py, test_recommender.py.', 'Avoided monolithic notebooks — structured as a maintainable Python package.'] },
-    { num:'06', title:'6. Recommendation Algorithm & Key Findings', color:'rose', summary:'KNN Cosine & Hybrid Scoring', bullets:['NearestNeighbors(metric="cosine", algorithm="brute") fits sparse TF-IDF matrix in sub-100ms.', 'Hybrid Ranking Score: Score = 0.7 × (1 - Cosine_Distance) + 0.3 × (Rating / 5.0).', 'LIME-style Explainability: _get_matching_keywords() extracts top overlapping TF-IDF terms for user transparency.'] },
-    { num:'07', title:'7. Business Solution & Streamlit App', color:'amber', summary:'Deployment & production caching', bullets:['Streamlit Web App (src/app.py): Dual search modes (by Title or by Custom Plot Description).', '@st.cache_resource: One-time model load ensures sub-100ms response time for live users.', 'Business Impact: Eliminates cold-start problem — new movies with plot text can be recommended immediately without user interaction logs.'] }
-  ];
-
-  const cryptoSlides = [
-    { num:'01', title:'1. Domain Introduction', color:'amber', summary:'Financial Analytics / Crypto in 3 lines', bullets:['"Cryptocurrency markets operate 24/7 with extreme volatility driven by non-linear temporal dynamics and market sentiment."', '"Accurate short-term price forecasting is critical for algorithmic trading, risk management, and quantitative asset allocation."', '"Deep learning models excel at capturing complex non-linear sequence dependencies where traditional linear econometric models fail."'] },
-    { num:'02', title:'2. Problem Statement', color:'amber', summary:'Problem statement in 1 line', bullets:['"Predict multi-horizon Bitcoin log returns (1-day, 3-day, 7-day ahead) using past 60-day sequences across 5 deep learning architectures."'] },
-    { num:'03', title:'3. Data Preprocessing & Leakage Prevention', color:'cyan', summary:'Handling missing values & scaling', bullets:['Dataset: ~5,000 daily BTC records (Aug 2010 – Mar 2024) from Yahoo Finance.', 'Target Variable: Log Return r = ln(P[t+h] / P[t]) — stationary and scale-invariant (prevents false trend R²).', 'Scaling: MinMaxScaler fit ONLY on training set (first 80%) — zero data leakage into test set (last 20%).', 'No Shuffling: 80/20 chronological split — shuffling time series is catastrophic data leakage.'] },
-    { num:'04', title:'4. Exploratory Data Analysis (EDA)', color:'cyan', summary:'Key univariate & multivariate findings', bullets:['Price distribution is heavily right-skewed; daily log returns exhibit heavy tails (fat-tailed distribution).', 'Volatility Clustering: High volatility days cluster together (GARCH-like behavior in crypto).', 'Autocorrelation (ACF/PACF): Daily price levels show high autocorrelation, but daily returns behave like a fractal random walk (Hurst exponent H ≈ 0.53).'] },
-    { num:'05', title:'5. Feature Engineering (Ablation Study)', color:'violet', summary:'V1 Technical Indicators vs V2 Protocol Features', bullets:['Version 1 (Reactive): [OHLCV, Change%, SMA_7, SMA_30, RSI_14, Vol_30].', 'Version 2 (Whitepaper Features): [OHLCV, Change%, Block_Reward, Days_Since_Halving, Halving_Progress].', 'Result: Replacing lagging indicators with Nakamoto whitepaper protocol features reduced prediction error (MAPE) across all horizons.'] },
-    { num:'06', title:'6. Statistical Significance & Stationarity', color:'violet', summary:'Stationarity testing & justification', bullets:['Augmented Dickey-Fuller (ADF) Test: Proved raw BTC price is non-stationary (p > 0.05).', 'Log Return Transformation: ADF test on log return rejected null hypothesis (p < 0.001) → stationary sequence.', 'Why stationary target? Non-stationary targets lead to spurious regressions and unstable gradient updates.'] },
-    { num:'07', title:'7. Data Scale & Imbalance', color:'rose', summary:'Normalizing multi-variate features', bullets:['Feature dimensions span different scales (Volume in billions, Block_Reward in units 50 to 3.125).', 'MinMaxScaler maps all 9 feature columns to [0, 1] range per window.', 'Single multi-output Dense head outputs 3 predictions (1D, 3D, 7D) simultaneously.'] },
-    { num:'08', title:'8. Base Model & Naive Baseline', color:'rose', summary:'Beating the Random Walk', bullets:['Naive Baseline: Predict tomorrow\'s price = today\'s price (r_pred = 0).', 'Baseline Benchmark: Any deep learning model MUST achieve lower MAPE than the naive random walk baseline.', '1D-CNN baseline trained first for rapid benchmark iterations.'] },
-    { num:'09', title:'9. Model Architectures & Hyperparameters', color:'cyan', summary:'5 Architectures compared in PyTorch', bullets:['1D-CNN: Fast local temporal pattern detection (kernel_size=3).', 'RNN: Standard sequential baseline.', 'LSTM: Gated memory cell (Forget, Input, Output gates) handles long-term sequence dependencies.', 'Transformer: Multi-head self-attention captures global temporal context.', 'PatchTST: SOTA patch-based Transformer with Reversible Instance Normalization (RevIN) (patch_len=16, stride=8).'] },
-    { num:'10', title:'10. Model Evaluation Metrics', color:'cyan', summary:'MAE, RMSE, MAPE & R² Paradox', bullets:['MAE (USD): Absolute dollar error ($730.98 for 1D LSTM).', 'RMSE (USD): Penalizes large unexpected price swings ($1,136.38 for 1D LSTM).', 'MAPE (%): Scale-independent percentage error — primary model selection metric.', 'R² Paradox: High R² (~0.99) on price levels is a path-dependent artifact. Return-level R² is 1%–3% (explaining 2% of return variance is a major success in quant finance).'] },
-    { num:'11', title:'11. Final Model Selection per Horizon', color:'amber', summary:'Empirical leaderboard winners', bullets:['1-Day Horizon: LSTM wins (MAE = $730.98, MAPE = 2.06%, R² = 0.9921).', '3-Day Horizon: PatchTST wins (MAE = $1,347.56, MAPE = 3.85%, R² = 0.9768).', '7-Day Horizon: PatchTST wins (MAE = $2,097.01, MAPE = 5.93%, R² = 0.9446).'] },
-    { num:'12', title:'12. Conclusion & Core Limitations', color:'amber', summary:'3 Bottlenecks to defend in Viva', bullets:['Data Starvation: BTC has only completed 4 halving cycles in history — limited regime transitions.', '2140 Protocol Boundary: Block_Reward drops to 0 post-2140, turning cyclical features static.', 'Walk-Forward Validation (WFV): Backtested rolling windows prove real out-of-sample stability.'] },
-    { num:'13', title:'13. Business Suggestions & Deployment', color:'rose', summary:'Streamlit 10-page suite & Groq AI', bullets:['Deployed 10-page Streamlit dashboard (app.py) with Backtesting, Live Inference & Portfolio Simulator.', 'Groq LLM Integration (src/llm_insights.py): Generates automated AI market insights on forecast trends.', 'Trading Signal Integration: Connect 1D/3D/7D predictions to automated risk management dashboards.'] }
-  ];
-
-  const edaQuestions = [
-    { n:'01', q:'What are the basic characteristics of my dataset?', desc:'Determine data type, number of observations (~5,000 daily records for BTC, 5,000 for IMDB), and variable count.' },
-    { n:'02', q:'What is the overall structure of my dataset?', desc:'Check categorical vs continuous distributions (e.g. IMDb ratings skewed right between 7.0–8.5).' },
-    { n:'03', q:'What patterns exist in the data?', desc:'Identify trends, volatility clustering in crypto returns, or storyline bigrams in movie genres.' },
-    { n:'04', q:'Are there any outliers present?', desc:'Detect extreme price spikes (e.g. 2021 BTC ATH) or abnormal text lengths.' },
-    { n:'05', q:'What are the missing values in the dataset?', desc:'Audit nulls (~3% missing storyline descriptions filled with empty strings).' },
-    { n:'06', q:'What is the correctness of the data?', desc:'Verify source authenticity (yfinance API, IMDb official advanced search) and deduplicate.' },
-    { n:'07', q:'Is there any correlation between variables?', desc:'Examine correlations between technical indicators or TF-IDF feature co-occurrences.' },
-    { n:'08', q:'How does this data compare to past performance?', desc:'Compare current price volatility or recommendation accuracy against naive baselines.' },
-    { n:'09', q:'Is there any seasonality present?', desc:'Identify Bitcoin 4-year halving cycles and monthly volume seasonality.' },
-    { n:'10', q:'How much variability exists within each variable?', desc:'Measure variance / standard deviation across features to guide MinMaxScaler scaling.' },
-    { n:'11', q:'Are there discrepancies between observed & expected values?', desc:'Investigate data mismatches or scraping artifacts before feeding into vectorizers.' },
-    { n:'12', q:'What are potential explanations for unexpected results?', desc:'Analyze why simple models beat complex ones on short horizons (e.g. LSTM vs PatchTST at 1D).' },
-    { n:'13', q:'How do different subsets behave differently?', desc:'Compare bull vs bear market partitions, or classics vs 2024 scraped movies.' },
-    { n:'14', q:'Do I need to transform any variables before analysis?', desc:'Apply Log Return r = ln(P[t+h]/P[t]) for stationarity, and TF-IDF for text.' },
-    { n:'15', q:'Are there gaps in our understanding that need filling?', desc:'Document structural limitations (e.g. 4 halving cycles total data starvation).' }
-  ];
-
-  el.innerHTML = `
-    <div class="section-header">
-      <h2>📊 Presentation Kit & Evaluation Suite</h2>
-      <p>Aligned 100% with GUVI HCL Capstone Guidelines, Live Evaluation Timings & Scoring Rubric.</p>
-    </div>
-
-    <!-- Presentation Tabs -->
-    <div class="viva-filters" style="margin-bottom:1.5rem">
-      <button class="filter-btn active" onclick="switchPresentTab('imdb', this)">🎬 IMDB Deck (7-Step)</button>
-      <button class="filter-btn" onclick="switchPresentTab('crypto', this)">📈 CryptoCast Deck (13-Step)</button>
-      <button class="filter-btn" onclick="switchPresentTab('eval', this)">⏱️ 30-Min Evaluation Rubric</button>
-      <button class="filter-btn" onclick="switchPresentTab('eda', this)">🔍 15-Question EDA Audit</button>
-    </div>
-
-    <!-- TAB 1: IMDB DECK -->
-    <div id="ptab-imdb" class="present-tab-content active">
-      <div style="padding:1rem;background:rgba(0,255,200,0.04);border:1px solid rgba(0,255,200,0.15);border-radius:12px;margin-bottom:1.2rem">
-        <div style="font-size:0.8rem;color:var(--cyan);font-weight:700;margin-bottom:0.3rem">📜 GUVI Text-Extraction & Recommendation Project Format</div>
-        <div style="font-size:0.82rem;color:var(--text-secondary)">Follows the mandatory 7-step presentation structure from page 1 of the GUVI Capstone Guideline PDF.</div>
-      </div>
-      <div class="slides-grid">
-        ${imdbSlides.map(s => `
-          <div class="slide-card glass-card" onclick="toggleSlide(this,'imdb-${s.num}')">
-            <div class="slide-num" style="color:var(--${s.color})">SLIDE ${s.num}</div>
-            <h4>${s.title}</h4>
-            <p>${s.summary}</p>
-            <div class="slide-expand" id="slide-imdb-${s.num}">
-              <ul>${s.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-
-    <!-- TAB 2: CRYPTOCAST DECK -->
-    <div id="ptab-crypto" class="present-tab-content" style="display:none">
-      <div style="padding:1rem;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:12px;margin-bottom:1.2rem">
-        <div style="font-size:0.8rem;color:var(--amber);font-weight:700;margin-bottom:0.3rem">📜 GUVI Model Building Project Format</div>
-        <div style="font-size:0.82rem;color:var(--text-secondary)">Follows the mandatory 13-step presentation structure from page 2 of the GUVI Capstone Guideline PDF.</div>
-      </div>
-      <div class="slides-grid">
-        ${cryptoSlides.map(s => `
-          <div class="slide-card glass-card" onclick="toggleSlide(this,'crypto-${s.num}')">
-            <div class="slide-num" style="color:var(--${s.color})">SLIDE ${s.num}</div>
-            <h4>${s.title}</h4>
-            <p>${s.summary}</p>
-            <div class="slide-expand" id="slide-crypto-${s.num}">
-              <ul>${s.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-
-    <!-- TAB 3: EVALUATION SCHEDULE & RUBRIC -->
-    <div id="ptab-eval" class="present-tab-content" style="display:none">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
-        <div class="glass-card" style="padding:1.25rem">
-          <h3 style="color:var(--cyan);font-size:1rem;margin-bottom:1rem">⏱️ Live Evaluation Schedule (30 Mins Total)</h3>
-          <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.85rem">
-            <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
-              <span>1. Self Introduction</span><strong style="color:var(--cyan)">3 Mins</strong>
-            </div>
-            <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
-              <span>2. Problem Statement & Walkthrough</span><strong style="color:var(--violet)">12 Mins</strong>
-            </div>
-            <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
-              <span>3. Mock Viva Questions (1–2 per tech)</span><strong style="color:var(--rose)">10 Mins</strong>
-            </div>
-            <div style="padding:0.6rem;background:rgba(255,255,255,0.03);border-radius:8px;display:flex;justify-content:space-between">
-              <span>4. Mentor Feedback</span><strong style="color:var(--amber)">5 Mins</strong>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card" style="padding:1.25rem">
-          <h3 style="color:var(--green);font-size:1rem;margin-bottom:1rem">🏆 Evaluation Scoring Rubric (60 Marks Total)</h3>
-          <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem">
-            <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Code Quality / Data Transformations</span><strong>10 Marks</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Documentation (Git ReadMe / Insights)</span><strong>10 Marks</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Code Reusability (PEP-8 Modular Code)</span><strong>10 Marks</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Presentation Quality</span><strong>10 Marks</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:0.4rem">
-              <span>Task Accomplishment</span><strong>10 Marks</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding-bottom:0.4rem">
-              <span>5 Mock Questions Defense</span><strong>10 Marks</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="glass-card" style="padding:1.25rem">
-        <h3 style="color:var(--amber);font-size:0.95rem;margin-bottom:0.75rem">📋 Mandatory Submission Checklist</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;font-size:0.82rem;color:var(--text-secondary)">
-          <div>✅ Public GitHub Repo with clean commit history</div>
-          <div>✅ Comprehensive README with architecture diagrams</div>
-          <div>✅ PEP-8 compliant modular code structure (src/ folder)</div>
-          <div>✅ Demo Video posted on LinkedIn (Mandatory)</div>
-          <div>✅ Streamlit app live or runnable via simple command</div>
-          <div>✅ Book slot on ZEN portal before weekend evaluation</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 4: 15-QUESTION EDA AUDIT -->
-    <div id="ptab-eda" class="present-tab-content" style="display:none">
-      <div style="padding:1rem;background:rgba(56,189,248,0.04);border:1px solid rgba(56,189,248,0.15);border-radius:12px;margin-bottom:1.2rem">
-        <div style="font-size:0.8rem;color:var(--cyan);font-weight:700;margin-bottom:0.3rem">🔍 15 Core EDA Questions (GUVI EDA Guide Reference)</div>
-        <div style="font-size:0.82rem;color:var(--text-secondary)">Use these 15 questions to structure your data analysis narrative during the live evaluation.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:0.75rem">
-        ${edaQuestions.map(q => `
-          <div class="glass-card" style="padding:0.9rem">
-            <div style="font-size:0.7rem;color:var(--cyan);font-weight:700">QUESTION ${q.n}</div>
-            <div style="font-size:0.85rem;font-weight:700;margin:0.2rem 0;color:var(--text-primary)">${q.q}</div>
-            <div style="font-size:0.78rem;color:var(--text-secondary);line-height:1.4">${q.desc}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
-
-  window.switchPresentTab = function (tab, btn) {
-    document.querySelectorAll('.present-tab-content').forEach(el => el.style.display = 'none');
-    document.querySelectorAll('.viva-filters .filter-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('ptab-' + tab).style.display = 'block';
-    btn.classList.add('active');
-    addXP(5);
-  };
-
-  window.toggleSlide = function (card, num) {
-    const ex = document.getElementById('slide-' + num);
-    if (ex) ex.classList.toggle('open');
-    addXP(5);
-  };
-}
+/* ─── Presentation Kit (Integrated in js/presentations.js) ─── */
+// All 7 resume flagship projects, slide decks, 2-minute pitches, and viva defense Q&As are in js/presentations.js
 
 
 /* ─── Init ─── */
