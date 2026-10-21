@@ -1,0 +1,6 @@
+{
+  "summary":  "Implementation plan for making NeuroForge Academy mobile-responsive (sticky top header, slide-out sidebar drawer, and bottom quick-nav bar), installable as a free & auto-updating Progressive Web App (PWA) with offline support, and ready for automated GitHub Pages (github.io) deployment.",
+  "updatedAt":  "2026-10-21T17:05:07.471370488Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
