@@ -8,6 +8,7 @@
   const STORAGE_KEY_GEMINI = 'nf_gemini_api_key';
   const STORAGE_KEY_GROQ = 'nf_groq_api_key';
   const STORAGE_KEY_PROVIDER = 'nf_llm_provider'; // 'gemini' | 'groq' | 'builtin'
+  const DEFAULT_GEMINI_KEY = '';
 
   let currentPersona = 'teacher'; // 'teacher' | 'interviewer' | 'architect'
   let chatHistory = [
@@ -347,34 +348,50 @@ def process_data_pipeline(data: list) -> dict:
   // ── Call Gemini API ──
   async function callGemini(prompt, apiKey) {
     const persona = PERSONAS[currentPersona];
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const candidateModels = [
+      'gemini-flash-lite-latest',
+      'gemini-3.8-flash',
+      'gemini-3.5-flash',
+      'gemini-flash-latest'
+    ];
 
-    const body = {
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: `${persona.systemPrompt}\n\nCandidate Question: ${prompt}` }]
+    let lastError = null;
+    for (const model of candidateModels) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        const body = {
+          contents: [
+            {
+              role: 'user',
+              parts: [{ text: `${persona.systemPrompt}\n\nCandidate Question: ${prompt}` }]
+            }
+          ],
+          generationConfig: {
+            temperature: currentPersona === 'interviewer' ? 0.3 : 0.6,
+            maxOutputTokens: 2048
+          }
+        };
+
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) return text;
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          lastError = new Error(errData.error?.message || `HTTP ${res.status}`);
         }
-      ],
-      generationConfig: {
-        temperature: currentPersona === 'interviewer' ? 0.4 : 0.7,
-        maxOutputTokens: 2048
+      } catch (err) {
+        lastError = err;
       }
-    };
-
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.error?.message || `Gemini API Error (HTTP ${res.status})`);
     }
 
-    const data = await res.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received from Gemini.";
+    throw lastError || new Error("Failed to connect to Gemini API.");
   }
 
   // ── Call Groq API ──
@@ -459,7 +476,7 @@ def process_data_pipeline(data: list) -> dict:
     const provider = localStorage.getItem(STORAGE_KEY_PROVIDER) || (geminiKey ? 'gemini' : groqKey ? 'groq' : 'builtin');
 
     const statusBadge = provider === 'gemini' && geminiKey
-      ? '<span class="tag green" style="font-size:0.72rem">🟢 Gemini 2.5 Flash Connected</span>'
+      ? '<span class="tag green" style="font-size:0.72rem">🟢 Gemini Flash Live AI Connected (Project: neuroforge)</span>'
       : provider === 'groq' && groqKey
       ? '<span class="tag amber" style="font-size:0.72rem">⚡ Groq LLaMA 3.3 Connected</span>'
       : '<span class="tag violet" style="font-size:0.72rem">🧠 Built-In Knowledge Engine (Free &amp; Offline)</span>';
