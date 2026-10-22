@@ -192,10 +192,11 @@ window.navigateTo = function (sectionId) {
   window.closeMobileSidebar();
 
   // Lazy render sections
+  if (sectionId === 'corridor-c') { if (typeof renderCorridorCSection === 'function') renderCorridorCSection(); }
   if (sectionId === 'accelerator') { if (typeof renderAccelerator === 'function') renderAccelerator(); }
   if (sectionId === 'corridor-a') { if (typeof renderCorridorASection === 'function') renderCorridorASection(); }
   if (sectionId === 'corridor-b') { if (typeof renderCorridorBSection === 'function') renderCorridorBSection(); }
-  if (sectionId === 'zoho-mock') { if (typeof renderZohoMockSection === 'function') renderZohoMockSection(); }
+  if (sectionId === 'roadmap') renderRoadmap();
   if (sectionId === 'nlp') renderModule('nlp');
   if (sectionId === 'classical') renderModule('classical');
   if (sectionId === 'rnn') renderModule('rnn');
@@ -219,6 +220,39 @@ document.querySelectorAll('.nav-item').forEach(a => {
     if (sec) navigateTo(sec);
   });
 });
+
+/* ─── Roadmap: 10-Step Career Accelerator ─── */
+function renderRoadmap() {
+  const el = document.getElementById('roadmap-timeline');
+  if (el.innerHTML.trim()) return;
+  const steps = [
+    { num:'01', color:'cyan', title:'01. Python Fundamentals & Modular OOP', desc:'Clean architecture, generators for memory-efficient streaming, dunder methods, decorators, and PEP-8 modular src/ packaging.', tags:['OOP','Generators','Decorators','Clean Code'], section:'accelerator', time:'~30 hours', milestone:'Write modular data stream pipeline without RAM spikes' },
+    { num:'02', color:'cyan', title:'02. SQL for Data Science & Warehousing', desc:'Multi-table relational JOINs, CTEs, Window Functions (LEAD/LAG, DENSE_RANK, SUM OVER), and island-gap grouping.', tags:['CTEs','Window Functions','LEAD/LAG','Island Gaps'], section:'accelerator', time:'~35 hours', milestone:'Solve complex enterprise LeetCode SQL in < 12 mins' },
+    { num:'03', color:'violet', title:'03. Applied Statistics & Hypothesis Testing', desc:'Central Limit Theorem, p-value defense, ANOVA, Augmented Dickey-Fuller (ADF) stationarity, and Earth Mover’s Distance (EMD).', tags:['Hypothesis Testing','ADF Stationarity','EMD','p-Values'], section:'accelerator', time:'~25 hours', milestone:'Defend statistical significance to executive stakeholders' },
+    { num:'04', color:'violet', title:'04. Machine Learning Foundations & Math', desc:'Supervised & unsupervised learning: Multi-Task Elastic Net (L1/L2), Random Forest, PCA, K-Means clustering, and loss surfaces.', tags:['Random Forest','Elastic Net','PCA','K-Means'], section:'classical', time:'~40 hours', milestone:'Explain mathematical loss surfaces live on whiteboard' },
+    { num:'05', color:'amber', title:'05. Real-World Data Analysis & 15-Point EDA', desc:'15-question EDA audit framework, robust outlier filtering (IQR), distribution normalization, and correlation heatmaps.', tags:['15-Point EDA','IQR Auditing','Feature Engineering'], section:'present', time:'~30 hours', milestone:'Uncover non-obvious business anomalies from raw data' },
+    { num:'06', color:'amber', title:'06. Business Case Studies & ROI Translation', desc:'Translate technical metrics ($R^2$, MAPE, Dice) into dollar savings, claim denial prevention, and grid penalty avoidance.', tags:['Business ROI','Cost Reduction','Claims Denial'], section:'accelerator', time:'~20 hours', milestone:'Frame every algorithm in terms of bottom-line ROI' },
+    { num:'07', color:'rose', title:'07. Behavioral Interview Preparation (STAR)', desc:'Situation-Task-Action-Result methodology, 60s opening hook, Civil Engineering to Data Science pivot, and 130 WPM pacing.', tags:['STAR Method','60s Opening Hook','Civil Moat'], section:'accelerator', time:'~15 hours', milestone:'Deliver 2-minute elevator pitch with zero fillers' },
+    { num:'08', color:'rose', title:'08. Mock Interview Simulations & War Rooms', desc:'45-minute live audio-prompted mock interviews across Enterprise Career Accelerator, Corridor A (AI/Vision), and Corridor B (Time-Series).', tags:['Mock Simulator','Corridor A','Corridor B'], section:'accelerator', time:'~35 hours', milestone:'Score ≥90% on technical accuracy & speech pacing' },
+    { num:'09', color:'cyan', title:'09. Project Portfolio Development', desc:'Public GitHub repos with clean commit histories, architecture diagrams, Streamlit/FastAPI interactive apps, and Pytest harnesses.', tags:['GitHub Ready','Streamlit','Docker','FastAPI'], section:'imdb', time:'~30 hours', milestone:'Working live demo and reproducible README for every repo' },
+    { num:'10', color:'green', title:'10. Job Application Readiness & Rational JD Matching', desc:'104 enterprise JDs analyzed, 5-Dimension Rational Scoring Formula, strict 1-page ATS resumes (< 2 MB law), 0–2 YOE target roles.', tags:['5D Score','ATS Resumes < 2MB','Early-Career'], section:'corridor-a', time:'~20 hours', milestone:'Submit high-density resumes with >90 ATS score' },
+  ];
+  el.innerHTML = steps.map(s => `
+    <div class="roadmap-node">
+      <div class="roadmap-dot" style="border-color:var(--${s.color});box-shadow:0 0 12px var(--${s.color})"></div>
+      <div class="roadmap-card glass-card" onclick="navigateTo('${s.section}')">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.4rem">
+          <div style="font-size:0.65rem;font-family:var(--font-mono);color:var(--text-muted)">STEP ${s.num}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">⏱ ${s.time}</div>
+        </div>
+        <h3>${s.title}</h3>
+        <p>${s.desc}</p>
+        <div style="font-size:0.72rem;color:var(--cyan);margin-bottom:0.6rem;font-weight:600">🏆 Milestone: ${s.milestone}</div>
+        <div class="roadmap-tags">${s.tags.map(t => `<span class="tag ${s.color}">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
 
 /* ─── Core Module Data (With 1-Minute Memory Cards & Zero Duplication) ─── */
 const MODULE_DATA = {

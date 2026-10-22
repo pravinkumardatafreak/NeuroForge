@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>NeuroForge Academy — Pravin's AI/DS Interview & Presentation Cockpit</title>
-  <meta name="description" content="Personalized AI/Data Science interview preparation and live evaluation suite for Pravin Kumar R. Features full Zoho IT Solutions mock interview simulator, code drills, 30+ ML viva flashcards, and project defense." />
+  <meta name="description" content="Personalized AI/Data Science interview preparation and live evaluation suite for Pravin Kumar R. Features full enterprise mock interview simulator, code drills, 90+ ML viva flashcards, and project defense." />
   <meta name="theme-color" content="#07070f" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -66,7 +66,7 @@
         <span>Pravin Kumar R</span>
         <span class="cand-card-score">98.3% Match</span>
       </div>
-      <div class="cand-card-title">B.E. Civil (Hons) · IIT-M GUVI DS</div>
+      <div class="cand-card-title">Enterprise Data Scientist &amp; AI Engineer</div>
     </div>
 
     <!-- Daily Study Goal Tracker -->
@@ -114,9 +114,9 @@
         <span class="nav-icon">⚡</span><span>Corridor B: Time-Series</span>
         <span class="nav-meta-tag" style="color:var(--amber)">26 JDs</span>
       </a></li>
-      <li><a href="#" data-section="zoho-mock" class="nav-item highlight-zoho" id="nav-zoho-mock">
-        <span class="nav-icon">🏢</span><span>Zoho IT Solutions Mock</span>
-        <span class="nav-meta-tag" style="color:var(--rose)">130 WPM</span>
+      <li><a href="#" data-section="corridor-c" class="nav-item highlight-corridor-c" id="nav-corridor-c" style="background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.4);color:#f472b6;font-weight:700">
+        <span class="nav-icon">🚀</span><span>Corridor C: Product AI &amp; Systems</span>
+        <span class="badge" style="background:rgba(236,72,153,0.25);color:#f472b6;font-weight:800">WAR ROOM</span>
       </a></li>
 
       <!-- 3. FLAGSHIP PROJECT PLAYBOOK (Unified 7 Projects + Code Pipelines) -->
@@ -185,13 +185,16 @@
           <div class="hero-eyebrow">⚡ NeuroForge Study Architecture · Reverse-Engineered from 104 Enterprise JDs</div>
           <h1 class="hero-title">Learn it. <span class="gradient-text">Build it.</span><br/>Defend it Cold.</h1>
           <p class="hero-sub">
-            Streamlined, zero-duplication study cockpit for <strong>Pravin Kumar R</strong> (B.E. Civil Engineering First Class Honors &rarr; IIT-M Incubated GUVI Master Data Science). Everything is organized into <strong>5 structured study stages</strong> so you can memorize your numbers, rehearse your pitches, and pass live coding rounds with ease.
+            Streamlined, zero-duplication study cockpit for <strong>Pravin Kumar R</strong> (B.E. Civil Engineering First Class Honors &rarr; IIT-M Incubated GUVI Master Data Science). Everything is organized into <strong>structured study stages</strong> so you can memorize your numbers, rehearse your pitches, and pass live coding rounds with ease.
           </p>
-          <div class="hero-cta-row">
+          <div class="hero-cta-row" style="flex-wrap:wrap;gap:0.75rem">
             <button class="btn-primary" onclick="openVoiceEvaluator()" style="background:linear-gradient(135deg,#f43f5e,#8b5cf6)">🎙️ Speak &amp; Evaluate My Answer</button>
-            <button class="btn-primary" onclick="navigateTo('accelerator')">1. Start 10-Step Path &amp; STAR</button>
-            <button class="btn-primary" onclick="navigateTo('present')" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">2. Study 7 Flagship Projects</button>
-            <button class="btn-ghost" onclick="navigateTo('viva')">3. Drill 90+ Viva Cards</button>
+            <button class="btn-primary" onclick="navigateTo('corridor-c')" style="background:linear-gradient(135deg,#ec4899,#f43f5e);border-color:#ec4899">🚀 Corridor C: Product AI &amp; Systems</button>
+            <button class="btn-primary" onclick="navigateTo('accelerator')" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);border-color:#8b5cf6">🎯 Career Accelerator</button>
+            <button class="btn-primary" onclick="navigateTo('corridor-a')">🤖 Corridor A: AI &amp; Vision</button>
+            <button class="btn-primary" onclick="navigateTo('corridor-b')" style="background:linear-gradient(135deg,#f59e0b,#d97706);border-color:#f59e0b">⚡ Corridor B: Time-Series &amp; ConTech</button>
+            <button class="btn-ghost" onclick="navigateTo('viva')">🎤 Practice Viva</button>
+            <button class="btn-ghost" onclick="navigateTo('roadmap')">Learning Roadmap</button>
           </div>
           <div class="hero-stats">
             <div class="stat"><span class="stat-n">104</span><span class="stat-l">Enterprise JDs Mined</span></div>
@@ -385,6 +388,37 @@
         <p>Each module pairs a Mentor Blackboard Diagram + Formula Cheat-Sheet + Production Code + Fill-in-Blank Challenge.</p>
       </div>
       <div class="module-cards-grid">
+        <!-- Corridor C Card Highlight -->
+        <div class="module-card glass-card" style="border-color:rgba(236,72,153,0.45);background:linear-gradient(135deg,rgba(236,72,153,0.1),rgba(99,102,241,0.06))" onclick="navigateTo('corridor-c')">
+          <div class="mc-icon">🚀</div>
+          <h3 style="color:#f472b6">Corridor C: Product AI &amp; Systems</h3>
+          <p>Product AI Architect Cockpit · Document Intelligence, Hyperlocal Geolocation, Python &amp; PostgreSQL Drills</p>
+          <div class="mc-project" style="color:#f472b6">⚡ Distributed Systems &amp; RAG &rarr;</div>
+        </div>
+
+        <!-- Career Accelerator Card Highlight -->
+        <div class="module-card glass-card" style="border-color:rgba(139,92,246,0.4);background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(0,255,200,0.06))" onclick="navigateTo('accelerator')">
+          <div class="mc-icon">🎯</div>
+          <h3 style="color:var(--violet)">Data Science Career Accelerator</h3>
+          <p>10-step curriculum, 6-dimension skill gap audit, 4 STAR behavioral stories &amp; ROI case studies</p>
+          <div class="mc-project" style="color:var(--violet)">⭐ GUVI Transition Cockpit &rarr;</div>
+        </div>
+
+        <!-- Corridor A Card Highlight -->
+        <div class="module-card glass-card" style="border-color:rgba(0,255,200,0.4);background:linear-gradient(135deg,rgba(0,255,200,0.08),rgba(124,58,237,0.08))" onclick="navigateTo('corridor-a')">
+          <div class="mc-icon">🤖</div>
+          <h3 style="color:var(--cyan)">Corridor A: Applied AI &amp; Vision</h3>
+          <p>Multi-Agent LangChain, Critic gates, Swin-TransUNet MC Dropout, OpenCV PPM, FastAPI &amp; Docker</p>
+          <div class="mc-project" style="color:var(--cyan)">🔥 36 Enterprise JDs · Siemens Energy &amp; eGov &rarr;</div>
+        </div>
+
+        <!-- Corridor B Card Highlight -->
+        <div class="module-card glass-card" style="border-color:rgba(245,158,11,0.4);background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(0,255,200,0.06))" onclick="navigateTo('corridor-b')">
+          <div class="mc-icon">⚡</div>
+          <h3 style="color:var(--amber)">Corridor B: Time-Series &amp; ConTech</h3>
+          <p>SQL Window Functions, PyTorch RevIN LSTM, Anomaly Detection &amp; OpenBIM IFC4 BOQ Engine</p>
+          <div class="mc-project" style="color:var(--amber)">⚡ 26 Enterprise JDs · Siemens Turbines &amp; L&amp;T BIM &rarr;</div>
+        </div>
         <div class="module-card glass-card" onclick="navigateTo('nlp')">
           <div class="mc-icon">📝</div>
           <h3>01. NLP &amp; Text AI</h3>
@@ -428,10 +462,6 @@
       <div id="corridor-b-content"></div>
     </section>
 
-    <!-- ══════ ZOHO MOCK SUITE ══════ -->
-    <section id="section-zoho-mock" class="section">
-      <div id="zoho-mock-content"></div>
-    </section>
 
     <!-- ══════ CORE ML MODULES (NLP, CLASSICAL, RNN, TRANSFORMER, CNN) ══════ -->
     <section id="section-nlp" class="section">
@@ -474,6 +504,9 @@
       <div id="ai-mentor-content"></div>
     </section>
 
+    <!-- ══════ CORRIDOR C WAR ROOM ══════ -->
+    <section id="section-corridor-c" class="section"></section>
+
   </main>
 
   <!-- ═══════════════════════ MOBILE BOTTOM 5-TAB QUICK NAV (≤768px) ═══════════════════════ -->
@@ -494,9 +527,9 @@
       <span class="mb-icon">🎤</span>
       <span class="mb-label">90+ Viva</span>
     </button>
-    <button type="button" class="mobile-bottom-item" data-bottom-sec="zoho-mock" onclick="navigateTo('zoho-mock')">
-      <span class="mb-icon">🏢</span>
-      <span class="mb-label">War Room</span>
+    <button type="button" class="mobile-bottom-item" data-bottom-sec="corridor-c" onclick="navigateTo('corridor-c')">
+      <span class="mb-icon">🚀</span>
+      <span class="mb-label">Corridor C</span>
     </button>
   </nav>
 
@@ -586,7 +619,7 @@ git add . && git commit -m "Update study notes" && git push</code></pre>
         <div class="ve-field-row">
           <label for="ve-preset-select">Select Interview Prompt or Viva Question:</label>
           <select id="ve-preset-select" class="ve-select" onchange="selectVoicePreset(this.value)">
-            <option value="intro_zoho">🏢 90-Second Zoho &amp; Enterprise Self-Introduction</option>
+            <option value="intro_zoho">🏢 90-Second Enterprise Self-Introduction</option>
             <option value="proj_telemetry">📊 Internship Studio Telemetry Defense (14,102 rows · R²=0.9979)</option>
             <option value="proj_eria">🤖 ERIA 4-Agent LangChain DAG &amp; Critic Gate Defense</option>
             <option value="proj_crypto">📈 CryptoCast: RevIN LSTM, PatchTST &amp; The R² Paradox</option>
@@ -626,9 +659,9 @@ git add . && git commit -m "Update study notes" && git push</code></pre>
 
   <script src="./js/animations.js?v=20261025"></script>
   <script src="./js/quiz.js?v=20261025"></script>
-  <script src="./js/zoho.js?v=20261025"></script>
   <script src="./js/corridor_a.js?v=20261025"></script>
   <script src="./js/corridor_b.js?v=20261025"></script>
+  <script src="./js/corridor_c.js?v=20261025"></script>
   <script src="./js/accelerator.js?v=20261025"></script>
   <script src="./js/presentations.js?v=20261025"></script>
   <script src="./js/mentor.js?v=20261025"></script>

@@ -785,6 +785,126 @@ print(a)  # Output is [1, 2, 3, 4]! Both names point to the SAME object.</code>
 <br><code>EMA_t = α · P_t + (1 - α) · EMA_(t-1)</code>, where smoothing factor <code>α = 2 / (N + 1)</code>.
 <br><br>• <strong>Practical Advantage:</strong> For N=20, α = 2/21 ≈ 0.095. Recent price movements register immediately without the drop-off artifact. Essential for algorithmic momentum trading and volatility modeling.
 <br><br><em>Source: Google Drive · ## Stock Analysis Project - Live Evaluation Ready.gdoc</em>`
+  },
+
+  // ── High-Yield Enterprise Viva Bank (Moved from War Room Modules) ──
+  {
+    id: 'ent_ml1', topic: 'Classical ML', difficulty: 'medium',
+    q: 'Explain the Bias-Variance Tradeoff. How do L1 and L2 regularization affect it?',
+    a: `<strong>Bias</strong> is error from erroneous assumptions (underfitting — model is too simple, e.g., fitting a straight line to quadratic data).<br>
+<strong>Variance</strong> is error from sensitivity to small fluctuations in training data (overfitting — model memorizes noise, high train accuracy but poor validation).<br><br>
+<strong>Total Error = Bias² + Variance + Irreducible Error.</strong><br><br>
+• <strong>Regularization adds a penalty term to the loss function</strong>:<br>
+- <strong>L1 (Lasso)</strong>: Adds $\\lambda \\sum |w_i|$. Promotes sparsity by driving irrelevant feature weights strictly to zero (automatic feature selection).<br>
+- <strong>L2 (Ridge)</strong>: Adds $\\lambda \\sum w_i^2$. Shrinks weights towards zero without making them exactly zero; handles multicollinearity exceptionally well.<br><br>
+By increasing $\\lambda$, we slightly increase bias to dramatically reduce variance, minimizing generalization error.
+<br><br>⚠️ <strong>Interview Gotcha:</strong> ElasticNet combines both penalties: essential when $p > n$ or when features are highly correlated (as in Pravin’s soil-grain-size distribution project).
+<br><br>🧠 <strong>Feynman Analogy:</strong> Think of archery: High Bias = your arrows hit tightly together but far from the bullseye. High Variance = arrows fly all over the target. Good model = all arrows hit close to the center.`
+  },
+  {
+    id: 'ent_ml2', topic: 'Quantitative & Telemetry', difficulty: 'medium',
+    q: 'When should you use Precision vs Recall vs ROC-AUC vs PR-AUC? How do you handle class imbalance?',
+    a: `<strong>Precision</strong> = $TP / (TP + FP)$ &rarr; Cost of False Positive is high (e.g., enterprise email spam filter marking a critical client contract as spam).<br><br>
+<strong>Recall</strong> = $TP / (TP + FN)$ &rarr; Cost of False Negative is disastrous (e.g., fraud detection or critical enterprise customer churn prediction).<br><br>
+<strong>F1-Score</strong> = Harmonic mean of Precision & Recall ($2 \\times P \\times R / (P + R)$); best balanced metric on skewed datasets.<br><br>
+<strong>ROC-AUC vs PR-AUC</strong>:<br>
+• <strong>ROC-AUC</strong> evaluates True Positive Rate vs False Positive Rate across all thresholds. However, when the negative class is massive (e.g., 99% non-fraud), ROC-AUC is deceptively optimistic because large TN keeps FPR small.<br>
+• <strong>PR-AUC</strong> focuses exclusively on the minority positive class ($P$ vs $R$). Always use PR-AUC for severe class imbalance!
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Never claim accuracy is sufficient on 95:5 imbalanced datasets. A dummy model predicting the majority class gets 95% accuracy with 0% recall!
+<br><br>🧠 <strong>Feynman Analogy:</strong> Precision is: "Of everyone I accused, how many actually committed the crime?" Recall is: "Of all actual criminals out there, how many did I catch?"`
+  },
+  {
+    id: 'ent_ml3', topic: 'Classical ML', difficulty: 'medium',
+    q: 'How does Random Forest work and why does it rarely overfit compared to a single Decision Tree?',
+    a: `Random Forest is an ensemble method utilizing <strong>Bagging (Bootstrap Aggregation) + Feature Subsampling</strong>:<br><br>
+1. <strong>Bootstrapping</strong>: Trains N independent deep decision trees on random samples drawn with replacement from the training set.<br>
+2. <strong>Random Subspace</strong>: At each split, only a random subset of features (typically $\\sqrt{p}$) is evaluated. This decorrelates the individual trees.<br>
+3. <strong>Aggregation</strong>: Averages predictions (regression) or takes majority vote (classification).<br><br>
+<strong>Why it avoids overfitting</strong>: While individual decision trees have high variance, averaging $B$ uncorrelated trees reduces variance by a factor approaching $1/B$ while keeping bias constant. That is why Random Forest was ideal for Pravin’s 14,102 telemetry records at Internship Studio (89.2% error reduction).
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Explain Out-Of-Bag (OOB) error: roughly 36.8% of samples are left out of each bootstrap sample, providing an honest built-in validation set without needing a separate split.
+<br><br>🧠 <strong>Feynman Analogy:</strong> Asking one doctor might give a biased opinion. Asking 100 independent doctors who each inspect different test results and taking their average gives a far more reliable diagnosis.`
+  },
+  {
+    id: 'ent_ml4', topic: 'Quantitative & Telemetry', difficulty: 'hard',
+    q: 'What is the R² Paradox in Time-Series Forecasting and why must you use stationary log returns?',
+    a: `In non-stationary time series (like financial or energy prices with random walk drift), a trivial "Persistence Model" that simply predicts $\\hat{y}_{t+1} = y_t$ can achieve an $R^2 > 0.98$ simply because prices are auto-correlated.<br><br>
+This is the <strong>R² Paradox</strong>: the model appears mathematically perfect, but has zero actual directional predictive power (it just mirrors yesterday’s price with a 1-step lag).<br><br>
+<strong>How to resolve it (as in CryptoCast)</strong>:<br>
+1. Formulate the target as <strong>Stationary Log Return</strong>: $r = \\ln(P_{t+h} / P_t)$ rather than raw price.<br>
+2. Verify stationarity using the Augmented Dickey-Fuller (ADF) test ($p < 0.05$).<br>
+3. Enforce strict <strong>Chronological Walk-Forward Validation</strong> rather than random k-fold splits, preventing future lookahead leakage.<br>
+4. Achieved verified 2.06% 1-day MAPE under true out-of-sample forward horizons.
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Never shuffle time-series data during train/test split. Shuffling leaks future values into the past.
+<br><br>🧠 <strong>Feynman Analogy:</strong> Predicting tomorrow’s weather is the same as today gives high correlation in summer, but fails completely when a storm hits. Predicting the change in weather is real forecasting.`
+  },
+  {
+    id: 'ent_ml5', topic: 'Classical ML', difficulty: 'medium',
+    q: 'How does K-Means clustering work? How do you select optimal K, and what are its core limitations?',
+    a: `<strong>K-Means Algorithm</strong>:<br>
+1. Initialize $K$ cluster centroids (e.g., K-Means++ to avoid poor local minima).<br>
+2. <strong>Assignment step</strong>: Assign each point to its nearest centroid via Euclidean distance.<br>
+3. <strong>Update step</strong>: Recalculate centroids as the mean of all points assigned to that cluster.<br>
+4. Repeat until centroids converge (movement < $\\epsilon$).<br><br>
+<strong>Selecting Optimal K</strong>:<br>
+• <strong>Elbow Method</strong>: Plot Within-Cluster Sum of Squares (WCSS) vs $K$ to find the bend.<br>
+• <strong>Silhouette Analysis</strong>: Measures how similar an object is to its own cluster ($a$) versus neighboring clusters ($b$). Range $[-1, 1]$. Score of 0.4546 in Pravin’s telemetry project indicated strong cluster separation.<br><br>
+<strong>Limitations</strong>: Assumes spherical clusters of equal variance, sensitive to outliers, and requires scaling features beforehand (StandardScaler).
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Always scale features prior to K-Means; otherwise, variables with large numerical scales dominate the Euclidean distance calculation.
+<br><br>🧠 <strong>Feynman Analogy:</strong> Imagine grouping people in a crowded room into 3 discussion circles. People step toward the circle center closest to them, the center updates its position, and you repeat until nobody moves.`
+  },
+  {
+    id: 'ent_ml6', topic: 'NLP', difficulty: 'hard',
+    q: 'In production GenAI systems (e.g., ERIA), why use a Multi-Agent architecture instead of a single prompt?',
+    a: `In regulatory policy and document analysis (e.g., 50+ page legal or compliance documents), a single prompt suffers from three major flaws:<br>
+1. <strong>Context hallucination & drift</strong>: Single calls easily miss nuanced clauses.<br>
+2. <strong>Lack of self-correction</strong>: No verification layer to ensure assertions are grounded in document text.<br>
+3. <strong>Role entanglement</strong>: Summarizing, extracting regulatory impact, and checking compliance require distinct cognitive lenses.<br><br>
+<strong>Multi-Agent Architecture (as in ERIA)</strong>:<br>
+• <strong>Agent 1 (Extractor)</strong>: Ingests documents, creates TF-IDF + Cosine semantic chunks, and extracts raw stakeholder impact clauses.<br>
+• <strong>Agent 2 (Critic/Evaluator)</strong>: Scores output against a Grounding Rubric (target $\\ge 8.5/10$), checking citations against ground-truth text chunks.<br>
+• <strong>Agent 3 (Synthesizer)</strong>: If Critic score < 8.5, sends back for correction; once approved, outputs structured Pydantic schema validation.<br>
+This closed-loop system achieved sub-15s response times with verified audit accuracy.
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Mention Pydantic schema validation: ensures that LLM outputs conform to strict typed JSON schemas rather than unpredictable conversational markdown.
+<br><br>🧠 <strong>Feynman Analogy:</strong> Instead of having one person write, proofread, and approve a legal contract in a single pass, you have a drafter, an auditor who rejects mistakes, and an executive publisher.`
+  },
+  {
+    id: 'ent_sql1', topic: 'SQL & Data Engineering', difficulty: 'medium',
+    q: 'Explain the difference between ROW_NUMBER(), RANK(), and DENSE_RANK() in SQL window functions.',
+    a: `All three assign integer ranks ordered by a column inside a partition:<br><br>
+• <strong>ROW_NUMBER()</strong>: Assigns unique sequential integers (1, 2, 3, 4) with no duplicates even for identical values.<br>
+• <strong>RANK()</strong>: Assigns identical rank for ties, but skips subsequent numbers (1, 2, 2, 4).<br>
+• <strong>DENSE_RANK()</strong>: Assigns identical rank for ties without skipping numbers (1, 2, 2, 3).<br><br>
+<strong>Rule of Thumb:</strong> Always use <code>DENSE_RANK()</code> for "Find the Nth highest salary / metric" so rank 2 is truly the 2nd distinct value!
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Using <code>RANK()</code> fails if there are ties for 1st place, because the next salary becomes rank 3, returning empty for rank = 2!
+<br><br>🧠 <strong>Feynman Analogy:</strong> ROW_NUMBER is a ticket counter; RANK gives shared medals but skips places; DENSE_RANK gives shared medals without leaving gaps.`
+  },
+  {
+    id: 'ent_py1', topic: 'Python & Pandas Pitfalls', difficulty: 'medium',
+    q: 'How do you find the first non-repeating character in a string in O(N) time without nested loops?',
+    a: `Use <code>collections.Counter</code> or a single-pass hash map (dict):<br><br>
+1. <strong>First pass:</strong> Count frequencies of all characters in $O(N)$ time.<br>
+2. <strong>Second pass:</strong> Iterate through the original string and return the first character whose frequency count is 1.<br><br>
+<code>Time Complexity: O(N) | Space Complexity: O(1)</code> bounded by alphabet size (26 lowercase chars).
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Never use <code>string.count(char)</code> inside a loop — that recalculates frequency on every character, creating an accidental $O(N^2)$ algorithm!
+<br><br>🧠 <strong>Feynman Analogy:</strong> Take attendance of every letter once, then read the line again and pick the first person who only showed up once.`
+  },
+  {
+    id: 'ent_ml7', topic: 'Classical ML', difficulty: 'hard',
+    q: 'Why choose Multi-Task Elastic Net over Random Forest for small-sample high-collinear features?',
+    a: `In small-sample regimes where $p > n$ with severe collinearity (like in Pravin's soil-grain-size distribution project):<br><br>
+1. <strong>Random Forest failure mode:</strong> Trees split arbitrarily across collinear features, diluting feature importance and overfitting small training batches.<br>
+2. <strong>Multi-Task Elastic Net advantage:</strong> Uses L1 (Lasso) penalty to enforce group sparsity (driving noise features strictly to zero) while L2 (Ridge) penalty stabilizes collinear coefficients by shrinking them together.<br>
+3. <strong>Multi-task formulation:</strong> Shares the sparsity pattern across related output distribution channels, achieving superior out-of-fold generalization (55.21 Earth Mover’s Distance).
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Never claim "Random Forest is always better than linear models." Complex non-linear models overfit severely when samples are scarce.
+<br><br>🧠 <strong>Feynman Analogy:</strong> When you have 200 clues but only 30 crime scenes, asking a group of strict linear detectives to eliminate redundant clues works much better than letting a chaotic forest guess.`
+  },
+  {
+    id: 'ent_ml8', topic: 'Transformers', difficulty: 'hard',
+    q: 'Why does PatchTST with Reversible Instance Normalization (RevIN) outperform LSTM on multi-step forecasting?',
+    a: `1. <strong>Why PatchTST wins:</strong> Time series over multi-step horizons (3-day, 7-day) suffer from non-stationary distribution drift. PatchTST tokenizes continuous time steps into patches, enabling cross-time self-attention to capture multi-scale cycles, while RevIN (Reversible Instance Normalization) eliminates non-stationary mean/variance shifts. LSTM suffers from recurrent gradient saturation over long horizons.<br><br>
+2. <strong>Preventing leakage:</strong> Strictly utilize <strong>Chronological Walk-Forward Validation</strong> instead of random k-fold splits, training exclusively on historical windows and testing on the subsequent unseen horizon.
+<br><br>⚠️ <strong>Interview Gotcha:</strong> Never use <code>train_test_split(shuffle=True)</code> on sequential data. Shuffling leaks future values into the past.
+<br><br>🧠 <strong>Feynman Analogy:</strong> LSTM reads words letter-by-letter and forgets long paragraphs; PatchTST reads whole sentences at a time and adjusts for volume changes.`
   }
 
 ];

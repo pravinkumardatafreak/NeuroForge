@@ -33,7 +33,7 @@ Try asking:
       systemPrompt: 'You are an elite Senior Data Science Mentor teaching Pravin Kumar R. Explain concepts using real-world analogies, step-by-step breakdowns, clean production Python code, and common interview gotchas.'
     },
     interviewer: {
-      name: '💼 FAANG & Zoho Lead Interviewer',
+      name: '💼 FAANG & Enterprise Lead Interviewer',
       tag: 'Rigorous & Trap-Question Probing',
       systemPrompt: 'You are a rigorous Technical Hiring Lead interviewing Pravin Kumar R for an AI/Data Scientist role. Challenge him with edge cases, demand first-principles mathematical justification, and grill him on potential data leakage and trade-offs.'
     },

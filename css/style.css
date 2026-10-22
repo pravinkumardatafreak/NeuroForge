@@ -644,7 +644,7 @@ body {
 .op { color: #ff7b72; }
 
 /* ═════════════════════════════════════════════════════════════════════
-   ZOHO IT SOLUTIONS MOCK WAR ROOM STYLES
+   ENTERPRISE WAR ROOM & MOCK STYLES
    Personalized for Pravin Kumar R
 ═════════════════════════════════════════════════════════════════════ */
 
@@ -683,13 +683,19 @@ body {
   border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
-/* ── Highlight Zoho Nav Link ── */
-.highlight-zoho {
-  background: rgba(0, 255, 200, 0.08) !important;
-  border: 1px solid rgba(0, 255, 200, 0.35) !important;
-  color: var(--cyan) !important;
+/* ── Highlight Corridor C Nav Link ── */
+.highlight-corridor-c {
+  background: rgba(236, 72, 153, 0.12) !important;
+  border: 1px solid rgba(236, 72, 153, 0.45) !important;
+  color: #f472b6 !important;
   font-weight: 700 !important;
 }
+.highlight-corridor-c:hover {
+  background: rgba(236, 72, 153, 0.22) !important;
+  border-color: #ec4899 !important;
+  box-shadow: 0 0 16px rgba(236, 72, 153, 0.35);
+}
+
 .badge-pulse {
   background: #f43f5e !important;
   color: #fff !important;

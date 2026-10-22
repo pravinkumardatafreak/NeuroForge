@@ -3,7 +3,7 @@
 
 A personalized learning and interview preparation platform designed for **Pravin Kumar R** to accelerate the career transition from completing the **GUVI Master Data Science Program (IIT Madras Research Park Incubated)** to securing high-growth **Data Scientist, Applied AI, and Machine Learning Engineer** positions.
 
-The platform is reverse-engineered from **104 enterprise Job Descriptions** and real-world hiring patterns across global in-house capability centers (Siemens Energy, TE Connectivity, UPS, Linde), frontier AI startups (Sarvam, AlgoLeap, M3 USA, Backbase), and enterprise campus drives (Zoho IT Solutions, CAMS, Capgemini).
+The platform is reverse-engineered from **104 enterprise Job Descriptions** and real-world hiring patterns across global in-house capability centers (Siemens Energy, TE Connectivity, UPS, Linde), frontier AI startups (Sarvam, AlgoLeap, M3 USA, Backbase), and enterprise campus drives (CAMS, Capgemini, Tier-1 Tech Hubs).
 
 ---
 
@@ -18,13 +18,14 @@ Many aspiring data scientists struggle to convert course certifications into top
 
 ---
 
-## 🏛️ Two Flagship Enterprise War Rooms (Mined from 62+ JDs)
+## 🏛️ Three Flagship Enterprise War Rooms (Mined from 62+ JDs)
 
 ```mermaid
 graph LR
     NF["NeuroForge Career Cockpit"] --> CA["🔥 Corridor A: Applied AI & Vision War Room<br>(36 Enterprise JDs)"]
     NF --> CB["⚡ Corridor B: Time-Series & ConTech War Room<br>(26 Enterprise JDs)"]
-    NF --> ZM["🏢 Zoho IT Solutions Mock Suite<br>(GUVI Campus Drive Track)"]
+    NF --> CC["🚀 Corridor C: Product AI & Distributed Systems<br>(Full-Stack Microservices)"]
+    NF --> AC["🎯 Career Accelerator & Mock Cockpit<br>(Full Enterprise Hiring Suite)"]
 ```
 
 ### 1. 🔥 Corridor A: Applied AI, Multi-Agent RAG & Computer Vision War Room
@@ -51,10 +52,21 @@ graph LR
   6. *Drill B6*: OpenBIM IFC4 Parsing with IfcOpenShell & CPWD DSR 2023 BOQ Rate Variance Matching.
 * **The 1-in-10,000 Moat**: Defending the intersection of Civil Engineering B.E. + OpenBIM IFC4 + PyTorch (`openbim-boq-variance-engine`).
 
-### 3. 🏢 Zoho IT Solutions Mock War Room
-* **Pravin's Baseline Recovery**: Diagnostic audio pace drills (increasing speech velocity from 48 WPM to 130 WPM to eliminate evaluator token starvation while leveraging 10/10 filler control).
-* **10 Essential Zoho Python & SQL Drills**: Sliding window moving averages, generator file streaming, and `DENSE_RANK()` query patterns.
-* **Product System Design**: Zoho CRM predictive lead scoring, Zoho Desk ticket routing, and Zoho Books cash flow forecasting.
+### 3. 🚀 Corridor C: Product AI, Hyperlocal Geolocation & Distributed Systems War Room
+* **Production Focus**: Full-stack AI microservices, automated document intelligence, Pydantic DTO schema validation, and PostgreSQL query optimization.
+* **45-Minute Live Examination Simulator**: Real-time timer and voice-prompted defense across API latency SLAs, asynchronous event loops, and relational schema integrity.
+* **6 Interactive Production Code Drills**:
+  1. *Drill C1*: Pydantic Schema Validator & Safe Parser for Profile Data with Error Handling.
+  2. *Drill C2*: Sliding-Window Document Chunker with Sentence Boundary Preservation.
+  3. *Drill C3*: High-Performance In-Memory Skills Matcher ($O(N)$ Jaccard & Intersection).
+  4. *Drill C4*: Production Async FastAPI REST Endpoint with 500ms Timeout & Pydantic DTO.
+  5. *Drill C5*: Memory-Efficient Geolocation Stream Parser with Python Generators.
+  6. *Drill C6*: In-Memory LRU Cache for LLM Embeddings & Repeated Query Optimization.
+
+### 4. 🎯 Career Accelerator & Enterprise Mock Simulator
+* **Diagnostic Scorecard Recovery**: Diagnostic audio pace drills (increasing speech velocity from 48 WPM to 130 WPM to eliminate evaluator token starvation while leveraging 10/10 filler control).
+* **10 Essential Enterprise Python & SQL Drills**: Sliding window moving averages, generator file streaming, `DENSE_RANK()` query patterns, and island grouping.
+* **Product System Design**: Predictive lead scoring, support ticket routing, and ERP cash flow forecasting.
 
 ---
 
@@ -105,7 +117,8 @@ Open your browser to:
 * **Dashboard**: `http://localhost:7800`
 * **Corridor A War Room**: `http://localhost:7800/#corridor-a`
 * **Corridor B War Room**: `http://localhost:7800/#corridor-b`
-* **Zoho Mock War Room**: `http://localhost:7800/#zoho-mock`
+* **Corridor C War Room**: `http://localhost:7800/#corridor-c`
+* **Career Accelerator & Mock Simulator**: `http://localhost:7800/#accelerator`
 
 ---
 
