@@ -119,19 +119,16 @@ window.copyCode = function (btn) {
 
 /* ─── Mobile Sidebar Drawer Controls ─── */
 const SECTION_LABELS = {
-  'home': 'Study Map',
-  'accelerator': '10-Step & STAR',
-  'corridor-a': 'Corridor A · AI',
-  'corridor-b': 'Corridor B · TS',
-  'corridor-c': 'Corridor C · Systems',
-  'present': '7 Projects',
-  'nlp': '01 · NLP & Text',
-  'classical': '02 · Classical ML',
-  'rnn': '03 · RNN & LSTM',
-  'transformer': '04 · Transformers',
-  'cnn': '05 · CNN & Vision',
-  'viva': '90+ Viva Vault',
-  'ai-mentor': 'AI Mentor Coach'
+  'learn': '1 · Curriculum',
+  'viva': '2 · Flashcards',
+  'practice': '3 · Practice Hub',
+  'record': '4 · Learning Record',
+  'home': 'Curriculum',
+  'accelerator': 'Curriculum',
+  'present': 'Practice Hub',
+  'corridor-a': 'Practice Hub',
+  'corridor-b': 'Practice Hub',
+  'corridor-c': 'Practice Hub'
 };
 
 window.toggleMobileSidebar = function () {
@@ -155,61 +152,46 @@ window.closeMobileSidebar = function () {
 
 /* ─── Router (Consolidates Legacy Routes into Unified Hubs) ─── */
 window.navigateTo = function (sectionId) {
-  // Redirect consolidated legacy routes
-  if (sectionId === 'roadmap') sectionId = 'accelerator';
-  if (sectionId === 'crypto') {
-    if (typeof window.openProjectDirectly === 'function') {
-      window.openProjectDirectly('crypto');
-      return;
-    }
-    sectionId = 'present';
-  }
-  if (sectionId === 'imdb') {
-    if (typeof window.openProjectDirectly === 'function') {
-      window.openProjectDirectly('imdb');
-      return;
-    }
-    sectionId = 'present';
+  // Normalize & alias to clean 4 pillars
+  if (!sectionId || sectionId === 'home' || sectionId === 'roadmap' || sectionId === 'accelerator') {
+    sectionId = 'learn';
+  } else if (sectionId === 'nlp' || sectionId === 'classical' || sectionId === 'rnn' || sectionId === 'transformer' || sectionId === 'cnn') {
+    sectionId = 'learn';
+  } else if (sectionId === 'present' || sectionId === 'crypto' || sectionId === 'imdb' || sectionId === 'corridor-a' || sectionId === 'corridor-b' || sectionId === 'corridor-c' || sectionId === 'ai-mentor') {
+    sectionId = 'practice';
   }
 
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(a => a.classList.remove('active'));
+
   const section = document.getElementById('section-' + sectionId);
   if (section) section.classList.add('active');
+
   const navItem = document.getElementById('nav-' + sectionId);
   if (navItem) navItem.classList.add('active');
 
-  // Sync mobile topbar title & bottom 5-tab bar active state
+  // Sync mobile topbar title & bottom 4-tab bar active state
   const mobTitle = document.getElementById('mobile-section-title');
-  if (mobTitle) mobTitle.textContent = SECTION_LABELS[sectionId] || 'Study Cockpit';
+  if (mobTitle) mobTitle.textContent = SECTION_LABELS[sectionId] || 'Study App';
 
-  const bottomTarget = (sectionId === 'corridor-a' || sectionId === 'corridor-b') ? 'corridor-c' : sectionId;
   document.querySelectorAll('.mobile-bottom-item').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-bottom-sec') === bottomTarget);
+    btn.classList.toggle('active', btn.getAttribute('data-bottom-sec') === sectionId);
   });
 
   // Always close mobile drawer on navigation
   window.closeMobileSidebar();
 
-  // Lazy render sections
-  if (sectionId === 'corridor-c') { if (typeof renderCorridorCSection === 'function') renderCorridorCSection(); }
-  if (sectionId === 'accelerator') { if (typeof renderAccelerator === 'function') renderAccelerator(); }
-  if (sectionId === 'corridor-a') { if (typeof renderCorridorASection === 'function') renderCorridorASection(); }
-  if (sectionId === 'corridor-b') { if (typeof renderCorridorBSection === 'function') renderCorridorBSection(); }
-  if (sectionId === 'roadmap') renderRoadmap();
-  if (sectionId === 'nlp') renderModule('nlp');
-  if (sectionId === 'classical') renderModule('classical');
-  if (sectionId === 'rnn') renderModule('rnn');
-  if (sectionId === 'transformer') renderModule('transformer');
-  if (sectionId === 'cnn') renderModule('cnn');
-  if (sectionId === 'viva') { if (typeof renderVivaPage === 'function') renderVivaPage(); }
-  if (sectionId === 'present') {
-    const el = document.getElementById('present-content');
-    if (el && !el.innerHTML.trim() && typeof renderPresentationKit === 'function') {
-      renderPresentationKit();
-    }
+  // Lazy render the 4 clean sections
+  if (sectionId === 'learn') {
+    if (typeof window.renderLearnPage === 'function') window.renderLearnPage();
+  } else if (sectionId === 'viva') {
+    if (typeof window.renderVivaPage === 'function') window.renderVivaPage();
+  } else if (sectionId === 'practice') {
+    if (typeof window.renderPracticePage === 'function') window.renderPracticePage();
+  } else if (sectionId === 'record') {
+    if (typeof window.renderRecordPage === 'function') window.renderRecordPage();
   }
-  if (sectionId === 'ai-mentor') { if (typeof renderMentorSection === 'function') renderMentorSection(); }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
@@ -993,6 +975,7 @@ window.addEventListener('online', () => {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
+  if (typeof window.renderLearnPage === 'function') window.renderLearnPage();
     navigator.serviceWorker.register('./sw.js', { scope: './' }).then(reg => {
       reg.addEventListener('updatefound', () => {
         const newWorker = reg.installing;

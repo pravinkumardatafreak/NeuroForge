@@ -95,66 +95,22 @@
     </div>
 
     <ul class="nav-links" id="nav-links">
-      <!-- 1. COMMAND CENTER & ROADMAP -->
-      <li class="nav-group-label">01 · Command Center</li>
-      <li><a href="#" data-section="home" class="nav-item active" id="nav-home">
-        <span class="nav-icon">🧭</span><span>Study Map &amp; Cheat Sheet</span>
+      <li class="nav-group-label">Core Learning Navigation</li>
+      <li><a href="#" data-section="learn" class="nav-item active" id="nav-learn">
+        <span class="nav-icon">📚</span><span>1. Structured Curriculum</span>
+        <span class="nav-meta-tag" style="color:var(--cyan)">4 Stages</span>
       </a></li>
-      <li><a href="#" data-section="accelerator" class="nav-item highlight-accelerator" id="nav-accelerator">
-        <span class="nav-icon">🎯</span><span>10-Step Path &amp; STAR Vault</span>
-      </a></li>
-
-      <!-- 2. ENTERPRISE WAR ROOMS (62+ JDs) -->
-      <li class="nav-group-label" style="color:var(--cyan)">02 · Enterprise War Rooms</li>
-      <li><a href="#" data-section="corridor-a" class="nav-item highlight-corridor-a" id="nav-corridor-a">
-        <span class="nav-icon">🤖</span><span>Corridor A: AI &amp; Vision</span>
-        <span class="nav-meta-tag" style="color:var(--cyan)">36 JDs</span>
-      </a></li>
-      <li><a href="#" data-section="corridor-b" class="nav-item highlight-corridor-b" id="nav-corridor-b">
-        <span class="nav-icon">⚡</span><span>Corridor B: Time-Series</span>
-        <span class="nav-meta-tag" style="color:var(--amber)">26 JDs</span>
-      </a></li>
-      <li><a href="#" data-section="corridor-c" class="nav-item highlight-corridor-c" id="nav-corridor-c" style="background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.4);color:#f472b6;font-weight:700">
-        <span class="nav-icon">🚀</span><span>Corridor C: Product AI &amp; Systems</span>
-        <span class="badge" style="background:rgba(236,72,153,0.25);color:#f472b6;font-weight:800">WAR ROOM</span>
-      </a></li>
-
-      <!-- 3. FLAGSHIP PROJECT PLAYBOOK (Unified 7 Projects + Code Pipelines) -->
-      <li class="nav-group-label" style="color:var(--amber)">03 · Flagship Playbook</li>
-      <li><a href="#" data-section="present" class="nav-item" id="nav-present">
-        <span class="nav-icon">🛠️</span><span>7 Projects &amp; Code Pipelines</span>
-      </a></li>
-
-      <!-- 4. CORE ML & DL FOUNDATIONS -->
-      <li class="nav-group-label">04 · Core ML Foundations</li>
-      <li><a href="#" data-section="nlp" class="nav-item" id="nav-nlp">
-        <span class="nav-icon">📝</span><span>NLP &amp; Text AI</span>
-        <span class="badge" id="badge-nlp"></span>
-      </a></li>
-      <li><a href="#" data-section="classical" class="nav-item" id="nav-classical">
-        <span class="nav-icon">📐</span><span>Classical ML</span>
-        <span class="badge" id="badge-classical"></span>
-      </a></li>
-      <li><a href="#" data-section="rnn" class="nav-item" id="nav-rnn">
-        <span class="nav-icon">🔄</span><span>RNN &amp; RevIN LSTM</span>
-        <span class="badge" id="badge-rnn"></span>
-      </a></li>
-      <li><a href="#" data-section="transformer" class="nav-item" id="nav-transformer">
-        <span class="nav-icon">🤖</span><span>Transformers &amp; Attention</span>
-        <span class="badge" id="badge-transformer"></span>
-      </a></li>
-      <li><a href="#" data-section="cnn" class="nav-item" id="nav-cnn">
-        <span class="nav-icon">👁️</span><span>CNN &amp; Spatial Vision</span>
-        <span class="badge" id="badge-cnn"></span>
-      </a></li>
-
-      <!-- 5. ACTIVE RECALL & AI MENTOR -->
-      <li class="nav-group-label" style="color:var(--violet)">05 · Active Recall &amp; Coach</li>
       <li><a href="#" data-section="viva" class="nav-item" id="nav-viva">
-        <span class="nav-icon">🎤</span><span>90+ Viva Flashcard Vault</span>
+        <span class="nav-icon">🎤</span><span>2. Flashcards &amp; Recall</span>
+        <span class="nav-meta-tag" style="color:var(--lime)">94 Q&amp;As</span>
       </a></li>
-      <li><a href="#" data-section="ai-mentor" class="nav-item" id="nav-ai-mentor" style="color:var(--violet)">
-        <span class="nav-icon">🧠</span><span>AI Mentor Coach</span>
+      <li><a href="#" data-section="practice" class="nav-item" id="nav-practice">
+        <span class="nav-icon">🛠️</span><span>3. Projects &amp; Practice</span>
+        <span class="nav-meta-tag" style="color:var(--amber)">7 Decks</span>
+      </a></li>
+      <li><a href="#" data-section="record" class="nav-item" id="nav-record">
+        <span class="nav-icon">📊</span><span>4. My Learning Record</span>
+        <span class="badge visible" style="background:var(--cyan);width:auto;height:auto;padding:0.12rem 0.5rem;border-radius:10px;font-size:0.65rem;color:#000;font-weight:700">TRACK</span>
       </a></li>
     </ul>
 
@@ -177,9 +133,24 @@
 
   <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
   <main id="main-content">
+    <!-- ══════ 1. LEARN: STRUCTURED 4-STAGE CURRICULUM ══════ -->
+    <section id="section-learn" class="section active">
+      <div id="learn-content"></div>
+    </section>
+
+    <!-- ══════ 3. PRACTICE: 7 FLAGSHIP PROJECTS, DECK & DRILLS ══════ -->
+    <section id="section-practice" class="section">
+      <div id="practice-content"></div>
+    </section>
+
+    <!-- ══════ 4. RECORD: PERSISTENT STUDY AUDIT & JOURNAL ══════ -->
+    <section id="section-record" class="section">
+      <div id="record-content"></div>
+    </section>
+
 
     <!-- ══════ HOME: README-ALIGNED STUDY MAP & MEMORY CHEAT SHEET ══════ -->
-    <section id="section-home" class="section active">
+    <section id="section-home" class="section">
       <div class="hero-grid">
         <div class="hero-left">
           <div class="hero-eyebrow">⚡ NeuroForge Study Architecture · Reverse-Engineered from 104 Enterprise JDs</div>
@@ -511,25 +482,21 @@
 
   <!-- ═══════════════════════ MOBILE BOTTOM 5-TAB QUICK NAV (≤768px) ═══════════════════════ -->
   <nav id="mobile-bottom-nav" class="mobile-bottom-nav" aria-label="Mobile Quick Navigation">
-    <button type="button" class="mobile-bottom-item active" data-bottom-sec="home" onclick="navigateTo('home')">
-      <span class="mb-icon">🧭</span>
-      <span class="mb-label">Map</span>
-    </button>
-    <button type="button" class="mobile-bottom-item" data-bottom-sec="accelerator" onclick="navigateTo('accelerator')">
-      <span class="mb-icon">🎯</span>
-      <span class="mb-label">10-Step</span>
-    </button>
-    <button type="button" class="mobile-bottom-item" data-bottom-sec="present" onclick="navigateTo('present')">
-      <span class="mb-icon">🛠️</span>
-      <span class="mb-label">Projects</span>
+    <button type="button" class="mobile-bottom-item active" data-bottom-sec="learn" onclick="navigateTo('learn')">
+      <span class="mb-icon">📚</span>
+      <span class="mb-label">Learn</span>
     </button>
     <button type="button" class="mobile-bottom-item" data-bottom-sec="viva" onclick="navigateTo('viva')">
       <span class="mb-icon">🎤</span>
-      <span class="mb-label">90+ Viva</span>
+      <span class="mb-label">Flashcards</span>
     </button>
-    <button type="button" class="mobile-bottom-item" data-bottom-sec="corridor-c" onclick="navigateTo('corridor-c')">
-      <span class="mb-icon">🚀</span>
-      <span class="mb-label">Corridor C</span>
+    <button type="button" class="mobile-bottom-item" data-bottom-sec="practice" onclick="navigateTo('practice')">
+      <span class="mb-icon">🛠️</span>
+      <span class="mb-label">Practice</span>
+    </button>
+    <button type="button" class="mobile-bottom-item" data-bottom-sec="record" onclick="navigateTo('record')">
+      <span class="mb-icon">📊</span>
+      <span class="mb-label">Record</span>
     </button>
   </nav>
 
@@ -666,6 +633,9 @@ git add . && git commit -m "Update study notes" && git push</code></pre>
   <script src="./js/presentations.js?v=20261025"></script>
   <script src="./js/mentor.js?v=20261025"></script>
   <script src="./js/voice_evaluator.js?v=20261025"></script>
-  <script src="./js/app.js?v=20261025"></script>
+  <script src="./js/learn.js?v=20261028"></script>
+  <script src="./js/practice.js?v=20261028"></script>
+  <script src="./js/record.js?v=20261028"></script>
+  <script src="./js/app.js?v=20261028"></script>
 </body>
 </html>
