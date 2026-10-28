@@ -159,7 +159,7 @@ graph LR
 * **Server-Side Speech Analysis Pipeline**: Records spoken answers via MediaRecorder API → sends audio to `gemini-3.5-transcribe` for accurate technical transcription → evaluates tone, pacing, and technical depth via `gemini-3.8-flash` with structured JSON output schema
 * **Real-Time WebAudio Waveform Visualizer**: Canvas-based audio waveform rendering during recording
 * **WPM Pacing Gauge**: Automated words-per-minute calculation, filler word detection (`um`, `uh`, `basically`, `literally`, etc.), and filler count tracking
-* **6 Pre-Built Defense Prompts**: 90-Second Zoho Self-Introduction, Internship Studio Telemetry Defense, ERIA 4-Agent LangChain Defense, CryptoCast RevIN LSTM Defense, Computer Vision (Soil PPM + HuBMAP) Defense, and OpenBIM BOQ Variance Engine Defense — each with calibrated reference answers for accurate scoring
+* **6 Pre-Built Defense Prompts**: 90-Second AI Engineer & Systems Self-Introduction, Internship Studio Telemetry Defense, ERIA 4-Agent LangChain Defense, CryptoCast RevIN LSTM Defense, Computer Vision (Soil PPM + HuBMAP) Defense, and OpenBIM BOQ Variance Engine Defense — each with calibrated reference answers for accurate scoring
 * **Structured Evaluation Output**: Overall / Tone / Presentation / Technical scores, executive verdict, tone & delivery analysis, structure feedback, strengths list, improvement recommendations, and upgraded 130 WPM spoken scripts
 * **Offline Fallback**: Browser-native `SpeechRecognition` API fallback when server is unavailable
 

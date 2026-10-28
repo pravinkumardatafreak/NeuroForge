@@ -123,7 +123,7 @@ const SECTION_LABELS = {
   'accelerator': '10-Step & STAR',
   'corridor-a': 'Corridor A · AI',
   'corridor-b': 'Corridor B · TS',
-  'zoho-mock': 'Zoho War Room',
+  'corridor-c': 'Corridor C · Systems',
   'present': '7 Projects',
   'nlp': '01 · NLP & Text',
   'classical': '02 · Classical ML',
@@ -183,7 +183,7 @@ window.navigateTo = function (sectionId) {
   const mobTitle = document.getElementById('mobile-section-title');
   if (mobTitle) mobTitle.textContent = SECTION_LABELS[sectionId] || 'Study Cockpit';
 
-  const bottomTarget = (sectionId === 'corridor-a' || sectionId === 'corridor-b') ? 'zoho-mock' : sectionId;
+  const bottomTarget = (sectionId === 'corridor-a' || sectionId === 'corridor-b') ? 'corridor-c' : sectionId;
   document.querySelectorAll('.mobile-bottom-item').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-bottom-sec') === bottomTarget);
   });
@@ -924,6 +924,61 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     window.closeMobileSidebar();
     window.closeDeployGuideModal();
+    if (typeof window.closeVoiceEvaluator === 'function') window.closeVoiceEvaluator();
+    return;
+  }
+
+  // Prevent keyboard shortcuts when typing in inputs or textareas
+  const activeTag = (document.activeElement && document.activeElement.tagName) || '';
+  if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) {
+    return;
+  }
+
+  // Flashcards & Viva Rapid Study Shortcuts
+  const vivaSection = document.getElementById('section-viva');
+  const isVivaVisible = vivaSection && !vivaSection.classList.contains('hidden') && vivaSection.style.display !== 'none';
+  if (!isVivaVisible) return;
+
+  const cards = Array.from(document.querySelectorAll('.viva-card-full'));
+  if (!cards.length) return;
+
+  let focusedCard = document.activeElement ? document.activeElement.closest('.viva-card-full') : null;
+  let currentIndex = focusedCard ? cards.indexOf(focusedCard) : -1;
+
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'j') {
+    e.preventDefault();
+    const nextIdx = Math.min(cards.length - 1, currentIndex + 1);
+    cards[nextIdx].focus();
+    cards[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'k') {
+    e.preventDefault();
+    const prevIdx = Math.max(0, currentIndex === -1 ? 0 : currentIndex - 1);
+    cards[prevIdx].focus();
+    cards[prevIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else if (e.key === ' ' || e.code === 'Space') {
+    if (focusedCard) {
+      e.preventDefault();
+      const id = focusedCard.id.replace('vc-', '');
+      if (typeof window.toggleVivaAnswer === 'function') {
+        window.toggleVivaAnswer(id);
+      }
+    }
+  } else if (e.key === 'm' || e.key === 'M') {
+    if (focusedCard) {
+      e.preventDefault();
+      const id = focusedCard.id.replace('vc-', '');
+      if (typeof window.toggleMasteredViva === 'function') {
+        window.toggleMasteredViva(id);
+      }
+    }
+  } else if (e.key === 's' || e.key === 'S') {
+    if (focusedCard) {
+      e.preventDefault();
+      const id = focusedCard.id.replace('vc-', '');
+      if (typeof window.launchVivaVoiceEval === 'function') {
+        window.launchVivaVoiceEval(id);
+      }
+    }
   }
 });
 

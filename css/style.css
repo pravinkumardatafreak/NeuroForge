@@ -711,8 +711,8 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
 }
 
-/* ── Zoho Hero Banner ── */
-.zoho-hero-banner {
+/* ── War Room Hero Banner ── */
+.warroom-hero-banner {
   padding: 1.75rem;
   margin-bottom: 1.5rem;
   position: relative;
@@ -720,7 +720,7 @@ body {
   border: 1px solid rgba(0, 255, 200, 0.25);
   background: linear-gradient(135deg, rgba(7, 7, 15, 0.95), rgba(13, 13, 26, 0.9));
 }
-.zoho-hero-banner::after {
+.warroom-hero-banner::after {
   content: '';
   position: absolute;
   top: -60px; right: -60px;
@@ -728,7 +728,7 @@ body {
   background: radial-gradient(circle, rgba(0, 255, 200, 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
-.zoho-hero-top {
+.warroom-hero-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -736,14 +736,14 @@ body {
   margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
-.zoho-hero-left { flex: 1; min-width: 320px; }
-.zoho-badge-row {
+.warroom-hero-left { flex: 1; min-width: 320px; }
+.warroom-badge-row {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
 }
-.zoho-pill {
+.warroom-pill {
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -756,20 +756,20 @@ body {
 .pill-violet { background: rgba(124, 58, 237, 0.15); color: #a78bfa; border: 1px solid rgba(124, 58, 237, 0.35); }
 .pill-amber { background: rgba(245, 158, 11, 0.12); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.3); }
 
-.zoho-hero-title {
+.warroom-hero-title {
   font-size: 1.6rem;
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.4rem;
   letter-spacing: -0.02em;
 }
-.zoho-hero-sub {
+.warroom-hero-sub {
   font-size: 0.88rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
-.zoho-score-card {
+.warroom-score-card {
   padding: 1.25rem 1.75rem;
   background: rgba(0, 255, 200, 0.06);
   border: 1px solid rgba(0, 255, 200, 0.3);
@@ -777,7 +777,7 @@ body {
   text-align: center;
   min-width: 180px;
 }
-.zoho-score-val {
+.warroom-score-val {
   font-size: 1.9rem;
   font-weight: 900;
   color: var(--cyan);
@@ -785,20 +785,20 @@ body {
   line-height: 1;
   margin-bottom: 0.35rem;
 }
-.zoho-score-lbl {
+.warroom-score-lbl {
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.zoho-score-sub {
+.warroom-score-sub {
   font-size: 0.68rem;
   color: var(--lime);
   margin-top: 0.25rem;
 }
 
-.zoho-candidate-bar {
+.warroom-candidate-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem;
@@ -827,8 +827,8 @@ body {
   text-overflow: ellipsis;
 }
 
-/* ── Zoho Nav Tabs ── */
-.zoho-nav-tabs {
+/* ── War Room Nav Tabs ── */
+.warroom-nav-tabs {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
@@ -1010,7 +1010,7 @@ body {
 }
 
 /* ── 4 Rounds Strategy Grid ── */
-.zoho-rounds-grid {
+.warroom-rounds-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
@@ -1208,10 +1208,10 @@ body {
 }
 
 @media (max-width: 1200px) {
-  .zoho-rounds-grid { grid-template-columns: 1fr; }
+  .warroom-rounds-grid { grid-template-columns: 1fr; }
   .coding-grid { grid-template-columns: 1fr; }
   .cases-grid { grid-template-columns: 1fr; }
-  .zoho-candidate-bar { grid-template-columns: repeat(2, 1fr); }
+  .warroom-candidate-bar { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ── Corridor A, B & Accelerator Nav Highlights ── */
@@ -1757,11 +1757,11 @@ body {
     gap: 0.75rem;
   }
 
-  .zoho-hero-left {
+  .warroom-hero-left {
     min-width: 100%;
   }
 
-  .zoho-candidate-bar {
+  .warroom-candidate-bar {
     grid-template-columns: 1fr;
   }
 

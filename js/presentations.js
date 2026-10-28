@@ -248,7 +248,7 @@ Served via an asynchronous FastAPI endpoint with strict Pydantic JSON schema val
       id: 'soil',
       title: '🔬 Soil Grain Size Distribution from Photography',
       repo: 'pravinkumardatafreak/soil-grain-size-distribution',
-      warRoom: 'Corridor A & Zoho · Physics-Grounded ML',
+      warRoom: 'Corridor A · Physics-Grounded ML',
       memoryHook: '24 soil specimens → OpenCV 15.0 PPM Calibration → EfficientNet-B0 + ResNet-34 (1,794 features) → MultiTaskElasticNet (Group-Lasso) + Monotonic CDF → 55.21 EMD (vs 86.14) & 8.61% MAE.',
       subtitle: 'Predicting Full 11-Point Particle Size Distribution from Smartphone Images using Computer Vision & ML',
       tech: 'OpenCV Pixels-Per-Millimeter (PPM), Dual CNN (EfficientNet-B0 + ResNet-34), MultiTaskElasticNet, Physical CDF Layer',

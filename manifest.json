@@ -1,7 +1,7 @@
 {
   "name": "NeuroForge Academy — Pravin's AI/DS Interview & Presentation Cockpit",
   "short_name": "NeuroForge",
-  "description": "Personalized AI/Data Science interview preparation and live evaluation suite for Pravin Kumar R. Features Zoho IT Solutions mock simulator, 62+ Enterprise JD War Rooms, 7 flagship project defenses, and 90+ ML viva flashcards.",
+  "description": "Personalized AI & Machine Learning interview preparation and evaluation suite for Pravin Kumar R. Features 3 Enterprise War Rooms (Applied AI, Time-Series, Product AI), 7 flagship project defenses, and 90+ viva flashcards.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

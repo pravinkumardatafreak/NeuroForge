@@ -37,52 +37,52 @@ window.renderCorridorCSection = function() {
 
   container.innerHTML = `
     <!-- HERO BANNER -->
-    <div class="zoho-hero-banner glass-card" style="border-color:rgba(236,72,153,0.4);background:linear-gradient(135deg, rgba(236,72,153,0.08), rgba(99,102,241,0.08))">
-      <div class="zoho-hero-top">
-        <div class="zoho-hero-left">
-          <div class="zoho-badge-row">
-            <span class="zoho-pill" style="background:rgba(236,72,153,0.2);color:#f472b6;border:1px solid rgba(236,72,153,0.4)">🚀 CORRIDOR C WAR ROOM</span>
-            <span class="zoho-pill pill-cyan">🌐 PRODUCT AI &amp; DISTRIBUTED SYSTEMS</span>
-            <span class="zoho-pill pill-amber">⚡ HIGH-YIELD COCKPIT</span>
+    <div class="warroom-hero-banner glass-card" style="border-color:rgba(236,72,153,0.4);background:linear-gradient(135deg, rgba(236,72,153,0.08), rgba(99,102,241,0.08))">
+      <div class="warroom-hero-top">
+        <div class="warroom-hero-left">
+          <div class="warroom-badge-row">
+            <span class="warroom-pill" style="background:rgba(236,72,153,0.2);color:#f472b6;border:1px solid rgba(236,72,153,0.4)">🚀 CORRIDOR C WAR ROOM</span>
+            <span class="warroom-pill pill-cyan">🌐 PRODUCT AI &amp; DISTRIBUTED SYSTEMS</span>
+            <span class="warroom-pill pill-amber">⚡ HIGH-YIELD COCKPIT</span>
           </div>
-          <h2 class="zoho-hero-title" style="color:#fff">Corridor C — Product AI, Hyperlocal Geolocation &amp; Distributed Systems</h2>
-          <p class="zoho-hero-sub">
+          <h2 class="warroom-hero-title" style="color:#fff">Corridor C — Product AI, Hyperlocal Geolocation &amp; Distributed Systems</h2>
+          <p class="warroom-hero-sub">
             Tailored exclusively for <strong>${data.candidate.name}</strong> to master technical evaluation rounds with 
             <strong>Principal Engineering Leads &amp; System Architects</strong>. Bridges your exact production codebases (ERIA, CryptoCast, Fitbit Telemetry, Alveris-Geo-AI) with enterprise platforms (Document Intelligence, Deal-Making RAG, Hyperlocal Maps, and Geospatial Analytics).
           </p>
         </div>
-        <div class="zoho-hero-right">
-          <div class="zoho-score-card" style="border-color:rgba(236,72,153,0.4)">
-            <div class="zoho-score-val" style="color:#f472b6">${data.candidate.matchScore}</div>
-            <div class="zoho-score-lbl">Rational Match Score</div>
-            <div class="zoho-score-sub">${data.candidate.tier}</div>
+        <div class="warroom-hero-right">
+          <div class="warroom-score-card" style="border-color:rgba(236,72,153,0.4)">
+            <div class="warroom-score-val" style="color:#f472b6">${data.candidate.matchScore}</div>
+            <div class="warroom-score-lbl">Rational Match Score</div>
+            <div class="warroom-score-sub">${data.candidate.tier}</div>
           </div>
         </div>
       </div>
 
       <!-- KEY ALIGNMENT HIGHLIGHTS -->
-      <div class="zoho-candidate-bar" style="border-color:rgba(236,72,153,0.25)">
+      <div class="warroom-candidate-bar" style="border-color:rgba(236,72,153,0.25)">
         <div class="cand-item">
           <span class="cand-k">Target Role</span>
-          <span class="cand-v" style="color:var(--cyan)">Data Scientist / Applied AI Engineer</span>
+          <span class="cand-v" style="color:var(--cyan)">AI &amp; Machine Learning Engineer (JD 102)</span>
         </div>
         <div class="cand-item">
           <span class="cand-k">Evaluator Mindset</span>
-          <span class="cand-v" style="color:#f472b6">ASP.NET Core · PostgreSQL · Flutter · Low Latency</span>
+          <span class="cand-v" style="color:#f472b6">LangGraph · RAG · FastAPI · PyTorch · Docker · Vector DBs</span>
         </div>
         <div class="cand-item">
           <span class="cand-k">Production Moat</span>
-          <span class="cand-v" style="color:var(--amber)">ERIA Pydantic Schema &amp; Critic Gate for Document Synthesis</span>
+          <span class="cand-v" style="color:var(--amber)">ERIA Pydantic/Critic Gate + CryptoCast Temporal Moat + FastAPI Microservices</span>
         </div>
         <div class="cand-item">
           <span class="cand-k">Execution Focus</span>
-          <span class="cand-v" style="color:var(--green)">Eliminate Python &amp; PostgreSQL Live Whiteboard Hesitation</span>
+          <span class="cand-v" style="color:var(--green)">Zero Hesitation on Multi-Agent RAG, Vector Search &amp; Concurrency</span>
         </div>
       </div>
     </div>
 
     <!-- TABS -->
-    <div class="zoho-nav-tabs">
+    <div class="warroom-nav-tabs">
       <button class="z-tab-btn active" onclick="switchCorridorCTab('intel', this)">🕵️ Systems Mindset &amp; Architecture</button>
       <button class="z-tab-btn" onclick="switchCorridorCTab('python', this)">🐍 Emergency Python Drills (Weakness Fix)</button>
       <button class="z-tab-btn" onclick="switchCorridorCTab('sql', this)">🐘 Emergency PostgreSQL Drills (Weakness Fix)</button>

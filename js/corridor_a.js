@@ -524,31 +524,31 @@ window.renderCorridorASection = function () {
 
   container.innerHTML = `
     <!-- HERO BANNER -->
-    <div class="zoho-hero-banner glass-card" style="border-color:rgba(0,255,200,0.3);background:linear-gradient(135deg, rgba(0,255,200,0.06), rgba(124,58,237,0.08))">
-      <div class="zoho-hero-top">
-        <div class="zoho-hero-left">
-          <div class="zoho-badge-row">
-            <span class="zoho-pill pill-cyan">🔥 CORRIDOR A WAR ROOM</span>
-            <span class="zoho-pill pill-violet">🎯 APPLIED AI, RAG & VISION SPECIALIST</span>
-            <span class="zoho-pill pill-amber">⚡ 36 ENTERPRISE JDs GROUNDED</span>
+    <div class="warroom-hero-banner glass-card" style="border-color:rgba(0,255,200,0.3);background:linear-gradient(135deg, rgba(0,255,200,0.06), rgba(124,58,237,0.08))">
+      <div class="warroom-hero-top">
+        <div class="warroom-hero-left">
+          <div class="warroom-badge-row">
+            <span class="warroom-pill pill-cyan">🔥 CORRIDOR A WAR ROOM</span>
+            <span class="warroom-pill pill-violet">🎯 APPLIED AI, RAG & VISION SPECIALIST</span>
+            <span class="warroom-pill pill-amber">⚡ 36 ENTERPRISE JDs GROUNDED</span>
           </div>
-          <h2 class="zoho-hero-title">Corridor A — Applied AI, Agentic RAG & Computer Vision War Room</h2>
-          <p class="zoho-hero-sub">
+          <h2 class="warroom-hero-title">Corridor A — Applied AI, Agentic RAG & Computer Vision War Room</h2>
+          <p class="warroom-hero-sub">
             Engineered exclusively for <strong>${data.candidate.name}</strong> to conquer enterprise interview pipelines across 
             <strong>Siemens Energy (Digital Solutions), eGov Foundation (DIGIT AI), M3 USA, Backbase, AlgoLeap, and Benchmark Construction (YC W21)</strong>.
           </p>
         </div>
-        <div class="zoho-hero-right">
-          <div class="zoho-score-card" style="border-color:rgba(0,255,200,0.4)">
-            <div class="zoho-score-val" style="color:var(--cyan)">${data.candidate.matchScore}</div>
-            <div class="zoho-score-lbl">Rational Match Score</div>
-            <div class="zoho-score-sub">${data.candidate.tier}</div>
+        <div class="warroom-hero-right">
+          <div class="warroom-score-card" style="border-color:rgba(0,255,200,0.4)">
+            <div class="warroom-score-val" style="color:var(--cyan)">${data.candidate.matchScore}</div>
+            <div class="warroom-score-lbl">Rational Match Score</div>
+            <div class="warroom-score-sub">${data.candidate.tier}</div>
           </div>
         </div>
       </div>
 
       <!-- PROFILE BAR -->
-      <div class="zoho-candidate-bar">
+      <div class="warroom-candidate-bar">
         <div class="cand-item">
           <span class="cand-k">Candidate</span>
           <span class="cand-v">Pravin Kumar R</span>
@@ -569,7 +569,7 @@ window.renderCorridorASection = function () {
     </div>
 
     <!-- TABS -->
-    <div class="zoho-nav-tabs">
+    <div class="warroom-nav-tabs">
       <button class="z-tab-btn active" onclick="switchCorridorATab('simulator', this)">⚡ 45-Min Mock Simulator</button>
       <button class="z-tab-btn" onclick="switchCorridorATab('strategy', this)">🎯 4-Round Enterprise Strategy</button>
       <button class="z-tab-btn" onclick="switchCorridorATab('scripts', this)">🎤 90-Sec Pitch & Civil Bridge</button>
@@ -679,7 +679,7 @@ window.renderCorridorASection = function () {
         ${data.codingDrills.map((d, idx) => `
           <div class="glass-card" style="padding:1.5rem;border-color:rgba(255,255,255,0.1)">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
-              <span class="zoho-pill ${d.badgeClass}">${d.badge}</span>
+              <span class="warroom-pill ${d.badgeClass}">${d.badge}</span>
               <span style="font-size:0.75rem;font-family:var(--font-mono);color:var(--text-muted)">DRILL 0${idx+1} / 06</span>
             </div>
             <h4 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem">${d.title}</h4>
@@ -743,7 +743,7 @@ window.renderCorridorASection = function () {
           <div class="glass-card" style="padding:1.5rem;border-color:rgba(124,58,237,0.3)">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
               <h3 style="font-size:1.2rem;font-weight:800;color:var(--cyan);font-family:var(--font-mono)">${repo.name}</h3>
-              <span class="zoho-pill pill-violet">FLAGSHIP REPO</span>
+              <span class="warroom-pill pill-violet">FLAGSHIP REPO</span>
             </div>
             <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1rem"><strong>Technical Core:</strong> ${repo.tech}</p>
             <div style="background:rgba(255,255,255,0.02);padding:1rem;border-radius:8px;font-size:0.8rem;color:var(--text-secondary);line-height:1.7">
@@ -764,7 +764,7 @@ window.switchCorridorATab = function (tabId, btn) {
   const target = document.getElementById('catab-' + tabId);
   if (target) target.style.display = 'block';
 
-  document.querySelectorAll('.zoho-nav-tabs .z-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.warroom-nav-tabs .z-tab-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   if (window.addXP) window.addXP(10);
 };

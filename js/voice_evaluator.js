@@ -7,8 +7,8 @@
 (function () {
   const PRESET_PROMPTS = [
     {
-      id: 'intro_zoho',
-      label: '🏢 90-Second Zoho & Enterprise Self-Introduction',
+      id: 'intro_enterprise',
+      label: '🎯 90-Second AI Engineer & Systems Self-Introduction',
       topic: 'Executive Pitch & Career Moat',
       question: 'Tell me about yourself and why you transitioned from B.E. Civil Engineering (First Class Honors) into Data Science & Applied AI.',
       reference: 'B.E. Civil Engineering (First Class Honors) + IIT-M Incubated GUVI Master Data Science. Data Science Intern at Internship Studio: modeled 14,102 metabolic telemetry records using PCA, K-Means, and Random Forest, cutting MAE by 89.2% (34.97 to 3.78 kcal, R²=0.9979). Built 6 production AI systems including ERIA (4-agent LangChain DAG with ≥8.5/10 Critic Gate), CryptoCast (PyTorch LSTM + RevIN, 2.06% 1-Day MAPE), and OpenBIM BOQ Variance Engine (45s automated IFC4 audit).'
